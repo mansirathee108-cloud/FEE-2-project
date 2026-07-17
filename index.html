@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Verdantia Smart City</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{min-height:100vh;background:linear-gradient(135deg,#0b1020,#1b1530,#102c3a,#3a1430);color:#fff;padding:20px}
+.title{text-align:center;font-size:42px;font-weight:700;color:#fff;margin:0 auto 20px;max-width:520px;padding:14px 28px;border-radius:22px;background:linear-gradient(90deg,rgba(255,154,198,.35),rgba(125,249,255,.28),rgba(192,132,252,.30));backdrop-filter:blur(10px);box-shadow:0 10px 28px rgba(0,0,0,.25)}
+.grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.card{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border-radius:24px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.cityimg{width:100%;height:280px;object-fit:cover;border-radius:18px}
+.mayorwrap{display:flex;justify-content:center;align-items:center;height:280px}
+.mayor{width:180px;height:180px;border-radius:50%;object-fit:cover;border:5px solid #ffd166}
+.news{color:#ffd166;font-size:22px;min-height:90px;display:flex;align-items:center}
+.welcome h2{color:#7df9ff;margin-bottom:10px}.welcome p{color:#ff9ac6;margin-bottom:10px}
+.stats div{margin:8px 0;padding:10px;border-radius:12px;background:rgba(255,255,255,.06)}
+.btnwrap{text-align:center;margin-top:22px}.btn{padding:14px 28px;border:none;border-radius:14px;font-weight:700;background:linear-gradient(90deg,#7df9ff,#c084fc,#ffd166,#90ee90);cursor:pointer}
+.side{position:fixed;right:-220px;top:20%;width:210px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);padding:14px;border-radius:20px 0 0 20px;transition:.4s}.side.show{right:0}.side a{display:block;text-decoration:none;color:#fff;padding:12px;margin:8px 0;border-radius:12px;background:rgba(255,255,255,.05)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.mayorwrap{height:auto}.title{font-size:32px}}
+</style>
+</head>
+<script src="script.js"></script>
+<body>
+<div class="title">Verdantia Smart City</div>
+<div class="grid">
+<div class="card"><img class="cityimg" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80"></div>
+<div class="card mayorwrap" style="flex-direction:column;gap:14px"><img class="mayor" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"><div style="font-size:22px;font-weight:700;color:#ff9ac6;text-align:center">Mayor Celestine Vale</div></div>
+<div class="card"><h2 style="color:#ff6b6b;margin-bottom:10px">City News</h2><div id="news" class="news">Metro expansion launched today.</div></div>
+<div class="card welcome"><h2>Welcome to Verdantia</h2><p>Future-ready city built with safety, style and innovation.</p><div class="stats"><div>Population: 1.8M</div><div>Safety Index: 94%</div><div>Green Score: 91%</div><div>Growth Rate: +12%</div></div></div>
+</div>
+<div class="card">
+<h2 style="color:#7df9ff;margin-bottom:10px">
+🌤 Smart City Weather
+</h2>
+
+<button class="btn" onclick="getWeather()">
+Get Live Weather
+</button>
+
+<div id="weather"
+style="
+margin-top:12px;
+font-size:18px;
+line-height:1.6;
+color:#ffd166;
+">
+Weather info will appear here.
+</div>
+
+</div>
+<div class="btnwrap"><button class="btn" onclick="toggleMenu()">Explore City</button></div>
+
+<div id="side" class="side">
+<a href="index.html">🏠 Home</a>
+<a href="health.html">🏥 Health</a>
+<a href="food.html">🍔 Food</a>
+<a href="education.html">🎓 Education</a>
+<a href="security.html">🛡️ Security</a>
+<a href="tourism.html">✈️ Tourism</a>
+</div>
+<script>
+function toggleMenu(){document.getElementById('side').classList.toggle('show')}
+const items=['Metro expansion launched today with three new smart stations connecting residential and business districts for faster daily travel.','Health mega camp this Sunday offering free checkups, vaccinations, wellness guidance and specialist consultations for citizens.','Scholarship portal now open for students with merit awards, need-based aid and digital application support citywide.','Tourism week begins tomorrow featuring cultural walks, food fairs, guided museum tours and evening light shows.','Crime reduced by 18% this month after new patrol systems, emergency response upgrades and community awareness drives.'];let i=0;setInterval(()=>{i=(i+1)%items.length;document.getElementById('news').textContent=items[i]},2500)
+async function getWeather(){
+
+try{
+
+const response=await fetch(
+'https://api.open-meteo.com/v1/forecast?latitude=28.9&longitude=77.3&current_weather=true'
+);
+
+const data=await response.json();
+
+document.getElementById('weather').innerHTML=
+`
+Temperature: ${data.current_weather.temperature}°C <br>
+Wind Speed: ${data.current_weather.windspeed} km/h
+`;
+
+}
+
+catch(error){
+
+document.getElementById('weather').textContent=
+'Unable to fetch weather data';
+
+}
+
+}
+</script>
+</body>
+</html>
+
+
