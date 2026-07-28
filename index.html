@@ -1,872 +1,1008 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verdantia Smart City</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-body{background:linear-gradient(180deg,#081120,#111827,#172C4A);
-color:white;
-overflow-x:hidden;}
-body::before{content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at 15% 20%,rgba(56,189,248,.12),transparent 35%),
-radial-gradient(circle at 80% 15%,rgba(139,92,246,.10),transparent 35%),
-radial-gradient(circle at 60% 80%,rgba(34,211,238,.08),transparent 40%);
-animation:bgMove 18s infinite alternate;
-z-index:-2;}
-@keyframes bgMove{
-from{transform:scale(1);}
-to{transform:scale(1.2);}
-}
-.container{
-width:90%;
-max-width:1400px;
-margin:auto;
-}
-/*==========================
-HEADER
-==========================*/
-header{
-position:sticky;
-top:0;
-background:rgba(8,17,32,.75);
-backdrop-filter:blur(18px);
-border-bottom:1px solid rgba(255,255,255,.08);
-z-index:999;
-}
-nav{
-height:90px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-.logo{
-display:flex;
-align-items:center;
-gap:15px;
-}
-.logo img{
-width:55px;
-height:55px;
-border-radius:50%;
-border:2px solid cyan;
-}
-.logo h1{font-size:30px;}
-.logo span{color:#38BDF8;}
-.menu{
-display:flex;
-gap:35px;
-}
-.menu a{
-text-decoration:none;
-color:white;
-font-weight:500;
-transition:.3s;
-}
-.menu a:hover{color:#38BDF8;}
-.status{text-align:right;}
-.status p{
-color:#CBD5E1;
-font-size:14px;
-}
-.status h2{
-font-size:22px;
-color:#22D3EE;
-}
-/*==========================
-HERO
-==========================*/
-.hero{padding:50px 0;}
-.hero-grid{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:30px;
-}
-.card{
-background:rgba(255,255,255,.07);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.08);
-border-radius:22px;
-padding:35px;
-box-shadow:0 20px 40px rgba(0,0,0,.25);
-transition:.35s;
-}
-.card:hover{transform:translateY(-8px);}
-.welcome{
-display:flex;
-flex-direction:column;
-justify-content:center;
-min-height:420px;
-background:
-linear-gradient(rgba(8,17,32,.65),rgba(8,17,32,.85)),
-url("images/city.jpg");
-background-size:cover;
-background-position:center;
-}
-.tag{
-display:inline-block;
-padding:8px 18px;
-background:#1E3A8A;
-border-radius:30px;
-font-size:14px;
-margin-bottom:20px;
-width:max-content;
-}
-.welcome h1{
-font-size:58px;
-line-height:1.1;
-margin-bottom:20px;
-}
-.welcome h1 span{color:#38BDF8;}
-.welcome p{
-font-size:18px;
-line-height:1.8;
-color:#CBD5E1;
-margin-bottom:35px;
-max-width:700px;
-}
-.buttons{
-display:flex;
-gap:20px;
-}
-.btn{
-padding:16px 34px;
-border-radius:40px;
-text-decoration:none;
-font-weight:600;
-transition:.3s;
-}
-.primary{
-background:linear-gradient(135deg,#38BDF8,#8B5CF6);
-color:white;
-}
-.primary:hover{transform:translateY(-5px);}
-.secondary{
-border:2px solid #22D3EE;
-color:white;
-}
-.secondary:hover{
-background:#22D3EE;
-color:#081120;
-}
-/*==========================
-MAYOR CARD
-==========================*/
-.mayor{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-min-height:420px;
-}
-.mayor img{
-width:170px;
-height:170px;
-object-fit:cover;
-border-radius:50%;
-border:4px solid #38BDF8;
-margin-bottom:20px;
-}
-.mayor h2{
-font-size:28px;
-margin-bottom:10px;
-}
-.mayor h4{
-color:#22D3EE;
-margin-bottom:20px;
-}
-.quote{
-font-style:italic;
-color:#CBD5E1;
-line-height:1.8;
-margin-bottom:25px;
-}
-.mini-stats{
-width:100%;
-display:grid;
-grid-template-columns:1fr;
-gap:12px;
-}
-.mini{
-padding:12px;
-border-radius:12px;
-background:rgba(255,255,255,.05);
-display:flex;
-justify-content:space-between;
-}
-.mini span{
-color:#38BDF8;
-font-weight:600;
-}
-/*==========================
-RESPONSIVE
-==========================*/
-@media(max-width:1000px){
-.hero-grid{grid-template-columns:1fr;}
-.welcome h1{font-size:42px;}
-nav{
-flex-direction:column;
-height:auto;
-padding:20px 0;
-gap:20px;
-}
-.menu{
-flex-wrap:wrap;
-justify-content:center;
-}
-}
-@media(max-width:700px){
-.welcome h1{font-size:34px;}
-.buttons{flex-direction:column;}
-.logo h1{font-size:24px;}
-.menu{gap:18px;}
-}
-/*part 2 css-------------------------------------------------------------------------------------------------------*/
-/*==========================
-DASHBOARD
-==========================*/
-.dashboard{padding:20px 0 80px;}
-.section-title{
-font-size:36px;
-margin:50px 0 30px;
-text-align:center;
-}
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:20px;
-margin-bottom:50px;
-}
-.stat-card{
-padding:25px;
-border-radius:20px;
-background:rgba(255,255,255,.07);
-text-align:center;
-transition:.35s;
-border-top:5px solid white;
-}
-.stat-card:hover{transform:translateY(-8px);}
-.stat-card .icon{
-font-size:40px;
-margin-bottom:10px;
-}
-.stat-card h1{
-font-size:36px;
-margin:10px 0;
-}
-.blue{border-color:#38BDF8;}
-.green{border-color:#10B981;}
-.orange{border-color:#22C55E;}
-.yellow{border-color:#FACC15;}
-.purple{border-color:#A855F7;}
-.news-weather{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:25px;
-margin-bottom:60px;
-}
-.news ul{
-padding-left:20px;
-margin-top:20px;
-}
-.news li{
-margin-bottom:18px;
-color:#CBD5E1;
-}
-.weather-box{
-display:flex;
-flex-direction:column;
-align-items:center;
-margin-top:25px;
-}
-.temp{
-font-size:70px;
-font-weight:bold;
-color:#38BDF8;
-margin-bottom:20px;
-}
-.weather-details p{margin:10px 0;}
-@media(max-width:1000px){
-.stats-grid{grid-template-columns:repeat(2,1fr);}
-.news-weather{grid-template-columns:1fr;}}
-@media(max-width:650px){
-.stats-grid{grid-template-columns:1fr;}}
-/*==========================
-PART 3
-==========================*/
-.extras{padding:70px 0;}
-.events-grid{
-display:grid;
-gap:25px;
-margin-bottom:70px;
-}
-.event-card{
-display:flex;
-gap:25px;
-padding:25px;
-background:rgba(255,255,255,.07);
-border-radius:20px;
-transition:.35s;
-}
-.event-card:hover{transform:translateY(-8px);}
-.event-date{
-width:100px;
-background:#38BDF8;
-border-radius:15px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-color:white;
-}
-.event-date h2{font-size:36px;}
-.event-info p{
-margin-top:10px;
-color:#CBD5E1;
-line-height:1.8;
-}
-.services{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:25px;
-margin-bottom:80px;
-}
-.service{
-padding:30px;
-background:rgba(255,255,255,.07);
-border-radius:20px;
-text-align:center;
-transition:.35s;
-}
-.service:hover{transform:translateY(-8px);}
-.service h2{
-font-size:50px;
-margin-bottom:15px;
-}
-footer{
-background:#07111d;
-padding:70px 0 30px;
-}
-.footer-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr 1fr;
-gap:40px;
-}
-.footer-grid p{
-color:#CBD5E1;
-line-height:1.8;
-margin-top:10px;
-}
-.footer-grid ul{
-list-style:none;
-margin-top:15px;
-}
-.footer-grid li{
-margin:12px 0;
-color:#CBD5E1;
-cursor:pointer;
-}
-.footer-grid li:hover{color:#38BDF8;}
-footer hr{
-margin:40px 0 20px;
-border:none;
-height:1px;
-background:rgba(255,255,255,.15);
-}
-.copyright{
-text-align:center;
-color:#CBD5E1;
-}
-@media(max-width:1000px){
-.services{grid-template-columns:repeat(2,1fr);}
-.footer-grid{grid-template-columns:1fr 1fr;}
-}
-@media(max-width:700px){
-.services{grid-template-columns:1fr;}
-.footer-grid{grid-template-columns:1fr;}
-.event-card{
-flex-direction:column;
-align-items:center;
-text-align:center;
-}
-}
-.btnwrap{
-    position:fixed;
-    top:20%;
-    right:20px;
-    z-index:9999;
-}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verdantia Smart City</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-.side{
-    position:fixed;
-    top:18%;
-    right:-240px;
-    width:220px;
-    background:#111827;
-    padding:15px;
-    border-radius:20px 0 0 20px;
-    transition:.4s;
-}
+        body {
+            background: linear-gradient(180deg, #081120, #111827, #172C4A);
+            color: white;
+            overflow-x: hidden;
+        }
 
-.side.show{
-    right:0;
-}
+        body.dimmed::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 85;
+            pointer-events: none;
+        }
 
-.side a{
-    display:block;
-    padding:12px;
-    margin:8px 0;
-    text-decoration:none;
-    color:white;
-    background:#1f2937;
-    border-radius:10px;
-}
-</style>
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(56, 189, 248, .12), transparent 35%),
+                radial-gradient(circle at 80% 15%, rgba(139, 92, 246, .10), transparent 35%),
+                radial-gradient(circle at 60% 80%, rgba(34, 211, 238, .08), transparent 40%);
+            animation: bgMove 18s infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes bgMove {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(8, 17, 32, .75);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            z-index: 999;
+        }
+
+        nav {
+            height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid cyan;
+        }
+
+        .logo h1 {
+            font-size: 30px;
+        }
+
+        .logo span {
+            color: #38BDF8;
+        }
+
+        .menu {
+            display: flex;
+            gap: 35px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .menu a:hover {
+            color: #38BDF8;
+        }
+
+        .status {
+            text-align: right;
+        }
+
+        .status p {
+            color: #CBD5E1;
+            font-size: 14px;
+        }
+
+        .status h2 {
+            font-size: 22px;
+            color: #22D3EE;
+        }
+
+        .hero {
+            padding: 50px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .07);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+            transition: .35s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 420px;
+            background:
+                linear-gradient(rgba(8, 17, 32, .65), rgba(8, 17, 32, .85)),
+                url("images/city.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #1E3A8A;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            width: max-content;
+        }
+
+        .welcome h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .welcome h1 span {
+            color: #38BDF8;
+        }
+
+        .welcome p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #CBD5E1;
+            margin-bottom: 35px;
+            max-width: 700px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 16px 34px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .primary {
+            background: linear-gradient(135deg, #38BDF8, #8B5CF6);
+            color: white;
+        }
+
+        .primary:hover {
+            transform: translateY(-5px);
+        }
+
+        .secondary {
+            border: 2px solid #22D3EE;
+            color: white;
+        }
+
+        .secondary:hover {
+            background: #22D3EE;
+            color: #081120;
+        }
+
+        .mayor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 420px;
+        }
+
+        .mayor img {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #38BDF8;
+            margin-bottom: 20px;
+        }
+
+        .mayor h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .mayor h4 {
+            color: #22D3EE;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #CBD5E1;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .mini-stats {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .mini {
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .05);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mini span {
+            color: #38BDF8;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin: 50px 0 30px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .07);
+            text-align: center;
+            transition: .35s;
+            border-top: 5px solid white;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .stat-card .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h1 {
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        .blue {
+            border-color: #38BDF8;
+        }
+
+        .green {
+            border-color: #10B981;
+        }
+
+        .orange {
+            border-color: #22C55E;
+        }
+
+        .yellow {
+            border-color: #FACC15;
+        }
+
+        .purple {
+            border-color: #A855F7;
+        }
+
+        .news-weather {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .news ul {
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        .news li {
+            margin-bottom: 18px;
+            color: #CBD5E1;
+        }
+
+        .weather-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .temp {
+            font-size: 70px;
+            font-weight: bold;
+            color: #38BDF8;
+            margin-bottom: 20px;
+        }
+
+        .weather-details p {
+            margin: 10px 0;
+        }
+
+        .extras {
+            padding: 70px 0;
+        }
+
+        .events-grid {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 70px;
+        }
+
+        .event-card {
+            display: flex;
+            gap: 25px;
+            padding: 25px;
+            background: rgba(255, 255, 255, .07);
+            border-radius: 20px;
+            transition: .35s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .event-date {
+            width: 100px;
+            background: #38BDF8;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .event-date h2 {
+            font-size: 36px;
+        }
+
+        .event-info p {
+            margin-top: 10px;
+            color: #CBD5E1;
+            line-height: 1.8;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .service {
+            padding: 30px;
+            background: rgba(255, 255, 255, .07);
+            border-radius: 20px;
+            text-align: center;
+            transition: .35s;
+        }
+
+        .service:hover {
+            transform: translateY(-8px);
+        }
+
+        .service h2 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #07111d;
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-grid p {
+            color: #CBD5E1;
+            line-height: 1.8;
+            margin-top: 10px;
+        }
+
+        .footer-grid ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .footer-grid li {
+            margin: 12px 0;
+            color: #CBD5E1;
+            cursor: pointer;
+        }
+
+        .footer-grid li:hover {
+            color: #38BDF8;
+        }
+
+        footer hr {
+            margin: 40px 0 20px;
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, .15);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #CBD5E1;
+        }
+
+        .btnwrap {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            z-index: 90;
+        }
+
+        .side {
+            position: fixed;
+            top: 18%;
+            right: -240px;
+            width: 220px;
+            background: #111827;
+            padding: 15px;
+            border-radius: 20px 0 0 20px;
+            transition: .4s;
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side.show {
+            right: 0;
+            z-index: 100;
+        }
+
+        .side a {
+            display: block;
+            padding: 12px;
+            margin: 8px 0;
+            text-decoration: none;
+            color: white;
+            background: #1f2937;
+            border-radius: 10px;
+        }
+
+        .sidebarButton {
+            background-color: #8B5CF6;
+            padding: 1rem;
+            border-radius: 2rem;
+            font-weight: bolder;
+            font-size: 1rem;
+            transition: all ease 0.4s;
+        }
+
+        @media (max-width: 1000px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .news-weather {
+                grid-template-columns: 1fr;
+            }
+
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .welcome h1 {
+                font-size: 34px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .logo h1 {
+                font-size: 24px;
+            }
+
+            .menu {
+                gap: 18px;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .event-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-<div class="container">
-<nav>
-<div class="logo">
-<img src="images/logo.png" alt="Logo">
-<h1>Verdantia <span>Smart City</span></h1>
-</div>
-<div class="menu">
-<a href="#
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo" />
+                    <h1>Verdantia <span>Smart City</span></h1>
+                </div>
+                <div class="menu">
+                    <a href="#">Home</a>
+                    <a href="#">Departments</a>
+                    <a href="#">News</a>
+                    <a href="#">Services</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="status">
+                    <p>Monday, 20 July 2026</p>
+                    <h2>09:45 AM</h2>
+                    <p>🌤 29°C</p>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="card welcome">
+                    <div class="tag">SMART • SAFE • SUSTAINABLE</div>
+                    <h1>
+                        Welcome to
+                        <span>Verdantia</span>
+                        Smart City
+                    </h1>
+                    <p>
+                        Discover a city where innovation meets sustainability.
+                        Explore smart governance, healthcare, education,
+                        tourism, food services and public safety through one
+                        integrated digital platform.
+                    </p>
+                    <div class="buttons">
+                        <a href="#" class="btn primary">Explore City</a>
+                        <a href="#" class="btn secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="card mayor">
+                    <img src="images/mayor.png" alt="Mayor" />
+                    <h2>Siya Gaba</h2>
+                    <h4>Mayor of Verdantia</h4>
+                    <p class="quote">
+                        "Together we are building a smarter,
+                        cleaner and safer future for every citizen."
+                    </p>
+                    <div class="mini-stats">
+                        <div class="mini">
+                            <p>Population</p>
+                            <span>1.8M</span>
+                        </div>
+                        <div class="mini">
+                            <p>Safety Index</p>
+                            <span>94%</span>
+                        </div>
+                        <div class="mini">
+                            <p>Green Score</p>
+                            <span>96%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="dashboard">
+        <div class="container">
+            <h2 class="section-title">City Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="icon">👥</div>
+                    <h1>1.8M</h1>
+                    <p>Population</p>
+                </div>
+                <div class="stat-card green">
+                    <div class="icon">🛡️</div>
+                    <h1>94%</h1>
+                    <p>Safety Index</p>
+                </div>
+                <div class="stat-card orange">
+                    <div class="icon">🌿</div>
+                    <h1>96%</h1>
+                    <p>Green Score</p>
+                </div>
+                <div class="stat-card yellow">
+                    <div class="icon">🌤️</div>
+                    <h1>72</h1>
+                    <p>AQI</p>
+                </div>
+                <div class="stat-card purple">
+                    <div class="icon">🚦</div>
+                    <h1>32%</h1>
+                    <p>Traffic</p>
+                </div>
+            </div>
+            <div class="news-weather">
+                <div class="card news">
+                    <h2>📰 City News</h2>
+                    <ul>
+                        <li>New Metro Line Phase-II inaugurated.</li>
+                        <li>Free Health Camp this Sunday.</li>
+                        <li>Smart Parking System launched downtown.</li>
+                        <li>Education Scholarship Portal now open.</li>
+                        <li>Tourism Festival begins next week.</li>
+                    </ul>
+                </div>
+                <div class="card weather">
+                    <h2>☀ Live Weather</h2>
+                    <div class="weather-box">
+                        <div class="temp">30°C</div>
+                        <div class="weather-details">
+                            <p><strong>Condition:</strong> Sunny</p>
+                            <p><strong>Humidity:</strong> 63%</p>
+                            <p><strong>Wind:</strong> 11 km/h</p>
+                            <p><strong>Visibility:</strong> 9 km</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="extras">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-date">
+                        <h2>15</h2>
+                        <p>JUL</p>
+                    </div>
+                    <div class="event-info">
+                        <h3>Smart City Hackathon</h3>
+                        <p>
+                            Develop innovative smart city solutions with students,
+                            developers and professionals.
+                        </p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-date">
+                        <h2>21</h2>
+                        <p>JUL</p>
+                    </div>
+                    <div class="event-info">
+                        <h3>Mega Health Camp</h3>
+                        <p>
+                            Free health checkups, blood donation,
+                            BMI analysis and awareness programs.
+                        </p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-date">
+                        <h2>30</h2>
+                        <p>AUG</p>
+                    </div>
+                    <div class="event-info">
+                        <h3>Tourism Carnival</h3>
+                        <p>
+                            Food festivals, music performances,
+                            art exhibitions and local handicrafts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">Quick Services</h2>
+            <div class="services">
+                <div class="service">
+                    <h2>📄</h2>
+                    <p>Apply for Birth Certificate</p>
+                </div>
+                <div class="service">
+                    <h2>💡</h2>
+                    <p>Electricity Bill</p>
+                </div>
+                <div class="service">
+                    <h2>💧</h2>
+                    <p>Water Bill</p>
+                </div>
+                <div class="service">
+                    <h2>🚗</h2>
+                    <p>Traffic Fine</p>
+                </div>
+                <div class="service">
+                    <h2>🚌</h2>
+                    <p>Bus Pass</p>
+                </div>
+                <div class="service">
+                    <h2>🏠</h2>
+                    <p>Property Tax</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h2>Verdantia Smart City</h2>
+                <p>
+                    Building a Smarter, Safer and Greener Future through
+                    Innovation and Technology.
+                </p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li>Home</li>
+                    <li>Departments</li>
+                    <li>Tourism</li>
+                    <li>News</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Departments</h3>
+                <ul>
+                    <li>Health</li>
+                    <li>Food</li>
+                    <li>Education</li>
+                    <li>Security</li>
+                    <li>Tourism</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Email : info@verdantia.gov</p>
+                <p>Phone : +91 9876543210</p>
+                <p>Address : Verdantia City Center</p>
+            </div>
+        </div>
+        <hr />
+        <p class="copyright">
+            © 2026 Verdantia Smart City | Academic Project
+        </p>
+    </footer>
+    <div class="btnwrap">
+        <button class="sidebarButton">Departments</button>
+    </div>
 
-">Home</a>
-<a href="#">Departments</a>
-<a href="#">News</a>
-<a href="#">Services</a>
-<a href="#">Contact</a>
-</div>
-<div class="status">
-<p>Monday, 20 July 2026</p>
-<h2>09:45 AM</h2>
-<p>🌤 29°C</p>
-</div>
-</nav>
-</div>
-</header>
-<section class="hero">
-<div class="container">
-<div class="hero-grid">
-<div class="card welcome">
-<div class="tag">
-SMART • SAFE • SUSTAINABLE
-</div>
-<h1>
-Welcome to
-<span>Verdantia</span>
-Smart City
-</h1>
-<p>
-Discover a city where innovation meets sustainability.
-Explore smart governance, healthcare, education,
-tourism, food services and public safety through one
-integrated digital platform.
-</p>
-<div class="buttons">
-<a href="#" class="btn primary">Explore City</a>
-<a href="#" class="btn secondary">Learn More</a>
-</div>
-</div>
-<div class="card mayor">
-<img src="images/mayor.png" alt="Mayor">
-<h2>Siya Gaba</h2>
-<h4>Mayor of Verdantia</h4>
-<p class="quote">
-"Together we are building a smarter,
-cleaner and safer future for every citizen."
-</p>
-<div class="mini-stats">
-<div class="mini">
-<p>Population</p>
-<span>1.8M</span>
-</div>
-<div class="mini">
-<p>Safety Index</p>
-<span>94%</span>
-</div>
-<div class="mini">
-<p>Green Score</p>
-<span>96%</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- ==========================
-PART 2 STARTS BELOW THIS LINE
-=========================== -->
-<!-- ==========================
-PART 2 : DASHBOARD SECTION
-Paste this BELOW the </section> of the hero and ABOVE </body>
-========================== -->
-<section class="dashboard">
-<div class="container">
-<h2 class="section-title">City Dashboard</h2>
-<div class="stats-grid">
-<div class="stat-card blue">
-<div class="icon">👥</div>
-<h1>1.8M</h1>
-<p>Population</p>
-</div>
-<div class="stat-card green">
-<div class="icon">🛡️</div>
-<h1>94%</h1>
-<p>Safety Index</p>
-</div>
-<div class="stat-card orange">
-<div class="icon">🌿</div>
-<h1>96%</h1>
-<p>Green Score</p>
-</div>
-<div class="stat-card yellow">
-<div class="icon">🌤️</div>
-<h1>72</h1>
-<p>AQI</p>
-</div>
-<div class="stat-card purple">
-<div class="icon">🚦</div>
-<h1>32%</h1>
-<p>Traffic</p>
-</div>
-</div>
-<div class="news-weather">
-<div class="card news">
-<h2>📰 City News</h2>
-<ul>
-<li>New Metro Line Phase-II inaugurated.</li>
-<li>Free Health Camp this Sunday.</li>
-<li>Smart Parking System launched downtown.</li>
-<li>Education Scholarship Portal now open.</li>
-<li>Tourism Festival begins next week.</li>
-</ul>
-</div>
-<div class="card weather">
-<h2>☀ Live Weather</h2>
-<div class="weather-box">
-<div class="temp">
-30°C
-</div>
-<div class="weather-details">
-<p><strong>Condition:</strong> Sunny</p>
-<p><strong>Humidity:</strong> 63%</p>
-<p><strong>Wind:</strong> 11 km/h</p>
-<p><strong>Visibility:</strong> 9 km</p>
-</div>
-</div>
-</div>
-</div>
+    <div id="side" class="side">
+        <a href="index.html">🏠 Home</a>
+        <a href="health.html">🏥 Health</a>
+        <a href="food.html">🍔 Food</a>
+        <a href="education.html">🎓 Education</a>
+        <a href="security.html">🛡 Security</a>
+        <a href="tourism.html">✈ Tourism</a>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const dateOptions = {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            };
+            const timeOptions = {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            };
+            const date = now.toLocaleDateString("en-US", dateOptions);
+            const time = now.toLocaleTimeString("en-US", timeOptions);
+            const dateBox = document.querySelector(".status p");
+            const clockBox = document.querySelector(".status h2");
+            if (dateBox) dateBox.innerHTML = date;
+            if (clockBox) clockBox.innerHTML = time;
+        }
 
-</section>
-<!-- ======================================================
-PART 3
-Paste this BELOW the </section> of the Dashboard
-and ABOVE </body>
-====================================================== -->
-<section class="extras">
-<div class="container">
-<h2 class="section-title">Upcoming Events</h2>
-<div class="events-grid">
-<div class="event-card">
-<div class="event-date">
-<h2>15</h2>
-<p>JUL</p>
-</div>
-<div class="event-info">
-<h3>Smart City Hackathon</h3>
-<p>
-Develop innovative smart city solutions with students,
-developers and professionals.
-</p>
-</div>
-</div>
-<div class="event-card">
-<div class="event-date">
-<h2>21</h2>
-<p>JUL</p>
-</div>
-<div class="event-info">
-<h3>Mega Health Camp</h3>
-<p>
-Free health checkups, blood donation,
-BMI analysis and awareness programs.
-</p>
-</div>
-</div>
-<div class="event-card">
-<div class="event-date">
-<h2>30</h2>
-<p>AUG</p>
-</div>
-<div class="event-info">
-<h3>Tourism Carnival</h3>
-<p>
-Food festivals, music performances,
-art exhibitions and local handicrafts.
-</p>
-</div>
-</div>
-</div>
-<h2 class="section-title">
-Quick Services
-</h2>
-<div class="services">
-<div class="service">
-<h2>📄</h2>
-<p>Apply for Birth Certificate</p>
-</div>
-<div class="service">
-<h2>💡</h2>
-<p>Electricity Bill</p>
-</div>
-<div class="service">
-<h2>💧</h2>
-<p>Water Bill</p>
-</div>
-<div class="service">
-<h2>🚗</h2>
-<p>Traffic Fine</p>
-</div>
-<div class="service">
-<h2>🚌</h2>
-<p>Bus Pass</p>
-</div>
-<div class="service">
-<h2>🏠</h2>
-<p>Property Tax</p>
-</div>
-</div>
-</div>
-</section>
-<footer>
-<div class="container footer-grid">
-<div>
-<h2>Verdantia Smart City</h2>
-<p>
-Building a Smarter, Safer and Greener Future through
-Innovation and Technology.
-</p>
-</div>
-<div>
-<h3>Quick Links</h3>
-<ul>
-<li>Home</li>
-<li>Departments</li>
-<li>Tourism</li>
-<li>News</li>
-<li>Contact</li>
-</ul>
-</div>
-<div>
-<h3>Departments</h3>
-<ul>
-<li>Health</li>
-<li>Food</li>
-<li>Education</li>
-<li>Security</li>
-<li>Tourism</li>
-</ul>
-</div>
-<div>
-<h3>Contact</h3>
-<p>Email : info@verdantia.gov</p>
-<p>Phone : +91 9876543210</p>
-<p>Address : Verdantia City Center</p>
-</div>
-</div>
-<hr>
-<p class="copyright">
-© 2026 Verdantia Smart City | Academic Project
-</p>
-</footer>
-<!-- ======================================================
-PART 4
-REPLACE your empty <script></script> with this script
-===================================================== -->
-<script>
-// =============================
-// LIVE CLOCK & DATE
-// =============================
-function updateClock(){
-const now=new Date();
-const dateOptions={
-weekday:"long",
-year:"numeric",
-month:"long",
-day:"numeric"};
-const timeOptions={
-hour:"2-digit",
-minute:"2-digit",
-second:"2-digit"};
-const date=now.toLocaleDateString("en-US",dateOptions);
-const time=now.toLocaleTimeString("en-US",timeOptions);
-const dateBox=document.querySelector(".status p");
-const clockBox=document.querySelector(".status h2");
-if(dateBox) dateBox.innerHTML=date;
-if(clockBox) clockBox.innerHTML=time;
-}
-updateClock();
-setInterval(updateClock,1000);
-// =============================
-// NEWS TICKER
-// =============================
-const news=[
-"🚇 Metro Phase-II has officially opened.",
-"🏥 Mega Health Camp starts this Sunday.",
-"🎓 Scholarship Portal is now accepting applications.",
-"🌳 10,000 new trees planted this month.",
-"🚔 Crime reduced by 18% compared to last year.",
-"🏖 Tourism Festival begins next week.",
-"⚡ Smart Street Lights installed in downtown."
-];
-let newsIndex=0;
-const newsList=document.querySelector(".news ul");
-function rotateNews(){
-if(!newsList) return;
-newsList.style.opacity="0";
-setTimeout(()=>{
-newsList.innerHTML="<li>"+news[newsIndex]+"</li>";
-newsIndex++;
-if(newsIndex>=news.length){
-newsIndex=0;}
-newsList.style.opacity="1";},400);
-}
-setInterval(rotateNews,3500);
-// =============================
-// HERO BUTTON
-// =============================
-const explore=document.querySelector(".primary");
-if(explore){
-explore.addEventListener("click",function(e){
-e.preventDefault();
-document.querySelector(".dashboard").scrollIntoView({
-behavior:"smooth"});
-});
-}
-// =============================
-// CARD ANIMATION
-// =============================
-const cards=document.querySelectorAll(
-".card,.dept,.stat-card,.service,.event-card,.emergency"
-);
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.style.opacity="1";
-entry.target.style.transform="translateY(0px)";}
-});
-},{
-threshold:.15
-});
-cards.forEach(card=>{
-card.style.opacity="0";
-card.style.transform="translateY(50px)";
-card.style.transition=".8s";
-observer.observe(card);
-});
-// =============================
-// COUNTER ANIMATION
-// =============================
-const stats=document.querySelectorAll(".stat-card h1");
-stats.forEach(stat=>{
-const target=stat.innerHTML;
-let numeric=parseInt(target);
-if(isNaN(numeric)) return;
-let count=0;
-const speed=Math.ceil(numeric/80);
-function update(){
-count+=speed;
-if(count>=numeric){
-count=numeric;}
-if(target.includes("%")){
-stat.innerHTML=count+"%";}
-else if(target.includes("M")){
-stat.innerHTML=(count/10).toFixed(1)+"M";}
-else{
-stat.innerHTML=count;}
-if(count<numeric){
-requestAnimationFrame(update);}}
-update();});
-// =============================
-// WEATHER COLORS
-// =============================
-const weather=document.querySelector(".temp");
-const hour=new Date().getHours();
-if(weather){
-if(hour>=6 && hour<12){
-weather.style.color="#FACC15";
-}
-else if(hour>=12 && hour<18){
-weather.style.color="#38BDF8";}
-else{weather.style.color="#A855F7";}}
-// =============================
-// RANDOM BACKGROUND GLOW
-// ============================
-setInterval(()=>{
-document.body.style.background=
-`linear-gradient(
-180deg,
-rgb(${8+Math.random()*5},
-${17+Math.random()*5},
-${32+Math.random()*5}),
-#111827,
-#172C4A)`;
-},8000);
-// =============================
-// HOVER EFFECT
-// =============================
-cards.forEach(card=>{
-card.addEventListener("mouseenter",()=>{
-card.style.boxShadow="0px 20px 45px rgba(56,189,248,.25)";
-});
-card.addEventListener("mouseleave",()=>{
-card.style.boxShadow="0px 20px 40px rgba(0,0,0,.25)";
-});
-});
-// =============================
-// PAGE LOAD ANIMATION
-// =============================
-window.onload=function(){
-document.body.style.opacity="0";
-document.body.style.transition="1s";
-setTimeout(()=>{
-document.body.style.opacity="1";
-},100);};
-function toggleMenu(){
-    document.getElementById("side").classList.toggle("show");
-}
-</script>
-<div class="btnwrap">
-    <button onclick="toggleMenu()">Departments</button>
-</div>
+        updateClock();
+        setInterval(updateClock, 1000);
 
-<div id="side" class="side">
-    <a href="index.html">🏠 Home</a>
-    <a href="health.html">🏥 Health</a>
-    <a href="food.html">🍔 Food</a>
-    <a href="education.html">🎓 Education</a>
-    <a href="security.html">🛡 Security</a>
-    <a href="tourism.html">✈ Tourism</a>
-</div>
+        const news = [
+            "🚇 Metro Phase-II has officially opened.",
+            "🏥 Mega Health Camp starts this Sunday.",
+            "🎓 Scholarship Portal is now accepting applications.",
+            "🌳 10,000 new trees planted this month.",
+            "🚔 Crime reduced by 18% compared to last year.",
+            "🏖 Tourism Festival begins next week.",
+            "⚡ Smart Street Lights installed in downtown."
+        ];
+        let newsIndex = 0;
+        const newsList = document.querySelector(".news ul");
+
+        function rotateNews() {
+            if (!newsList) return;
+            newsList.style.opacity = "0";
+            setTimeout(() => {
+                newsList.innerHTML = "<li>" + news[newsIndex] + "</li>";
+                newsIndex++;
+                if (newsIndex >= news.length) {
+                    newsIndex = 0;
+                }
+                newsList.style.opacity = "1";
+            }, 400);
+        }
+
+        setInterval(rotateNews, 3500);
+
+        const explore = document.querySelector(".primary");
+        if (explore) {
+            explore.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.querySelector(".dashboard").scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        }
+
+        const cards = document.querySelectorAll(
+            ".card,.dept,.stat-card,.service,.event-card,.emergency"
+        );
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0px)";
+                }
+            });
+        }, {
+            threshold: .15
+        });
+
+        cards.forEach((card) => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(50px)";
+            card.style.transition = ".8s";
+            observer.observe(card);
+        });
+
+        const stats = document.querySelectorAll(".stat-card h1");
+        stats.forEach((stat) => {
+            const target = stat.innerHTML;
+            let numeric = parseInt(target);
+            if (isNaN(numeric)) return;
+            let count = 0;
+            const speed = Math.ceil(numeric / 80);
+
+            function update() {
+                count += speed;
+                if (count >= numeric) {
+                    count = numeric;
+                }
+                if (target.includes("%")) {
+                    stat.innerHTML = count + "%";
+                } else if (target.includes("M")) {
+                    stat.innerHTML = (count / 10).toFixed(1) + "M";
+                } else {
+                    stat.innerHTML = count;
+                }
+                if (count < numeric) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            update();
+        });
+
+        const weather = document.querySelector(".temp");
+        const hour = new Date().getHours();
+        if (weather) {
+            if (hour >= 6 && hour < 12) {
+                weather.style.color = "#FACC15";
+            } else if (hour >= 12 && hour < 18) {
+                weather.style.color = "#38BDF8";
+            } else {
+                weather.style.color = "#A855F7";
+            }
+        }
+
+        setInterval(() => {
+            document.body.style.background =
+                `linear-gradient(
+                    180deg,
+                    rgb(${8 + Math.random() * 5},
+                    ${17 + Math.random() * 5},
+                    ${32 + Math.random() * 5}),
+                    #111827,
+                    #172C4A)`;
+        }, 8000);
+
+        cards.forEach((card) => {
+            card.addEventListener("mouseenter", () => {
+                card.style.boxShadow = "0px 20px 45px rgba(56,189,248,.25)";
+            });
+            card.addEventListener("mouseleave", () => {
+                card.style.boxShadow = "0px 20px 40px rgba(0,0,0,.25)";
+            });
+        });
+
+        window.onload = function () {
+            document.body.style.opacity = "0";
+            document.body.style.transition = "1s";
+            setTimeout(() => {
+                document.body.style.opacity = "1";
+            }, 100);
+        };
+
+        const body = document.querySelector('body');
+        const sideMenu = document.querySelector("#side");
+        const sidebarButton = document.querySelector(".sidebarButton");
+
+        sidebarButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            sideMenu.classList.add("show");
+            body.classList.add("dimmed");
+            sidebarButton.style.opacity = 0;
+        });
+
+        sideMenu.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+
+        body.addEventListener("click", () => {
+            sideMenu.classList.remove("show");
+            body.classList.remove("dimmed");
+            sidebarButton.style.opacity = 1;
+        });
+    </script>
 </body>
 </html>
