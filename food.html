@@ -2,26 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/styles.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verdantia Food Department</title>
 
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
-
 body{
+font-family:'Segoe UI',sans-serif;
 background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee,#84fab0,#8fd3f4);
 background-size:400% 400%;
 animation:bgmove 15s ease infinite;
 color:white;
-padding:20px;
 min-height:100vh;
 }
 
@@ -237,9 +230,26 @@ font-size:32px;
 <script src="script.js"></script>
 <body>
 
-<div class="title">
-Verdantia Food Department
-</div>
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo" />
+                <h1>Verdantia <span>Smart City</span></h1>
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#" class="sidebarButton">Departments</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="status">
+                <p>Monday, 20 July 2026</p>
+                <h2>09:45 AM</h2>
+                <p>🌤 29°C</p>
+            </div>
+        </nav>
+    </div>
+</header>
 
 <div class="grid">
 
@@ -333,7 +343,7 @@ Send Complaint
 </div>
 
 <div class="btnwrap">
-<button onclick="toggleMenu()">
+<button class="sidebarButton" onclick="toggleMenu()">
 Departments
 </button>
 </div>
@@ -421,6 +431,7 @@ document.getElementById('complaintResult').textContent=
 }
 
 </script>
+<script src="scripts/script.js"></script>
 
 </body>
 </html>
