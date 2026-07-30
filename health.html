@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/styles.css">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Verdantia Health Department</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:linear-gradient(135deg,#14090a,#241012,#10131c);color:#fff;padding:20px}
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#14090a,#241012,#10131c);
+    color:#fff;
+}
+
+/* header{
+    background: rgba(116, 39, 67, 0.4);
+    margin-bottom: 1rem;
+} */
+
 .title{text-align:center;font-size:38px;font-weight:700;padding:14px 24px;border-radius:22px;max-width:620px;margin:0 auto 20px;background:rgba(255,255,255,.08)}
 .grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .card{background:rgba(255,255,255,.08);padding:18px;border-radius:22px;backdrop-filter:blur(10px);transition:.35s;box-shadow:0 10px 24px rgba(0,0,0,.2)}.card:hover{transform:translateY(-6px);box-shadow:0 18px 34px rgba(255,107,107,.18)}
@@ -21,7 +30,26 @@ button{padding:12px 20px;border:none;border-radius:12px;background:linear-gradie
 </head>
 <script src="script.js"></script>
 <body>
-<div class="title">Verdantia Health Department</div>
+<header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo" />
+                    <h1>Verdantia <span>Smart City</span></h1>
+                </div>
+                <div class="menu">
+                    <a href="#">Home</a>
+                    <a href="#" class="sidebarButton">Departments</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="status">
+                    <p>Monday, 20 July 2026</p>
+                    <h2>09:45 AM</h2>
+                    <p>🌤 29°C</p>
+                </div>
+            </nav>
+        </div>
+    </header>
 <div class="grid">
 <div class="card"><h2>🏥 Main Hospital Portal</h2><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80" style="width:100%;height:160px;object-fit:cover;border-radius:16px;margin-bottom:10px"><p class="small">Verdantia Central Hospital offers emergency care, surgeries, diagnostics and specialist treatment 24/7.</p></div>
 <div class="card"><h2>Hospital Branches</h2><p class="small">School Clinic North Campus<br>College Health Wing East Zone<br>Community Branch West Sector</p></div>
@@ -30,7 +58,7 @@ button{padding:12px 20px;border:none;border-radius:12px;background:linear-gradie
 <div class="card"><h2>💉 Vaccination Report</h2><input id="apname" placeholder="Appointment Name"><input id="apdate" type="date"><button onclick="bookApp()">Book Appointment</button><div id="appres" class="result"></div><hr style="margin:14px 0;border-color:rgba(255,255,255,.08)"><h2 style="font-size:22px">Vaccination Report</h2><input id="name" placeholder="Citizen Name"><select id="dose"><option>Dose 1</option><option>Dose 2</option><option>Booster</option></select><button onclick="saveVac()">Submit Report</button><div id="vacres" class="result"></div></div>
 <div class="card"><h2>Complaint Box</h2><textarea id="comp" rows="5" placeholder="Enter complaint"></textarea><button onclick="complaint()">Send Complaint</button><div id="compres" class="result"></div></div>
 </div>
-<div class="btnwrap"><button onclick="toggleMenu()">Departments</button></div>
+<div class="btnwrap"><button class="sidebarButton" onclick="toggleMenu()">Departments</button></div>
 <div id="side" class="side">
 <a href="index.html">🏠 Home</a>
 <a href="health.html">🏥 Health</a>
@@ -91,5 +119,6 @@ document.getElementById('bmires').textContent=
 function saveVac(){let n=document.getElementById('name').value,d=document.getElementById('dose').value;localStorage.setItem('vaccination',n+' - '+d);document.getElementById('vacres').textContent='Saved for '+n}
 function complaint(){let c=document.getElementById('comp').value;localStorage.setItem('healthComplaint',c);document.getElementById('compres').textContent='Complaint submitted successfully'} function bookApp(){let n=document.getElementById('apname').value,d=document.getElementById('apdate').value;document.getElementById('appres').textContent='Appointment booked for '+n+' on '+d;}
 </script>
+<script src="scripts/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #081120, #111827, #172C4A);
+  color: white;
+  overflow-x: hidden;
+  padding-bottom: 1vh;
+}
+
+body.dimmed::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 85;
+  pointer-events: none;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .3s;
+  font-weight: 800;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 12px;
+  outline: none;
+}
+
+.side {
+  position: fixed;
+  right: -240px;
+  transition: .4s;
+}
+
+.side.show {
+  right: 0;
+}
+
+.side a {
+  display: block;
+  text-decoration: none;
+  padding: 13px;
+  margin: 10px 0;
+  border-radius: 14px;
+  transition: .3s;
+  font-weight: 700;
+}
+
+.side a:hover {
+  transform: translateX(-4px);
+}
+
+#sideBtn {
+  background-color: #8B5CF6;
+  padding: 1rem;
+  border-radius: 2rem;
+  font-weight: bolder;
+  font-size: 1rem;
+  transition: all ease 0.4s;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.btnwrap {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    z-index: 80;
+    margin-bottom: 1rem;;
+}
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: auto;
+}
+
+nav {
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid cyan;
+}
+
+.logo h1 {
+    font-size: 30px;
+}
+
+.logo span {
+    color: #38BDF8;
+}
+
+.menu {
+    display: flex;
+    gap: 35px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.menu a:hover {
+    color: #38BDF8;
+}
+
+.status {
+    text-align: right;
+}
+
+.status p {
+    color: #CBD5E1;
+    font-size: 14px;
+}
+
+.status h2 {
+    font-size: 22px;
+    color: #22D3EE;
+}
+
+.side {
+  position: fixed;
+  top: 18%;
+  right: -240px;
+  width: 220px;
+  background: #111827;
+  padding: 15px;
+  border-radius: 20px 0 0 20px;
+  transition: .4s;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.side.show {
+  right: 0;
+  z-index: 100;
+}
+
+.side a {
+  display: block;
+  padding: 12px;
+  margin: 8px 0;
+  text-decoration: none;
+  color: white;
+  background: #1f2937;
+  border-radius: 10px;
+}

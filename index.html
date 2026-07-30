@@ -7,31 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(180deg, #081120, #111827, #172C4A);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        body.dimmed::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 85;
-            pointer-events: none;
-        }
 
         body::before {
             content: "";
@@ -55,79 +32,6 @@
             to {
                 transform: scale(1.2);
             }
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: auto;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            background: rgba(8, 17, 32, .75);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(255, 255, 255, .08);
-            z-index: 999;
-        }
-
-        nav {
-            height: 90px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo img {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2px solid cyan;
-        }
-
-        .logo h1 {
-            font-size: 30px;
-        }
-
-        .logo span {
-            color: #38BDF8;
-        }
-
-        .menu {
-            display: flex;
-            gap: 35px;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            transition: .3s;
-        }
-
-        .menu a:hover {
-            color: #38BDF8;
-        }
-
-        .status {
-            text-align: right;
-        }
-
-        .status p {
-            color: #CBD5E1;
-            font-size: 14px;
-        }
-
-        .status h2 {
-            font-size: 22px;
-            color: #22D3EE;
         }
 
         .hero {
@@ -491,44 +395,6 @@
             z-index: 90;
         }
 
-        .side {
-            position: fixed;
-            top: 18%;
-            right: -240px;
-            width: 220px;
-            background: #111827;
-            padding: 15px;
-            border-radius: 20px 0 0 20px;
-            transition: .4s;
-            z-index: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .side.show {
-            right: 0;
-            z-index: 100;
-        }
-
-        .side a {
-            display: block;
-            padding: 12px;
-            margin: 8px 0;
-            text-decoration: none;
-            color: white;
-            background: #1f2937;
-            border-radius: 10px;
-        }
-
-        .sidebarButton {
-            background-color: #8B5CF6;
-            padding: 1rem;
-            border-radius: 2rem;
-            font-weight: bolder;
-            font-size: 1rem;
-            transition: all ease 0.4s;
-        }
-
         @media (max-width: 1000px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -590,10 +456,8 @@
                 </div>
                 <div class="menu">
                     <a href="#">Home</a>
-                    <a href="#">Departments</a>
-                    <a href="#">News</a>
-                    <a href="#">Services</a>
-                    <a href="#">Contact</a>
+                    <a href="#" class="sidebarButton">Departments</a>
+                    <a href="#contact">Contact</a>
                 </div>
                 <div class="status">
                     <p>Monday, 20 July 2026</p>
@@ -789,16 +653,6 @@
                 </p>
             </div>
             <div>
-                <h3>Quick Links</h3>
-                <ul>
-                    <li>Home</li>
-                    <li>Departments</li>
-                    <li>Tourism</li>
-                    <li>News</li>
-                    <li>Contact</li>
-                </ul>
-            </div>
-            <div>
                 <h3>Departments</h3>
                 <ul>
                     <li>Health</li>
@@ -808,7 +662,7 @@
                     <li>Tourism</li>
                 </ul>
             </div>
-            <div>
+            <div id="contact">
                 <h3>Contact</h3>
                 <p>Email : info@verdantia.gov</p>
                 <p>Phone : +91 9876543210</p>
@@ -821,7 +675,7 @@
         </p>
     </footer>
     <div class="btnwrap">
-        <button class="sidebarButton">Departments</button>
+        <button class="sidebarButton" id="sideBtn">Departments</button>
     </div>
 
     <div id="side" class="side">
@@ -985,13 +839,16 @@
 
         const body = document.querySelector('body');
         const sideMenu = document.querySelector("#side");
-        const sidebarButton = document.querySelector(".sidebarButton");
+        const sidebarButton = document.querySelectorAll(".sidebarButton");
+        const floatBtn = document.querySelector("#sideBtn");
 
-        sidebarButton.addEventListener("click", (event) => {
-            event.stopPropagation();
-            sideMenu.classList.add("show");
-            body.classList.add("dimmed");
-            sidebarButton.style.opacity = 0;
+        sidebarButton.forEach(btn => {
+            btn.addEventListener("click", (event) => {
+                event.stopPropagation();
+                sideMenu.classList.add("show");
+                body.classList.add("dimmed");
+                floatBtn.style.opacity = 0;
+            })       
         });
 
         sideMenu.addEventListener("click", (event) => {
@@ -1001,7 +858,9 @@
         body.addEventListener("click", () => {
             sideMenu.classList.remove("show");
             body.classList.remove("dimmed");
-            sidebarButton.style.opacity = 1;
+            sidebarButton.forEach(btn => {
+                floatBtn.style.opacity = 1;
+            })
         });
     </script>
 </body>
