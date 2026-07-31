@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles/styles.css">
-    <link rel="icon" href="Navy_blue_circle_with_tree_202607301434.jpeg">
+    <link rel="icon" href="favicon.png">
     <style>
 
         body::before {
@@ -363,6 +363,36 @@
             }
         }
 
+        #news-container{
+            overflow: hidden;
+            white-space: nowrap;
+            width: 50vw;
+            height: 28vh;
+        }
+
+        #news-container ul{
+            display: block;
+            /* gap: 2vh; */
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            animation: marquee 12s linear infinite;
+            list-style: none;
+        }
+
+        #news-container:hover ul{
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0%{
+                transform: translateY(-100%);
+            }
+            100%{
+                transform: translateY(50%);
+            }
+        }
+
         @media (max-width: 700px) {
             .welcome h1 {
                 font-size: 34px;
@@ -440,11 +470,10 @@
                 </div>
                 <div class="card mayor">
                     <img src="images/mayor.png" alt="Mayor" />
-                    <h2>Siya Gaba</h2>
+                    <h2>Himanshi</h2>
                     <h4>Mayor of Oakridge</h4>
                     <p class="quote">
-                        "Together we are building a smarter,
-                        cleaner and safer future for every citizen."
+                        "Working together to build a smarter, cleaner, and safer tomorrow—because every citizen deserves a world that stands strong."
                     </p>
                     <div class="mini-stats">
                         <div class="mini">
@@ -496,14 +525,26 @@
             </div>
             <div class="news-weather">
                 <div class="card news">
-                    <h2>📰 City News</h2>
-                    <ul>
-                        <li>New Metro Line Phase-II inaugurated.</li>
-                        <li>Free Health Camp this Sunday.</li>
-                        <li>Smart Parking System launched downtown.</li>
-                        <li>Education Scholarship Portal now open.</li>
-                        <li>Tourism Festival begins next week.</li>
-                    </ul>
+                    <h2>Live Updates</h2>
+                    <div id="news-container">
+                        <ul>
+                            <li>New Metro Line Phase-II inaugurated.</li>
+                            <li>Free Health Camp this Sunday.</li>
+                            <li>Smart Parking System launched downtown.</li>
+                            <li>Education Scholarship Portal now open.</li>
+                            <li>Tourism Festival begins next week.</li>
+                            <li>New EV charging hubs completed in 12 neighborhoods.</li>
+                            <li>City library extends hours for summer study.</li>
+                            <li>Smart waste bins now live across central districts.</li>
+                            <li>Night market returns with local artisans.</li>
+                            <li>Water conservation app hits 100k downloads.</li>
+                            <li>City safety camera network expands to 30 new junctions.</li>
+                            <li>Urban garden plots available for residents.</li>
+                            <li>Solar streetlights activated in West Oakridge.</li>
+                            <li>Stand user sighted near downtown murals.</li>
+                            <li>Stone Ocean art installation opens by the river.</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card weather">
                     <h2>☀ Live Weather</h2>
@@ -645,25 +686,36 @@
             "🌳 10,000 new trees planted this month.",
             "🚔 Crime reduced by 18% compared to last year.",
             "🏖 Tourism Festival begins next week.",
-            "⚡ Smart Street Lights installed in downtown."
+            "⚡ Smart Street Lights installed in downtown.",
+            "🔌 New EV charging hubs completed in 12 neighborhoods.",
+            "📚 City library extends hours for summer study.",
+            "♻ Smart waste bins now live across central districts.",
+            "🎪 Night market returns with local artisans.",
+            "💧 Water conservation app hits 100k downloads.",
+            "📸 City safety camera network expands to 30 new junctions.",
+            "🌿 Urban garden plots available for residents.",
+            "🌀 Stand user sighted near downtown murals.",
+            "🗿 Stone Ocean art installation opens by the river.",
+            "🏛 Joestar lineage honored in city hall ceremony.",
+            "🌙 DIO statue unveiled at community park."
         ];
-        let newsIndex = 0;
-        const newsList = document.querySelector(".news ul");
+        // let newsIndex = 0;
+        // const newsList = document.querySelector(".news ul");
 
-        function rotateNews() {
-            if (!newsList) return;
-            newsList.style.opacity = "0";
-            setTimeout(() => {
-                newsList.innerHTML = "<li>" + news[newsIndex] + "</li>";
-                newsIndex++;
-                if (newsIndex >= news.length) {
-                    newsIndex = 0;
-                }
-                newsList.style.opacity = "1";
-            }, 400);
-        }
+        // function rotateNews() {
+        //     if (!newsList) return;
+        //     newsList.style.opacity = "0";
+        //     setTimeout(() => {
+        //         newsList.innerHTML = "<li>" + news[newsIndex] + "</li>";
+        //         newsIndex++;
+        //         if (newsIndex >= news.length) {
+        //             newsIndex = 0;
+        //         }
+        //         newsList.style.opacity = "1";
+        //     }, 400);
+        // }
 
-        setInterval(rotateNews, 3500);
+        // setInterval(rotateNews, 3500);
 
         const explore = document.querySelector(".primary");
         if (explore) {

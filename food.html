@@ -6,206 +6,206 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oakridge Food Department</title>
-
+<link rel="icon" href="favicon.png">
 
 <style>
 body{
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee,#84fab0,#8fd3f4);
-background-size:400% 400%;
-animation:bgmove 15s ease infinite;
-color:white;
-min-height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee,#84fab0,#8fd3f4);
+    background-size:400% 400%;
+    animation:bgmove 15s ease infinite;
+    color:white;
+    min-height:100vh;
 }
 
 @keyframes bgmove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 .title{
-text-align:center;
-font-size:40px;
-font-weight:800;
-padding:16px 28px;
-border-radius:24px;
-max-width:680px;
-margin:0 auto 24px;
-background:rgba(255,255,255,.22);
-backdrop-filter:blur(14px);
-box-shadow:0 10px 30px rgba(0,0,0,.2);
-color:#fff;
-text-shadow:0 0 10px rgba(255,255,255,.4);
+    text-align:center;
+    font-size:40px;
+    font-weight:800;
+    padding:16px 28px;
+    border-radius:24px;
+    max-width:680px;
+    margin:0 auto 24px;
+    background:rgba(255,255,255,.22);
+    backdrop-filter:blur(14px);
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    color:#fff;
+    text-shadow:0 0 10px rgba(255,255,255,.4);
 }
 
 .grid{
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:22px;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
 }
 
 .card{
-padding:20px;
-border-radius:28px;
-backdrop-filter:blur(14px);
-box-shadow:0 12px 28px rgba(0,0,0,.18);
-transition:.35s;
-color:white;
+    padding:20px;
+    border-radius:28px;
+    backdrop-filter:blur(14px);
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+    transition:.35s;
+    color:white;
 }
 
 .card:nth-child(1){
-background:rgba(255,107,107,.25);
+    background:rgba(255,107,107,.25);
 }
 
 .card:nth-child(2){
-background:rgba(255,209,102,.25);
+    background:rgba(255,209,102,.25);
 }
 
 .card:nth-child(3){
-background:rgba(125,249,255,.22);
+    background:rgba(125,249,255,.22);
 }
 
 .card:nth-child(4){
-background:rgba(144,238,144,.22);
+    background:rgba(144,238,144,.22);
 }
 
 .card:nth-child(5){
-background:rgba(192,132,252,.24);
+    background:rgba(192,132,252,.24);
 }
 
 .card:nth-child(6){
-background:rgba(255,143,171,.24);
+    background:rgba(255,143,171,.24);
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.01);
-box-shadow:0 20px 40px rgba(0,0,0,.22);
+    transform:translateY(-8px) scale(1.01);
+    box-shadow:0 20px 40px rgba(0,0,0,.22);
 }
 
 .card img{
-width:100%;
-height:190px;
-object-fit:cover;
-border-radius:18px;
-margin-bottom:12px;
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    border-radius:18px;
+    margin-bottom:12px;
 }
 
 h2{
-margin-bottom:12px;
-font-size:28px;
-color:#fff;
+    margin-bottom:12px;
+    font-size:28px;
+    color:#fff;
 }
 
 .small{
-line-height:1.7;
-font-size:16px;
-color:#fdfdfd;
+    line-height:1.7;
+    font-size:16px;
+    color:#fdfdfd;
 }
 
 input,
 select,
 textarea{
-width:100%;
-padding:13px;
-margin:8px 0;
-border:none;
-border-radius:14px;
-outline:none;
-background:rgba(255,255,255,.85);
-font-size:15px;
+    width:100%;
+    padding:13px;
+    margin:8px 0;
+    border:none;
+    border-radius:14px;
+    outline:none;
+    background:rgba(255,255,255,.85);
+    font-size:15px;
 }
 
 button{
-padding:13px 24px;
-border:none;
-border-radius:14px;
-background:linear-gradient(90deg,#ff6b6b,#ffd166,#7df9ff,#90ee90,#c084fc);
-background-size:300% 300%;
-animation:btnmove 6s ease infinite;
-font-weight:800;
-font-size:15px;
-cursor:pointer;
-margin-top:10px;
-color:#222;
-transition:.3s;
-box-shadow:0 8px 18px rgba(0,0,0,.2);
+    padding:13px 24px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(90deg,#ff6b6b,#ffd166,#7df9ff,#90ee90,#c084fc);
+    background-size:300% 300%;
+    animation:btnmove 6s ease infinite;
+    font-weight:800;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:10px;
+    color:#222;
+    transition:.3s;
+    box-shadow:0 8px 18px rgba(0,0,0,.2);
 }
 
 @keyframes btnmove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 button:hover{
-transform:scale(1.06);
+    transform:scale(1.06);
 }
 
 .result{
-margin-top:12px;
-padding:14px;
-border-radius:14px;
-background:rgba(255,255,255,.16);
-color:#fff;
-font-weight:700;
-min-height:55px;
-white-space:pre-line;
+    margin-top:12px;
+    padding:14px;
+    border-radius:14px;
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    font-weight:700;
+    min-height:55px;
+    white-space:pre-line;
 }
 
 .bill-item{
-background:rgba(255,255,255,.12);
-padding:14px;
-border-radius:16px;
-margin:12px 0;
+    background:rgba(255,255,255,.12);
+    padding:14px;
+    border-radius:16px;
+    margin:12px 0;
 }
 
 .bill-item label{
-font-weight:700;
-font-size:17px;
-color:#fff;
-display:block;
-margin-bottom:6px;
+    font-weight:700;
+    font-size:17px;
+    color:#fff;
+    display:block;
+    margin-bottom:6px;
 }
 
 .btnwrap{
-text-align:center;
-margin-top:28px;
+    text-align:center;
+    margin-top:28px;
 }
 
 .side{
-position:fixed;
-right:-240px;
-top:18%;
-width:220px;
-background:rgba(255,255,255,.2);
-backdrop-filter:blur(14px);
-padding:16px;
-border-radius:24px 0 0 24px;
-transition:.4s;
-box-shadow:0 10px 30px rgba(0,0,0,.18);
+    position:fixed;
+    right:-240px;
+    top:18%;
+    width:220px;
+    background:rgba(255,255,255,.2);
+    backdrop-filter:blur(14px);
+    padding:16px;
+    border-radius:24px 0 0 24px;
+    transition:.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
 }
 
 .side.show{
-right:0;
+    right:0;
 }
 
 .side a{
-display:block;
-text-decoration:none;
-padding:13px;
-margin:10px 0;
-border-radius:14px;
-background:rgba(255,255,255,.18);
-font-weight:700;
-transition:.3s;
+    display:block;
+    text-decoration:none;
+    padding:13px;
+    margin:10px 0;
+    border-radius:14px;
+    background:rgba(255,255,255,.18);
+    font-weight:700;
+    transition:.3s;
 }
 
 .side a:hover{
-transform:translateX(-4px);
-background:rgba(255,255,255,.28);
+    transform:translateX(-4px);
+    background:rgba(255,255,255,.28);
 }
 
 .side a:nth-child(1){color:#7df9ff;}
@@ -216,29 +216,29 @@ background:rgba(255,255,255,.28);
 .side a:nth-child(6){color:#ff8fab;}
 
 @media(max-width:900px){
-.grid{
-grid-template-columns:1fr;
-}
-
-.title{
-font-size:32px;
-}
+    .grid{
+        grid-template-columns:1fr;
+    }
+    
+    .title{
+        font-size:32px;
+    }
 }
 </style>
 
 </head>
 <script src="script.js"></script>
 <body>
-
-<header>
-    <div class="container">
-        <nav>
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo" />
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo" />
                 <h1>Oakridge <span>Smart City</span></h1>
             </div>
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="index.html">Home</a>
                 <a href="#" class="sidebarButton">Departments</a>
                 <a href="#contact">Contact</a>
             </div>
