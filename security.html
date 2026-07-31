@@ -1,95 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles/styles.css">
+<link rel="stylesheet" href="styles/styles.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verdantia Security Department</title>
-
+<title>Oakridge Security Department</title>
+<link rel="icon" href="favicon.png">
 <style>
 
 body{
 font-family:'Segoe UI',sans-serif;
 background:
 linear-gradient(
-135deg,
-#f4efe6,
-#ebe3d5,
-#e6dcc8,
-#f8f4ed
-);
-color:#1d3557;
-min-height:100vh;
+    135deg,
+    #f4efe6,
+    #ebe3d5,
+    #e6dcc8,
+    #f8f4ed
+    );
+    color:#1d3557;
+    min-height:100vh;
 }
 
 /* ================= TITLE ================= */
 
 .title{
-text-align:center;
-font-size:42px;
-font-weight:800;
-padding:16px 28px;
-border-radius:24px;
-max-width:760px;
-margin:0 auto 24px;
-background:#1d3557;
-color:white;
-box-shadow:0 12px 28px rgba(0,0,0,.18);
-border:3px solid #c2b280;
-letter-spacing:.5px;
+    text-align:center;
+    font-size:42px;
+    font-weight:800;
+    padding:16px 28px;
+    border-radius:24px;
+    max-width:760px;
+    margin:0 auto 24px;
+    background:#1d3557;
+    color:white;
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+    border:3px solid #c2b280;
+    letter-spacing:.5px;
 }
 
 /* ================= GRID ================= */
 
 .grid{
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:22px;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
 }
 
 /* ================= CARDS ================= */
 
 .card{
-background:rgba(255,248,240,.92);
-padding:20px;
-border-radius:24px;
-box-shadow:0 12px 28px rgba(0,0,0,.12);
-border-left:6px solid #1d3557;
-transition:.35s;
+    background:rgba(255,248,240,.92);
+    padding:20px;
+    border-radius:24px;
+    box-shadow:0 12px 28px rgba(0,0,0,.12);
+    border-left:6px solid #1d3557;
+    transition:.35s;
 }
 
 .card:hover{
-transform:translateY(-6px);
-box-shadow:0 18px 36px rgba(0,0,0,.18);
-border-left:6px solid #b23a48;
+    transform:translateY(-6px);
+    box-shadow:0 18px 36px rgba(0,0,0,.18);
+    border-left:6px solid #b23a48;
 }
 
 .card img{
-width:100%;
-height:190px;
-object-fit:cover;
-border-radius:18px;
-margin-bottom:12px;
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    border-radius:18px;
+    margin-bottom:12px;
 }
 
 /* ================= TEXT ================= */
 
 h2{
-color:#1d3557;
-margin-bottom:12px;
-font-size:28px;
+    color:#1d3557;
+    margin-bottom:12px;
+    font-size:28px;
 }
 
 .small{
-line-height:1.7;
-color:#5c4b3b;
+    line-height:1.7;
+    color:#5c4b3b;
 }
 
 .highlight{
-color:#b23a48;
-font-weight:700;
+    color:#b23a48;
+    font-weight:700;
 }
 
 /* ================= INPUTS ================= */
@@ -97,212 +97,212 @@ font-weight:700;
 input,
 textarea,
 select{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:12px;
-border:1px solid rgba(0,0,0,.12);
-outline:none;
-background:#fffdf8;
-font-size:15px;
-color:#1d3557;
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:12px;
+    border:1px solid rgba(0,0,0,.12);
+    outline:none;
+    background:#fffdf8;
+    font-size:15px;
+    color:#1d3557;
 }
 
 input:focus,
 textarea:focus,
 select:focus{
-border-color:#c2b280;
-box-shadow:0 0 8px rgba(194,178,128,.35);
+    border-color:#c2b280;
+    box-shadow:0 0 8px rgba(194,178,128,.35);
 }
 
 /* ================= BUTTONS ================= */
 
 button{
-padding:12px 24px;
-border:none;
-border-radius:12px;
-background:
-linear-gradient(
-90deg,
-#1d3557,
-#2b4c7e,
-#c2b280
-);
-font-weight:800;
-cursor:pointer;
-margin-top:10px;
-transition:.3s;
-color:white;
-box-shadow:0 8px 18px rgba(0,0,0,.15);
+    padding:12px 24px;
+    border:none;
+    border-radius:12px;
+    background:
+    linear-gradient(
+        90deg,
+        #1d3557,
+        #2b4c7e,
+        #c2b280
+        );
+        font-weight:800;
+        cursor:pointer;
+        margin-top:10px;
+        transition:.3s;
+        color:white;
+        box-shadow:0 8px 18px rgba(0,0,0,.15);
 }
-
+    
 button:hover{
-transform:scale(1.05);
-background:
-linear-gradient(
-90deg,
-#1d3557,
-#b23a48,
-#c2b280
-);
+    transform:scale(1.05);
+    background:
+    linear-gradient(
+        90deg,
+        #1d3557,
+        #b23a48,
+        #c2b280
+        );
 }
-
+    
 /* ================= RESULTS ================= */
 
 .result{
-margin-top:12px;
-padding:14px;
-border-radius:14px;
-background:#f5ede0;
-color:#1d3557;
-font-weight:700;
-min-height:55px;
-white-space:pre-line;
-border-left:5px solid #b23a48;
+    margin-top:12px;
+    padding:14px;
+    border-radius:14px;
+    background:#f5ede0;
+    color:#1d3557;
+    font-weight:700;
+    min-height:55px;
+    white-space:pre-line;
+    border-left:5px solid #b23a48;
 }
-
+        
 /* ================= ALERT BOX ================= */
 
 .alert-box{
-background:#fff2f2;
-padding:14px;
-border-radius:16px;
-margin-top:10px;
-border-left:5px solid #b23a48;
-font-weight:700;
-color:#b23a48;
+    background:#fff2f2;
+    padding:14px;
+    border-radius:16px;
+    margin-top:10px;
+    border-left:5px solid #b23a48;
+    font-weight:700;
+    color:#b23a48;
 }
 
 /* ================= HELPLINE ================= */
 
 .helpline{
-background:#f7f1e7;
-padding:14px;
-border-radius:16px;
-margin-top:10px;
-line-height:1.8;
-border:1px solid rgba(194,178,128,.25);
+    background:#f7f1e7;
+    padding:14px;
+    border-radius:16px;
+    margin-top:10px;
+    line-height:1.8;
+    border:1px solid rgba(194,178,128,.25);
 }
 
 /* ================= PANIC BUTTON ================= */
 
 .panic{
-background:
-linear-gradient(
-90deg,
-#b23a48,
-#d62828
-);
-font-size:18px;
-width:100%;
-padding:16px;
+    background:
+    linear-gradient(
+        90deg,
+        #b23a48,
+        #d62828
+        );
+        font-size:18px;
+        width:100%;
+        padding:16px;
 }
-
+    
 .panic:hover{
-background:
-linear-gradient(
-90deg,
-#d62828,
-#ff4d4d
-);
+    background:
+    linear-gradient(
+        90deg,
+        #d62828,
+        #ff4d4d
+        );
 }
-
+        
 /* ================= MENU BUTTON WRAP ================= */
 
 .btnwrap{
-text-align:center;
-margin-top:28px;
+    text-align:center;
+    margin-top:28px;
 }
 
 /* ================= SIDE MENU ================= */
 
 .side{
-position:fixed;
-right:-240px;
-top:18%;
-width:220px;
-background:rgba(255,248,240,.97);
-padding:16px;
-border-radius:24px 0 0 24px;
-transition:.4s;
-box-shadow:0 10px 30px rgba(0,0,0,.12);
-border:1px solid rgba(0,0,0,.08);
+    position:fixed;
+    right:-240px;
+    top:18%;
+    width:220px;
+    background:rgba(255,248,240,.97);
+    padding:16px;
+    border-radius:24px 0 0 24px;
+    transition:.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    border:1px solid rgba(0,0,0,.08);
 }
 
 .side.show{
-right:0;
+    right:0;
 }
 
 .side a{
-display:block;
-text-decoration:none;
-padding:13px;
-margin:10px 0;
-border-radius:14px;
-background:#f3ede4;
-font-weight:700;
-transition:.3s;
+    display:block;
+    text-decoration:none;
+    padding:13px;
+    margin:10px 0;
+    border-radius:14px;
+    background:#f3ede4;
+    font-weight:700;
+    transition:.3s;
 }
-
+                
 .side a:hover{
-transform:translateX(-4px);
-background:#e8dcc8;
+    transform:translateX(-4px);
+    background:#e8dcc8;
 }
 
 /* ================= MENU COLORS ================= */
 
 .side a:nth-child(1){
-color:#1d3557;
+    color:#1d3557;
 }
 
 .side a:nth-child(2){
-color:#ff6b6b;
+    color:#ff6b6b;
 }
 
 .side a:nth-child(3){
-color:#c08400;
+    color:#c08400;
 }
 
 .side a:nth-child(4){
-color:#0d1b2a;
+    color:#0d1b2a;
 }
 
 .side a:nth-child(5){
-color:#b23a48;
+    color:#b23a48;
 }
 
 .side a:nth-child(6){
-color:#9d4edd;
+    color:#9d4edd;
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
-
-.grid{
-grid-template-columns:1fr;
-}
-
-.title{
-font-size:32px;
-}
-
+    
+    .grid{
+        grid-template-columns:1fr;
+    }
+    
+    .title{
+        font-size:32px;
+    }
+    
 }
 </style>
 </head>
 
 <body>
-
-<header>
-    <div class="container">
-        <nav>
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo" />
-                <h1>Verdantia <span>Smart City</span></h1>
-            </div>
-            <div class="menu">
-                <a href="#">Home</a>
-                <a href="#" class="sidebarButton">Departments</a>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo" />
+                    <h1>Oakridge <span>Smart City</span></h1>
+                </div>
+                <div class="menu">
+                    <a href="index.html">Home</a>
+                    <a href="#" class="sidebarButton">Departments</a>
                 <a href="#contact">Contact</a>
             </div>
             <div class="status">
@@ -323,7 +323,7 @@ font-size:32px;
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80">
 
 <p class="small">
-Verdantia Smart Police Headquarters monitors city safety,
+Oakridge Smart Police Headquarters monitors city safety,
 cybercrime prevention, emergency response systems and smart surveillance
 across all sectors of the city.
 </p>
@@ -424,11 +424,7 @@ Safety Index: 94% Secure
 </div>
 
 <div class="btnwrap">
-
-<button class="sidebarButton" onclick="toggleMenu()">
-Departments
-</button>
-
+    <button class="sidebarButton" id="sideBtn">Departments</button>
 </div>
 
 <div id="side" class="side">
@@ -446,6 +442,38 @@ Departments
 <a href="tourism.html">✈️ Tourism</a>
 
 </div>
+
+<footer>
+    <div class="container footer-grid">
+        <div>
+            <h2>Oakridge Smart City</h2>
+            <p>
+                Building a Smarter, Safer and Greener Future through
+                Innovation and Technology.
+            </p>
+        </div>
+        <div>
+            <h3>Departments</h3>
+            <ul>
+                <li>Health</li>
+                <li>Food</li>
+                <li>Education</li>
+                <li>Security</li>
+                <li>Tourism</li>
+            </ul>
+        </div>
+        <div id="contact">
+            <h3>Contact</h3>
+            <p>Email : info@Oakridge.gov</p>
+            <p>Phone : +91 9876543210</p>
+            <p>Address : Oakridge City Center</p>
+        </div>
+    </div>
+    <hr />
+    <p class="copyright">
+        © 2026 Oakridge Smart City | Academic Project
+    </p>
+</footer>
 
 <script>
 

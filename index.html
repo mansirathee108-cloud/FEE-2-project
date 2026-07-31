@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verdantia Smart City</title>
+    <title>Oakridge Smart City</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" href="favicon.png">
     <style>
 
         body::before {
@@ -344,57 +345,6 @@
             margin-bottom: 15px;
         }
 
-        footer {
-            background: #07111d;
-            padding: 70px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer-grid p {
-            color: #CBD5E1;
-            line-height: 1.8;
-            margin-top: 10px;
-        }
-
-        .footer-grid ul {
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        .footer-grid li {
-            margin: 12px 0;
-            color: #CBD5E1;
-            cursor: pointer;
-        }
-
-        .footer-grid li:hover {
-            color: #38BDF8;
-        }
-
-        footer hr {
-            margin: 40px 0 20px;
-            border: none;
-            height: 1px;
-            background: rgba(255, 255, 255, .15);
-        }
-
-        .copyright {
-            text-align: center;
-            color: #CBD5E1;
-        }
-
-        .btnwrap {
-            position: fixed;
-            top: 20%;
-            right: 20px;
-            z-index: 90;
-        }
-
         @media (max-width: 1000px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -410,6 +360,36 @@
 
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        #news-container{
+            overflow: hidden;
+            white-space: nowrap;
+            width: 50vw;
+            height: 28vh;
+        }
+
+        #news-container ul{
+            display: block;
+            /* gap: 2vh; */
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            animation: marquee 12s linear infinite;
+            list-style: none;
+        }
+
+        #news-container:hover ul{
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0%{
+                transform: translateY(-100%);
+            }
+            100%{
+                transform: translateY(50%);
             }
         }
 
@@ -451,8 +431,8 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="images/logo.png" alt="Logo" />
-                    <h1>Verdantia <span>Smart City</span></h1>
+                    <img src="Navy_blue_circle_with_tree_202607301434.jpeg" alt="Logo" />
+                    <h1>Oakridge <span>Smart City</span></h1>
                 </div>
                 <div class="menu">
                     <a href="#">Home</a>
@@ -474,7 +454,7 @@
                     <div class="tag">SMART • SAFE • SUSTAINABLE</div>
                     <h1>
                         Welcome to
-                        <span>Verdantia</span>
+                        <span>Oakridge</span>
                         Smart City
                     </h1>
                     <p>
@@ -490,11 +470,10 @@
                 </div>
                 <div class="card mayor">
                     <img src="images/mayor.png" alt="Mayor" />
-                    <h2>Siya Gaba</h2>
-                    <h4>Mayor of Verdantia</h4>
+                    <h2>Himanshi</h2>
+                    <h4>Mayor of Oakridge</h4>
                     <p class="quote">
-                        "Together we are building a smarter,
-                        cleaner and safer future for every citizen."
+                        "Working together to build a smarter, cleaner, and safer tomorrow—because every citizen deserves a world that stands strong."
                     </p>
                     <div class="mini-stats">
                         <div class="mini">
@@ -546,14 +525,26 @@
             </div>
             <div class="news-weather">
                 <div class="card news">
-                    <h2>📰 City News</h2>
-                    <ul>
-                        <li>New Metro Line Phase-II inaugurated.</li>
-                        <li>Free Health Camp this Sunday.</li>
-                        <li>Smart Parking System launched downtown.</li>
-                        <li>Education Scholarship Portal now open.</li>
-                        <li>Tourism Festival begins next week.</li>
-                    </ul>
+                    <h2>Live Updates</h2>
+                    <div id="news-container">
+                        <ul>
+                            <li>New Metro Line Phase-II inaugurated.</li>
+                            <li>Free Health Camp this Sunday.</li>
+                            <li>Smart Parking System launched downtown.</li>
+                            <li>Education Scholarship Portal now open.</li>
+                            <li>Tourism Festival begins next week.</li>
+                            <li>New EV charging hubs completed in 12 neighborhoods.</li>
+                            <li>City library extends hours for summer study.</li>
+                            <li>Smart waste bins now live across central districts.</li>
+                            <li>Night market returns with local artisans.</li>
+                            <li>Water conservation app hits 100k downloads.</li>
+                            <li>City safety camera network expands to 30 new junctions.</li>
+                            <li>Urban garden plots available for residents.</li>
+                            <li>Solar streetlights activated in West Oakridge.</li>
+                            <li>Stand user sighted near downtown murals.</li>
+                            <li>Stone Ocean art installation opens by the river.</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card weather">
                     <h2>☀ Live Weather</h2>
@@ -646,7 +637,7 @@
     <footer>
         <div class="container footer-grid">
             <div>
-                <h2>Verdantia Smart City</h2>
+                <h2>Oakridge Smart City</h2>
                 <p>
                     Building a Smarter, Safer and Greener Future through
                     Innovation and Technology.
@@ -664,14 +655,14 @@
             </div>
             <div id="contact">
                 <h3>Contact</h3>
-                <p>Email : info@verdantia.gov</p>
+                <p>Email : info@Oakridge.gov</p>
                 <p>Phone : +91 9876543210</p>
-                <p>Address : Verdantia City Center</p>
+                <p>Address : Oakridge City Center</p>
             </div>
         </div>
         <hr />
         <p class="copyright">
-            © 2026 Verdantia Smart City | Academic Project
+            © 2026 Oakridge Smart City | Academic Project
         </p>
     </footer>
     <div class="btnwrap">
@@ -687,29 +678,6 @@
         <a href="tourism.html">✈ Tourism</a>
     </div>
     <script>
-        function updateClock() {
-            const now = new Date();
-            const dateOptions = {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-            };
-            const timeOptions = {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            };
-            const date = now.toLocaleDateString("en-US", dateOptions);
-            const time = now.toLocaleTimeString("en-US", timeOptions);
-            const dateBox = document.querySelector(".status p");
-            const clockBox = document.querySelector(".status h2");
-            if (dateBox) dateBox.innerHTML = date;
-            if (clockBox) clockBox.innerHTML = time;
-        }
-
-        updateClock();
-        setInterval(updateClock, 1000);
 
         const news = [
             "🚇 Metro Phase-II has officially opened.",
@@ -718,25 +686,36 @@
             "🌳 10,000 new trees planted this month.",
             "🚔 Crime reduced by 18% compared to last year.",
             "🏖 Tourism Festival begins next week.",
-            "⚡ Smart Street Lights installed in downtown."
+            "⚡ Smart Street Lights installed in downtown.",
+            "🔌 New EV charging hubs completed in 12 neighborhoods.",
+            "📚 City library extends hours for summer study.",
+            "♻ Smart waste bins now live across central districts.",
+            "🎪 Night market returns with local artisans.",
+            "💧 Water conservation app hits 100k downloads.",
+            "📸 City safety camera network expands to 30 new junctions.",
+            "🌿 Urban garden plots available for residents.",
+            "🌀 Stand user sighted near downtown murals.",
+            "🗿 Stone Ocean art installation opens by the river.",
+            "🏛 Joestar lineage honored in city hall ceremony.",
+            "🌙 DIO statue unveiled at community park."
         ];
-        let newsIndex = 0;
-        const newsList = document.querySelector(".news ul");
+        // let newsIndex = 0;
+        // const newsList = document.querySelector(".news ul");
 
-        function rotateNews() {
-            if (!newsList) return;
-            newsList.style.opacity = "0";
-            setTimeout(() => {
-                newsList.innerHTML = "<li>" + news[newsIndex] + "</li>";
-                newsIndex++;
-                if (newsIndex >= news.length) {
-                    newsIndex = 0;
-                }
-                newsList.style.opacity = "1";
-            }, 400);
-        }
+        // function rotateNews() {
+        //     if (!newsList) return;
+        //     newsList.style.opacity = "0";
+        //     setTimeout(() => {
+        //         newsList.innerHTML = "<li>" + news[newsIndex] + "</li>";
+        //         newsIndex++;
+        //         if (newsIndex >= news.length) {
+        //             newsIndex = 0;
+        //         }
+        //         newsList.style.opacity = "1";
+        //     }, 400);
+        // }
 
-        setInterval(rotateNews, 3500);
+        // setInterval(rotateNews, 3500);
 
         const explore = document.querySelector(".primary");
         if (explore) {
@@ -837,31 +816,7 @@
             }, 100);
         };
 
-        const body = document.querySelector('body');
-        const sideMenu = document.querySelector("#side");
-        const sidebarButton = document.querySelectorAll(".sidebarButton");
-        const floatBtn = document.querySelector("#sideBtn");
-
-        sidebarButton.forEach(btn => {
-            btn.addEventListener("click", (event) => {
-                event.stopPropagation();
-                sideMenu.classList.add("show");
-                body.classList.add("dimmed");
-                floatBtn.style.opacity = 0;
-            })       
-        });
-
-        sideMenu.addEventListener("click", (event) => {
-            event.stopPropagation();
-        });
-
-        body.addEventListener("click", () => {
-            sideMenu.classList.remove("show");
-            body.classList.remove("dimmed");
-            sidebarButton.forEach(btn => {
-                floatBtn.style.opacity = 1;
-            })
-        });
     </script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
