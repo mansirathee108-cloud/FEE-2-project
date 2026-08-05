@@ -10,7 +10,7 @@ sidebarButton.forEach(btn => {
         sideMenu.classList.add("show");
         body.classList.add("dimmed");
         floatBtn.style.opacity = 0;
-    })       
+    })
 });
 
 sideMenu.addEventListener("click", (event) => {
@@ -48,3 +48,30 @@ function updateClock() {
 
 updateClock();
 setInterval(updateClock, 1000);
+
+
+async function updateWether(latitude, longitude) {
+
+
+    const apiKey = "b25b86ff5f31ee72f5c323f68ffa0ac2";
+
+    const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`);
+    const data = await weatherRes.json();
+
+    const fields = document.querySelectorAll('.changeTemp');
+
+    if (fields) {
+        fields.forEach(field => {
+            field.textContent = Math.trunc(data.main.temp) + "°C";
+        })
+    }
+
+
+
+}
+
+navigator.geolocation.getCurrentPosition(position => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    updateWether(latitude, longitude);
+})

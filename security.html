@@ -423,10 +423,6 @@ Safety Index: 94% Secure
 
 </div>
 
-<div class="btnwrap">
-    <button class="sidebarButton" id="sideBtn">Departments</button>
-</div>
-
 <div id="side" class="side">
 
 <a href="index.html">🏠 Home</a>
@@ -478,9 +474,9 @@ Safety Index: 94% Secure
 <script>
 
 function toggleMenu(){
-
-document.getElementById('side').classList.toggle('show');
-
+    
+    document.getElementById('side').classList.toggle('show');
+    
 }
 
 function submitFIR(){
@@ -492,16 +488,16 @@ let crime=document.getElementById('crime').value;
 let details=document.getElementById('details').value;
 
 if(name=='' || details==''){
-
-alert('Please fill all FIR details');
-
-return;
-
+    
+    alert('Please fill all FIR details');
+    
+    return;
+    
 }
 
 localStorage.setItem(
-'firReport',
-name+' | '+crime+' | '+details
+    'firReport',
+    name+' | '+crime+' | '+details
 );
 
 document.getElementById('firResult').textContent=
@@ -510,58 +506,58 @@ document.getElementById('firResult').textContent=
 }
 
 const alerts=[
-
-'Cyber Fraud Alert reported in Central Market Area.',
-
-'Suspicious vehicle detected near Metro Station.',
-
-'Night patrol increased in South Zone sectors.',
-
-'Traffic surveillance upgraded near City Mall.',
-
-'Online scam warning issued for fake banking links.'
-
+    
+    'Cyber Fraud Alert reported in Central Market Area.',
+    
+    'Suspicious vehicle detected near Metro Station.',
+    
+    'Night patrol increased in South Zone sectors.',
+    
+    'Traffic surveillance upgraded near City Mall.',
+    
+    'Online scam warning issued for fake banking links.'
+    
 ];
 
 let a=0;
 
 setInterval(()=>{
-
-a=(a+1)%alerts.length;
-
-document.getElementById('alertBox').textContent=alerts[a];
-
+    
+    a=(a+1)%alerts.length;
+    
+    document.getElementById('alertBox').textContent=alerts[a];
+    
 },3000);
 
 function checkBribe(){
-
-let text=document.getElementById('bribeText').value.toLowerCase();
-
-if(text.includes('bribe')){
-
-alert('⚠️ Bribery is illegal and punishable by law.');
-
-document.getElementById('bribeResult').textContent=
-'Anti-corruption department has received your report.';
-
-}
-
-else{
-
-document.getElementById('bribeResult').textContent=
-'Report submitted for review.';
-
-}
-
+    
+    let text=document.getElementById('bribeText').value.toLowerCase();
+    
+    if(text.includes('bribe')){
+        
+        
+        alert('⚠️ Bribery is illegal and punishable by law.');
+        document.getElementById('bribeResult').textContent=
+        'Anti-corruption department has received your report.';
+        
+    }
+    
+    else{
+        
+        document.getElementById('bribeResult').textContent=
+        'Report submitted for review.';
+        
+    }
+    
 }
 
 function panicMode(){
-
-document.body.style.background=
-'linear-gradient(135deg,#ffe5e5,#ffcccc,#ffeaea)';
-
-alert('🚨 Emergency Panic Mode Activated!\nNearest police units have been alerted.');
-
+    
+    document.body.style.background=
+    'linear-gradient(135deg,#ffe5e5,#ffcccc,#ffeaea)';
+    
+    alert('🚨 Emergency Panic Mode Activated!\nNearest police units have been alerted.');
+    
 }
 
 </script>

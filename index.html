@@ -442,7 +442,7 @@
                 <div class="status">
                     <p>Monday, 20 July 2026</p>
                     <h2>09:45 AM</h2>
-                    <p>🌤 29°C</p>
+                    <p class="changeTemp">🌤 29°C</p>
                 </div>
             </nav>
         </div>
@@ -549,7 +549,7 @@
                 <div class="card weather">
                     <h2>☀ Live Weather</h2>
                     <div class="weather-box">
-                        <div class="temp">30°C</div>
+                        <div class="temp changeTemp">30°C</div>
                         <div class="weather-details">
                             <p><strong>Condition:</strong> Sunny</p>
                             <p><strong>Humidity:</strong> 63%</p>
@@ -665,9 +665,6 @@
             © 2026 Oakridge Smart City | Academic Project
         </p>
     </footer>
-    <div class="btnwrap">
-        <button class="sidebarButton" id="sideBtn">Departments</button>
-    </div>
 
     <div id="side" class="side">
         <a href="index.html">🏠 Home</a>
@@ -699,23 +696,6 @@
             "🏛 Joestar lineage honored in city hall ceremony.",
             "🌙 DIO statue unveiled at community park."
         ];
-        // let newsIndex = 0;
-        // const newsList = document.querySelector(".news ul");
-
-        // function rotateNews() {
-        //     if (!newsList) return;
-        //     newsList.style.opacity = "0";
-        //     setTimeout(() => {
-        //         newsList.innerHTML = "<li>" + news[newsIndex] + "</li>";
-        //         newsIndex++;
-        //         if (newsIndex >= news.length) {
-        //             newsIndex = 0;
-        //         }
-        //         newsList.style.opacity = "1";
-        //     }, 400);
-        // }
-
-        // setInterval(rotateNews, 3500);
 
         const explore = document.querySelector(".primary");
         if (explore) {
