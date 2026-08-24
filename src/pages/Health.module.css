@@ -1,0 +1,77 @@
+.healthPage .title {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    padding: 14px 24px;
+    border-radius: 22px;
+    max-width: 620px;
+    margin: 0 auto 20px;
+    background: rgba(255, 255, 255, .08);
+}
+
+.healthPage .grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.healthPage .card {
+    background: rgba(255, 255, 255, .08);
+    padding: 18px;
+    border-radius: 22px;
+    backdrop-filter: blur(10px);
+    transition: .35s;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+}
+
+.healthPage .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 34px rgba(255, 107, 107, .18);
+}
+
+.healthPage .redS {
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+.healthPage .small {
+    opacity: .9;
+    line-height: 1.5;
+}
+
+.healthPage .input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 12px;
+}
+
+.healthPage .button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.healthPage .button:hover {
+    transform: scale(1.04);
+}
+
+.healthPage .result {
+    margin-top: 10px;
+    color: #ffd166;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .healthPage .grid {
+        grid-template-columns: 1fr;
+    }
+}

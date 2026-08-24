@@ -2,15 +2,100 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overscroll-behavior: none;
 }
 
-body {
+a:hover{
+    cursor: pointer;
+}
+
+html,
+body,
+#root {
+  min-height: 100%; 
+  overscroll-behavior: none;
+  /* overflow-x: hidden; */
+  /* /* overflow-y: auto; */
+}
+
+body[data-page="main"] {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(180deg, #081120, #111827, #172C4A);
   color: white;
+  min-height: 100vh;
   overflow-x: hidden;
-  /* padding-bottom: 1vh; */
+  overflow-y: visible;
+}
+
+body[data-page="main"]::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+      radial-gradient(circle at 15% 20%, rgba(56, 189, 248, .12), transparent 35%),
+      radial-gradient(circle at 80% 15%, rgba(139, 92, 246, .10), transparent 35%),
+      radial-gradient(circle at 60% 80%, rgba(34, 211, 238, .08), transparent 40%);
+  animation: bgmove 18s infinite alternate;
+  z-index: -2;
+}
+
+body[data-page="health"] {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #14090a, #241012, #10131c);
+  color: #fff;
+}
+
+body[data-page="food"] {
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee,#84fab0,#8fd3f4);
+  background-size:400% 400%;
+  animation:bgmove 30s ease infinite;
+  color:white;
+  min-height:100vh;
+}
+
+body[data-page="education"] {
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(
+      135deg,
+      #f8f5f0,
+      #f2ede3,
+      #ede7dc,
+      #f7f3eb
+      );
+    color:#1d3557;
+    min-height:100vh;
+}
+
+body[data-page="tourism"] {
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffb703, #ff8fab, #ffd6a5, #4cc9f0);
+  background-size: 400% 400%;
+  animation: bgmove 14s ease infinite;
+  color: white;
+}
+
+body[data-page="security"]{
+  font-family:'Segoe UI',sans-serif;
+  background:
+  linear-gradient(
+      135deg,
+      #f4efe6,
+      #ebe3d5,
+      #e6dcc8,
+      #f8f4ed
+      );
+      color:#1d3557;
+      min-height:100vh;
+}
+
+@keyframes bgmove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 body.dimmed::after {
@@ -100,7 +185,7 @@ header {
     backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(255, 255, 255, .08);
     z-index: 80;
-    margin-bottom: 1rem;;
+    margin-bottom: 1rem;
 }
 .container {
     width: 90%;
