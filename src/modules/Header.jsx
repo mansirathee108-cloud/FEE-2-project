@@ -63,9 +63,19 @@ export default function Header(){
 
         if (fields) {
             fields.forEach(field => {
-                field.textContent = Math.trunc(data.main.temp) + "°C";
+                field.textContent =  Math.trunc(data.main.temp) + "°C";
+                console.log(data.weather[0].main);
             })
         }
+
+        const humidField = document.querySelector("#humi");
+        const speedField = document.querySelector('#speed');
+        const visibilityField = document.querySelector('#visi');
+        const conditionField = document.querySelector('#cond');
+        if (humidField) humidField.textContent = data.main.humidity;
+        if (speedField) speedField.textContent = data.wind.speed;
+        if (visibilityField) visibilityField.textContent = data.visibility / 1000; 
+        if (conditionField) conditionField.textContent = data.weather[0].main;
     }
 
     navigator.geolocation.getCurrentPosition(position => {

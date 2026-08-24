@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import './MainPage.css'
+import styles from './Main.module.css';
 
 
 export default function Main(){
@@ -63,18 +62,6 @@ export default function Main(){
             update();
         });
 
-        const weather = document.querySelector(".temp");
-        const hour = new Date().getHours();
-        if (weather) {
-            if (hour >= 6 && hour < 12) {
-                weather.style.color = "#FACC15";
-            } else if (hour >= 12 && hour < 18) {
-                weather.style.color = "#38BDF8";
-            } else {
-                weather.style.color = "#A855F7";
-            }
-        }
-
         setInterval(() => {
             document.body.style.background =
                 `linear-gradient(
@@ -105,12 +92,12 @@ export default function Main(){
 
 
     return(
-        <div id="mainB">
-    <section className="hero">
+        <div className={styles.mainPage}>
+    <section className={styles.hero}>
         <div className="container">
-            <div className="hero-grid">
-                <div className="card welcome">
-                    <div className="tag">SMART • SAFE • SUSTAINABLE</div>
+            <div className={styles.heroGrid}>
+                <div className={`${styles.card} card ${styles.welcome}`}>
+                    <div className={styles.tag}>SMART • SAFE • SUSTAINABLE</div>
                     <h1>
                         Welcome to
                         <span>Oakridge</span>
@@ -122,28 +109,28 @@ export default function Main(){
                         tourism, food services and public safety through one
                         integrated digital platform.
                     </p>
-                    <div className="buttons">
-                        <a href="#" className="btn primary">Explore City</a>
-                        <a href="#" className="btn secondary">Learn More</a>
+                    <div className={styles.buttons}>
+                        <a href="#" className={`${styles.btn} primary ${styles.primary}`}>Explore City</a>
+                        <a href="#" className={`${styles.btn} ${styles.secondary}`}>Learn More</a>
                     </div>
                 </div>
-                <div className="card mayor">
+                <div className={`${styles.card} card ${styles.mayor}`}>
                     <img src="images/mayor.png" alt="Mayor" />
                     <h2>Himanshi</h2>
                     <h4>Mayor of Oakridge</h4>
-                    <p className="quote">
+                    <p className={styles.quote}>
                         "Working together to build a smarter, cleaner, and safer tomorrow—because every citizen deserves a world that stands strong."
                     </p>
-                    <div className="mini-stats">
-                        <div className="mini">
+                    <div className={styles.miniStats}>
+                        <div className={styles.mini}>
                             <p>Population</p>
                             <span>1.8M</span>
                         </div>
-                        <div className="mini">
+                        <div className={styles.mini}>
                             <p>Safety Index</p>
                             <span>94%</span>
                         </div>
-                        <div className="mini">
+                        <div className={styles.mini}>
                             <p>Green Score</p>
                             <span>96%</span>
                         </div>
@@ -152,40 +139,40 @@ export default function Main(){
             </div>
         </div>
     </section>
-    <section className="dashboard">
+    <section className={`${styles.dashboard} dashboard`}>
         <div className="container">
-            <h2 className="section-title">City Dashboard</h2>
-            <div className="stats-grid">
-                <div className="stat-card blue">
-                    <div className="icon">👥</div>
+            <h2 className={styles.sectionTitle}>City Dashboard</h2>
+            <div className={styles.statsGrid}>
+                <div className={`${styles.statCard} stat-card ${styles.blue}`}>
+                    <div className={styles.icon}>👥</div>
                     <h1>1.8M</h1>
                     <p>Population</p>
                 </div>
-                <div className="stat-card green">
-                    <div className="icon">🛡️</div>
+                <div className={`${styles.statCard} stat-card ${styles.green}`}>
+                    <div className={styles.icon}>🛡️</div>
                     <h1>94%</h1>
                     <p>Safety Index</p>
                 </div>
-                <div className="stat-card orange">
-                    <div className="icon">🌿</div>
+                <div className={`${styles.statCard} stat-card ${styles.orange}`}>
+                    <div className={styles.icon}>🌿</div>
                     <h1>96%</h1>
                     <p>Green Score</p>
                 </div>
-                <div className="stat-card yellow">
-                    <div className="icon">🌤️</div>
+                <div className={`${styles.statCard} stat-card ${styles.yellow}`}>
+                    <div className={styles.icon}>🌤️</div>
                     <h1>72</h1>
                     <p>AQI</p>
                 </div>
-                <div className="stat-card purple">
-                    <div className="icon">🚦</div>
+                <div className={`${styles.statCard} stat-card ${styles.purple}`}>
+                    <div className={styles.icon}>🚦</div>
                     <h1>32%</h1>
                     <p>Traffic</p>
                 </div>
             </div>
-            <div className="news-weather">
-                <div className="card news">
+            <div className={styles.newsWeather}>
+                <div className={`${styles.card} card ${styles.news}`}>
                     <h2>Live Updates</h2>
-                    <div id="news-container">
+                    <div id="news-container" className={styles.newsContainer}>
                         <ul>
                             <li>New Metro Line Phase-II inaugurated.</li>
                             <li>Free Health Camp this Sunday.</li>
@@ -205,31 +192,31 @@ export default function Main(){
                         </ul>
                     </div>
                 </div>
-                <div className="card weather">
+                <div className={`${styles.card} card ${styles.weather}`}>
                     <h2>☀ Live Weather</h2>
-                    <div className="weather-box">
-                        <div className="temp changeTemp">30°C</div>
-                        <div className="weather-details">
-                            <p><strong>Condition:</strong> Sunny</p>
-                            <p><strong>Humidity:</strong> 63%</p>
-                            <p><strong>Wind:</strong> 11 km/h</p>
-                            <p><strong>Visibility:</strong> 9 km</p>
+                    <div className={styles.weatherBox}>
+                        <div className={`${styles.temp} temp changeTemp`}>30°C</div>
+                        <div className={styles.weatherDetails}>
+                            <p><strong>Condition:</strong> <span id="cond"></span></p>
+                            <p><strong>Humidity:</strong> <span id="humi">xx</span>%</p>
+                            <p><strong>Wind:</strong> <span id="speed">xx</span> km/h</p>
+                            <p><strong>Visibility:</strong> <span id="visi">x</span> km</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section className="extras">
+    <section className={styles.extras}>
         <div className="container">
-            <h2 className="section-title">Upcoming Events</h2>
-            <div className="events-grid">
-                <div className="event-card">
-                    <div className="event-date">
+            <h2 className={styles.sectionTitle}>Upcoming Events</h2>
+            <div className={styles.eventsGrid}>
+                <div className={`${styles.eventCard} event-card`}>
+                    <div className={styles.eventDate}>
                         <h2>15</h2>
                         <p>JUL</p>
                     </div>
-                    <div className="event-info">
+                    <div className={styles.eventInfo}>
                         <h3>Smart City Hackathon</h3>
                         <p>
                             Develop innovative smart city solutions with students,
@@ -237,12 +224,12 @@ export default function Main(){
                         </p>
                     </div>
                 </div>
-                <div className="event-card">
-                    <div className="event-date">
+                <div className={`${styles.eventCard} event-card`}>
+                    <div className={styles.eventDate}>
                         <h2>21</h2>
                         <p>JUL</p>
                     </div>
-                    <div className="event-info">
+                    <div className={styles.eventInfo}>
                         <h3>Mega Health Camp</h3>
                         <p>
                             Free health checkups, blood donation,
@@ -250,12 +237,12 @@ export default function Main(){
                         </p>
                     </div>
                 </div>
-                <div className="event-card">
-                    <div className="event-date">
+                <div className={`${styles.eventCard} event-card`}>
+                    <div className={styles.eventDate}>
                         <h2>30</h2>
                         <p>AUG</p>
                     </div>
-                    <div className="event-info">
+                    <div className={styles.eventInfo}>
                         <h3>Tourism Carnival</h3>
                         <p>
                             Food festivals, music performances,
@@ -264,29 +251,29 @@ export default function Main(){
                     </div>
                 </div>
             </div>
-            <h2 className="section-title">Quick Services</h2>
-            <div className="services">
-                <div className="service">
+            <h2 className={styles.sectionTitle}>Quick Services</h2>
+            <div className={styles.services}>
+                <div className={`${styles.service} service`}>
                     <h2>📄</h2>
                     <p>Apply for Birth Certificate</p>
                 </div>
-                <div className="service">
+                <div className={`${styles.service} service`}>
                     <h2>💡</h2>
                     <p>Electricity Bill</p>
                 </div>
-                <div className="service">
+                <div className={`${styles.service} service`}>
                     <h2>💧</h2>
                     <p>Water Bill</p>
                 </div>
-                <div className="service">
+                <div className={`${styles.service} service`}>
                     <h2>🚗</h2>
                     <p>Traffic Fine</p>
                 </div>
-                <div className="service">
+                <div className={`${styles.service} service`}>
                     <h2>🚌</h2>
                     <p>Bus Pass</p>
                 </div>
-                <div className="service">
+                <div className={`${styles.service} service`}>
                     <h2>🏠</h2>
                     <p>Property Tax</p>
                 </div>

@@ -1,14 +1,43 @@
-#mainB .hero {
+.mainPage {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.mainPage::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, .12), transparent 35%),
+        radial-gradient(circle at 80% 15%, rgba(139, 92, 246, .10), transparent 35%),
+        radial-gradient(circle at 60% 80%, rgba(34, 211, 238, .08), transparent 40%);
+    animation: backgroundMove 18s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes backgroundMove {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.hero {
     padding: 50px 0;
 }
 
-#mainB .hero-grid {
+.heroGrid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px;
 }
 
-#mainB .card {
+.card {
     background: rgba(255, 255, 255, .07);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, .08);
@@ -18,56 +47,63 @@
     transition: .35s;
 }
 
-#mainB .card:hover {
+.mainPage h2 {
+    color: white;
+}
+
+.card:hover,
+.statCard:hover,
+.eventCard:hover,
+.service:hover {
     transform: translateY(-8px);
 }
 
-#mainB .welcome {
+.welcome {
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 420px;
     background:
         linear-gradient(rgba(8, 17, 32, .65), rgba(8, 17, 32, .85)),
-        url("images/city.jpg");
+        url('/images/city.jpg');
     background-size: cover;
     background-position: center;
 }
 
-#mainB .tag {
+.tag {
     display: inline-block;
     padding: 8px 18px;
-    background: #1E3A8A;
+    background: #1e3a8a;
     border-radius: 30px;
     font-size: 14px;
     margin-bottom: 20px;
     width: max-content;
 }
 
-#mainB .welcome h1 {
+.welcome h1 {
     font-size: 58px;
     line-height: 1.1;
     margin-bottom: 20px;
 }
 
-#mainB .welcome h1 span {
-    color: #38BDF8;
+.welcome h1 span {
+    color: #38bdf8;
 }
 
-#mainB .welcome p {
+.welcome p {
     font-size: 18px;
     line-height: 1.8;
-    color: #CBD5E1;
+    color: #cbd5e1;
     margin-bottom: 35px;
     max-width: 700px;
 }
 
-#mainB .buttons {
+.buttons {
     display: flex;
     gap: 20px;
 }
 
-#mainB .btn {
+.btn {
     padding: 16px 34px;
     border-radius: 40px;
     text-decoration: none;
@@ -75,26 +111,26 @@
     transition: .3s;
 }
 
-#mainB .primary {
-    background: linear-gradient(135deg, #38BDF8, #8B5CF6);
+.primary {
+    background: linear-gradient(135deg, #38bdf8, #8b5cf6);
     color: white;
 }
 
-#mainB .primary:hover {
+.primary:hover {
     transform: translateY(-5px);
 }
 
-#mainB .secondary {
-    border: 2px solid #22D3EE;
+.secondary {
+    border: 2px solid #22d3ee;
     color: white;
 }
 
-#mainB .secondary:hover {
-    background: #22D3EE;
+.secondary:hover {
+    background: #22d3ee;
     color: #081120;
 }
 
-#mainB .mayor {
+.mayor {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,40 +139,40 @@
     min-height: 420px;
 }
 
-#mainB .mayor img {
+.mayor img {
     width: 170px;
     height: 170px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #38BDF8;
+    border: 4px solid #38bdf8;
     margin-bottom: 20px;
 }
 
-#mainB .mayor h2 {
+.mayor h2 {
     font-size: 28px;
     margin-bottom: 10px;
 }
 
-#mainB .mayor h4 {
-    color: #22D3EE;
+.mayor h4 {
+    color: #22d3ee;
     margin-bottom: 20px;
 }
 
-#mainB .quote {
+.quote {
     font-style: italic;
-    color: #CBD5E1;
+    color: #cbd5e1;
     line-height: 1.8;
     margin-bottom: 25px;
 }
 
-#mainB .mini-stats {
+.miniStats {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
 }
 
-#mainB .mini {
+.mini {
     padding: 12px;
     border-radius: 12px;
     background: rgba(255, 255, 255, .05);
@@ -144,25 +180,26 @@
     justify-content: space-between;
 }
 
-#mainB .mini span {
-    color: #38BDF8;
+.mini span {
+    color: #38bdf8;
     font-weight: 600;
 }
 
-#mainB .section-title {
+.sectionTitle {
+    color: white;
     font-size: 36px;
     margin: 50px 0 30px;
     text-align: center;
 }
 
-#mainB .stats-grid {
+.statsGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin-bottom: 50px;
 }
 
-#mainB .stat-card {
+.statCard {
     padding: 25px;
     border-radius: 20px;
     background: rgba(255, 255, 255, .07);
@@ -171,86 +208,100 @@
     border-top: 5px solid white;
 }
 
-#mainB .stat-card:hover {
-    transform: translateY(-8px);
-}
-
-#mainB .stat-card .icon {
+.icon {
     font-size: 40px;
     margin-bottom: 10px;
 }
 
-#mainB .stat-card h1 {
+.statCard h1 {
     font-size: 36px;
     margin: 10px 0;
 }
-
-#mainB .blue {
-    border-color: #38BDF8;
+.blue {
+    border-color: #38bdf8;
 }
 
-#mainB .green {
-    border-color: #10B981;
+.green {
+    border-color: #10b981;
 }
 
-#mainB .orange {
-    border-color: #22C55E;
+.orange {
+    border-color: #22c55e;
 }
 
-#mainB .yellow {
-    border-color: #FACC15;
+.yellow {
+    border-color: #facc15;
 }
 
-#mainB .purple {
-    border-color: #A855F7;
+.purple {
+    border-color: #a855f7;
 }
 
-#mainB .news-weather {
+.newsWeather {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 25px;
     margin-bottom: 60px;
 }
 
-#mainB .news ul {
+.news ul {
     padding-left: 20px;
     margin-top: 20px;
 }
 
-#mainB .news li {
+.news li {
     margin-bottom: 18px;
-    color: #CBD5E1;
+    color: #cbd5e1;
 }
 
-#mainB .weather-box {
+.newsContainer {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 50vw;
+    height: 28vh;
+}
+
+.newsContainer ul {
+    display: block;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    animation: marquee 12s linear infinite;
+}
+
+.newsContainer:hover ul {
+    animation-play-state: paused;
+}
+
+.weatherBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 25px;
 }
 
-#mainB .temp {
+.temp {
     font-size: 70px;
     font-weight: bold;
-    color: #38BDF8;
+    color: #38bdf8 !important;
     margin-bottom: 20px;
 }
 
-#mainB .weather-details p {
+.weatherDetails p {
     margin: 10px 0;
 }
 
-#mainB .extras {
+.extras {
     padding: 70px 0;
 }
 
-#mainB .events-grid {
+.eventsGrid {
     display: grid;
     gap: 25px;
     margin-bottom: 70px;
 }
 
-#mainB .event-card {
+.eventCard {
     display: flex;
     gap: 25px;
     padding: 25px;
@@ -259,13 +310,9 @@
     transition: .35s;
 }
 
-#mainB .event-card:hover {
-    transform: translateY(-8px);
-}
-
-#mainB .event-date {
+.eventDate {
     width: 100px;
-    background: #38BDF8;
+    background: #38bdf8;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -274,24 +321,24 @@
     color: white;
 }
 
-#mainB .event-date h2 {
+.eventDate h2 {
     font-size: 36px;
 }
 
-#mainB .event-info p {
+.eventInfo p {
     margin-top: 10px;
-    color: #CBD5E1;
+    color: #cbd5e1;
     line-height: 1.8;
 }
 
-#mainB .services {
+.services {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     margin-bottom: 80px;
 }
 
-#mainB .service {
+.service {
     padding: 30px;
     background: rgba(255, 255, 255, .07);
     border-radius: 20px;
@@ -299,89 +346,49 @@
     transition: .35s;
 }
 
-#mainB .service:hover {
-    transform: translateY(-8px);
-}
-
-#mainB .service h2 {
+.service h2 {
     font-size: 50px;
     margin-bottom: 15px;
 }
 
-@media (max-width: 1000px) {
-    #mainB .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #mainB .news-weather {
-        grid-template-columns: 1fr;
-    }
-
-    #mainB .services {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #mainB .footer-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-#mainB #news-container{
-    overflow: hidden;
-    white-space: nowrap;
-    width: 50vw;
-    height: 28vh;
-}
-
-#mainB #news-container ul{
-    display: block;
-    /* gap: 2vh; */
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    animation: marquee 12s linear infinite;
-    list-style: none;
-}
-
-#mainB #news-container:hover ul{
-    animation-play-state: paused;
-}
-
 @keyframes marquee {
-    0%{
+    0% {
         transform: translateY(-100%);
     }
-    100%{
+
+    100% {
         transform: translateY(50%);
     }
 }
 
+@media (max-width: 1000px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .newsWeather {
+        grid-template-columns: 1fr;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 700px) {
-    #mainB .welcome h1 {
+    .welcome h1 {
         font-size: 34px;
     }
 
-    #mainB .buttons {
+    .buttons {
         flex-direction: column;
     }
 
-    #mainB .logo h1 {
-        font-size: 24px;
-    }
-
-    #mainB .menu {
-        gap: 18px;
-    }
-
-    #mainB .services {
+    .services {
         grid-template-columns: 1fr;
     }
 
-    #mainB .footer-grid {
-        grid-template-columns: 1fr;
-    }
-
-    #mainB .event-card {
+    .eventCard {
         flex-direction: column;
         align-items: center;
         text-align: center;

@@ -80,7 +80,7 @@ export default function Education(){
 
     return(
         <>
-        <div className={styles.grid}>
+        <div className={`${styles.educationPage} ${styles.grid}`}>
 
         <div className={styles.card}>
             
