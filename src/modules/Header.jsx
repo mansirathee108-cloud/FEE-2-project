@@ -1,8 +1,10 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import './Header.css';
 
 export default function Header(){
-
+    
+    const [icnLink, setIcnLink] = useState(null);
+    
     useEffect(() => {
         const sidebarButton = document.querySelectorAll(".sidebarButton");
         const body = document.querySelector('body');
@@ -19,11 +21,50 @@ export default function Header(){
         sideMenu.addEventListener("click", (event) => {
             event.stopPropagation();
         });
-
+        
         body.addEventListener("click", () => {
             sideMenu.classList.remove("show");
             body.classList.remove("dimmed");
         });
+
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        async function updateWether(latitude, longitude) {
+        
+        
+            const apiKey = "b25b86ff5f31ee72f5c323f68ffa0ac2";
+        
+            const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`);
+            const data = await weatherRes.json();
+        
+            setIcnLink(`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`);
+        
+            console.log(icnLink);
+        
+            const fields = document.querySelectorAll('.changeTemp');
+        
+            if (fields) {
+                fields.forEach(field => {
+                    field.textContent = Math.trunc(data.main.temp) + "°C";
+                })
+            }
+        
+            const humidField = document.querySelector("#humi");
+            const speedField = document.querySelector('#speed');
+            const visibilityField = document.querySelector('#visi');
+            const conditionField = document.querySelector('#cond');
+            if (humidField) humidField.textContent = data.main.humidity;
+            if (speedField) speedField.textContent = data.wind.speed;
+            if (visibilityField) visibilityField.textContent = data.visibility / 1000; 
+            if (conditionField) conditionField.textContent = data.weather[0].main;
+        }
+        
+        navigator.geolocation.getCurrentPosition(position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            updateWether(latitude, longitude);
+        })
     }, []);
 
     function updateClock() {
@@ -47,43 +88,6 @@ export default function Header(){
         if (clockBox) clockBox.innerHTML = time;
     }
 
-    updateClock();
-    setInterval(updateClock, 1000);
-
-
-    async function updateWether(latitude, longitude) {
-
-
-        const apiKey = "b25b86ff5f31ee72f5c323f68ffa0ac2";
-
-        const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`);
-        const data = await weatherRes.json();
-
-        const fields = document.querySelectorAll('.changeTemp');
-
-        if (fields) {
-            fields.forEach(field => {
-                field.textContent =  Math.trunc(data.main.temp) + "°C";
-                console.log(data.weather[0].main);
-            })
-        }
-
-        const humidField = document.querySelector("#humi");
-        const speedField = document.querySelector('#speed');
-        const visibilityField = document.querySelector('#visi');
-        const conditionField = document.querySelector('#cond');
-        if (humidField) humidField.textContent = data.main.humidity;
-        if (speedField) speedField.textContent = data.wind.speed;
-        if (visibilityField) visibilityField.textContent = data.visibility / 1000; 
-        if (conditionField) conditionField.textContent = data.weather[0].main;
-    }
-
-    navigator.geolocation.getCurrentPosition(position => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        updateWether(latitude, longitude);
-    })
-
     return (
         <>
         <header>
@@ -101,7 +105,7 @@ export default function Header(){
                     <div className="status">
                         <p>Monday, 20 July 2026</p>
                         <h2>09:45 AM</h2>
-                        <p className="changeTemp">🌤 29°C</p>
+                        <p className="flex"><img src={icnLink}/><span className="changeTemp">--C</span></p>
                     </div>
                 </nav>
             </div>

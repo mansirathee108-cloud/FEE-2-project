@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Main from "./pages/MainPage.jsx";
 import Health from './pages/HealthPage.jsx';
 import Food from './pages/FoodPage.jsx';

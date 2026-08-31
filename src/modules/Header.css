@@ -2,3 +2,16 @@
     color: white;
 }
 
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 5px;        
+    line-height: 1;
+}
+
+.flex img {
+    display: block;
+    width: 40px; 
+    height: auto;
+}
