@@ -217,7 +217,7 @@ export default function Main(){
                     </div>
                 </div>
             </div>
-            <div className={`${styles.card} ${styles.complaints}`}>
+            <div className={`${styles.card} card ${styles.complaints}`}>
                 <h2>Recent Submissions</h2>
                 {submissions.length === 0 ? (
                     <p className={styles.emptyComplaints}>No complaints submitted yet.</p>
