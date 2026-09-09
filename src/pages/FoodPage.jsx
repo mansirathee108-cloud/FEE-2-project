@@ -1,5 +1,5 @@
 import styles from './Food.module.css';
-import { saveActivity, saveComplaint } from '../modules/complaints.js';
+import { saveActivity, saveComplaint } from '../modules/storage.js';
 
 export default function Food(){
 
@@ -51,7 +51,6 @@ export default function Food(){
     let rating=document.getElementById('rating').value;
     let review=document.getElementById('review').value;
 
-    localStorage.setItem("foodReview",rating+" - "+review);
     saveActivity('Food Review', rating+" - "+review, 'review');
 
     document.getElementById('reviewResult').textContent=
@@ -61,8 +60,6 @@ export default function Food(){
     function sendComplaint(){
 
     let complaint=document.getElementById('complaint').value;
-
-    localStorage.setItem("foodComplaint",complaint);
 
     if (!saveComplaint('Food', complaint)) {
         document.getElementById('complaintResult').textContent=

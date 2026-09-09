@@ -1,5 +1,5 @@
 import styles from './Education.module.css'
-import { saveActivity } from '../modules/complaints.js';
+import { saveActivity } from '../modules/storage.js';
 
 export default function Education(){
 
@@ -69,10 +69,6 @@ export default function Education(){
 
         let dept=document.getElementById('department').value;
 
-        localStorage.setItem(
-        'studentApplication',
-        name+' | '+email+' | '+dept
-        );
         saveActivity('Education Admission', name+' | '+email+' | '+dept);
 
         document.getElementById('admissionResult').textContent=

@@ -1,19 +1,19 @@
 import styles from './Main.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getComplaints, isPanicAlertActive } from '../modules/complaints.js';
+import { getSubmissions, isPanicAlertActive } from '../modules/storage.js';
  
 
 export default function Main(){
-    const [complaints, setComplaints] = useState([]);
+    const [submissions, setSubmissions] = useState([]);
     const [panicAlert, setPanicAlert] = useState(false);
 
     useEffect(() => {
-        setComplaints(getComplaints());
+        setSubmissions(getSubmissions());
         setPanicAlert(isPanicAlertActive());
 
         const refreshHome = () => {
-            setComplaints(getComplaints());
+            setSubmissions(getSubmissions());
             setPanicAlert(isPanicAlertActive());
         };
 
@@ -219,14 +219,14 @@ export default function Main(){
             </div>
             <div className={`${styles.card} ${styles.complaints}`}>
                 <h2>Recent Submissions</h2>
-                {complaints.length === 0 ? (
+                {submissions.length === 0 ? (
                     <p className={styles.emptyComplaints}>No complaints submitted yet.</p>
                 ) : (
                     <ul>
-                        {complaints.slice(0, 3).map((complaint) => (
-                            <li key={complaint.id}>
-                                <strong>{complaint.source}</strong>
-                                <span>{complaint.text}</span>
+                        {submissions.map((submission) => (
+                            <li key={submission.id}>
+                                <strong>{submission.source}</strong>
+                                <span>{submission.text}</span>
                             </li>
                         ))}
                     </ul>

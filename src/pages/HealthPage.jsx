@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Health.module.css";
-import { saveActivity, saveComplaint } from '../modules/complaints.js';
+import { saveActivity, saveComplaint } from '../modules/storage.js';
 
 export default function Health(){
     const [weight, setWeight] = useState("");
@@ -52,15 +52,12 @@ export default function Health(){
     const saveVac = () => {
         let n = citizenName;
         let d = dose;
-        localStorage.setItem('vaccination', n + ' - ' + d);
         saveActivity('Vaccination', n + ' - ' + d, 'vaccination');
         setVacResult('Saved for ' + n);
     };
 
     const complaint = () => {
         let c = complaintText;
-        localStorage.setItem('healthComplaint', c);
-
         if (!saveComplaint('Health', c)) {
             setComplaintResult('Please enter a complaint before submitting');
             return;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import styles from './Security.module.css';
-import { isPanicAlertActive, saveActivity, setPanicAlert } from '../modules/complaints.js';
+import { isPanicAlertActive, saveActivity, setPanicAlert } from '../modules/storage.js';
 
 export default function Security(){
     const [panicActive, setPanicActive] = useState(isPanicAlertActive());
@@ -22,10 +22,6 @@ export default function Security(){
         
     }
 
-    localStorage.setItem(
-        'firReport',
-        name+' | '+crime+' | '+details
-    );
     saveActivity('FIR Report', name+' | '+crime+' | '+details, 'complaint');
 
     document.getElementById('firResult').textContent=

@@ -1,5 +1,5 @@
 import styles from "./Tourism.module.css";
-import { saveActivity } from '../modules/complaints.js';
+import { saveActivity } from '../modules/storage.js';
 
 export default function Tourism(){
     function calculateTrip(){
@@ -39,10 +39,6 @@ export default function Tourism(){
             
         }
         
-        localStorage.setItem(
-            'tourismReview',
-            rating+' | '+review
-        );
         saveActivity('Tourism Review', rating+' | '+review, 'review');
         
         document.getElementById('reviewResult').textContent=
@@ -55,6 +51,7 @@ export default function Tourism(){
         let name=document.getElementById('touristName').value;
         let country=document.getElementById('country').value;
         
+        saveActivity('Visa Approval', name+' from '+country, 'visa');
         
         document.getElementById('visaResult').textContent=
         'Visa Approved for '+name+' from '+country;
