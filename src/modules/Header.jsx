@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default function Header(){
@@ -16,10 +17,6 @@ export default function Header(){
                 sideMenu.classList.add("show");
                 body.classList.add("dimmed");
             })
-        });
-
-        sideMenu.addEventListener("click", (event) => {
-            event.stopPropagation();
         });
         
         body.addEventListener("click", () => {
@@ -93,14 +90,14 @@ export default function Header(){
         <header>
             <div className="container">
                 <nav>
-                    <div className="logo">
+                    <Link style={{"text-decoration": "none"}} to="/" className="logo">
                         <img src="/src/assets/Navy_blue_circle_with_tree_202607301434.jpeg" alt="Logo" />
                         <h1 className="moduleWhiteText">Oakridge <span>Smart City</span></h1>
-                    </div>
+                    </Link>
                     <div className="menu">
-                        <a href="/">Home</a>
+                        <Link to="/">Home</Link>
                         <a className="sidebarButton">Departments</a>
-                        <a href="#contact">Contact</a>
+                        <Link to="#contact">Contact</Link>
                     </div>
                     <div className="status">
                         <p>Monday, 20 July 2026</p>

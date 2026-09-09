@@ -1,5 +1,6 @@
 import styles from './Main.module.css';
-
+import { Link } from 'react-router-dom';
+ 
 
 export default function Main(){
 
@@ -62,17 +63,6 @@ export default function Main(){
             update();
         });
 
-        setInterval(() => {
-            document.body.style.background =
-                `linear-gradient(
-                    180deg,
-                    rgb(${8 + Math.random() * 5},
-                    ${17 + Math.random() * 5},
-                    ${32 + Math.random() * 5}),
-                    #111827,
-                    #172C4A)`;
-        }, 8000);
-
         cards.forEach((card) => {
             card.addEventListener("mouseenter", () => {
                 card.style.boxShadow = "0px 20px 45px rgba(56,189,248,.25)";
@@ -99,8 +89,8 @@ export default function Main(){
                 <div className={`${styles.card} card ${styles.welcome}`}>
                     <div className={styles.tag}>SMART • SAFE • SUSTAINABLE</div>
                     <h1>
-                        Welcome to
-                        <span>Oakridge</span>
+                        Welcome to 
+                        <span> Oakridge </span>
                         Smart City
                     </h1>
                     <p>
@@ -111,11 +101,11 @@ export default function Main(){
                     </p>
                     <div className={styles.buttons}>
                         <a href="#" className={`${styles.btn} primary ${styles.primary}`}>Explore City</a>
-                        <a href="#" className={`${styles.btn} ${styles.secondary}`}>Learn More</a>
+                        {/* <a href="#" className={`${styles.btn} ${styles.secondary}`}>Learn More</a> */}
                     </div>
                 </div>
                 <div className={`${styles.card} card ${styles.mayor}`}>
-                    <img src="images/mayor.png" alt="Mayor" />
+                    <img src="mayor.jpg" alt="Mayor" />
                     <h2>Himanshi</h2>
                     <h4>Mayor of Oakridge</h4>
                     <p className={styles.quote}>
@@ -209,73 +199,37 @@ export default function Main(){
     </section>
     <section className={styles.extras}>
         <div className="container">
-            <h2 className={styles.sectionTitle}>Upcoming Events</h2>
-            <div className={styles.eventsGrid}>
-                <div className={`${styles.eventCard} event-card`}>
-                    <div className={styles.eventDate}>
-                        <h2>15</h2>
-                        <p>JUL</p>
-                    </div>
-                    <div className={styles.eventInfo}>
-                        <h3>Smart City Hackathon</h3>
-                        <p>
-                            Develop innovative smart city solutions with students,
-                            developers and professionals.
-                        </p>
-                    </div>
-                </div>
-                <div className={`${styles.eventCard} event-card`}>
-                    <div className={styles.eventDate}>
-                        <h2>21</h2>
-                        <p>JUL</p>
-                    </div>
-                    <div className={styles.eventInfo}>
-                        <h3>Mega Health Camp</h3>
-                        <p>
-                            Free health checkups, blood donation,
-                            BMI analysis and awareness programs.
-                        </p>
-                    </div>
-                </div>
-                <div className={`${styles.eventCard} event-card`}>
-                    <div className={styles.eventDate}>
-                        <h2>30</h2>
-                        <p>AUG</p>
-                    </div>
-                    <div className={styles.eventInfo}>
-                        <h3>Tourism Carnival</h3>
-                        <p>
-                            Food festivals, music performances,
-                            art exhibitions and local handicrafts.
-                        </p>
-                    </div>
-                </div>
-            </div>
             <h2 className={styles.sectionTitle}>Quick Services</h2>
             <div className={styles.services}>
+                <Link style={{color: "inherit", "text-decoration": "none",}} to="/food#complaint">
                 <div className={`${styles.service} service`}>
                     <h2>📄</h2>
-                    <p>Apply for Birth Certificate</p>
+                    <p>File a food complaint</p>
                 </div>
+                </Link>
+                <Link style={{color: "inherit", "text-decoration": "none",}} to="/health#vac">
                 <div className={`${styles.service} service`}>
                     <h2>💡</h2>
-                    <p>Electricity Bill</p>
+                    <p>Book Vaccination Appointment</p>
                 </div>
+                </Link>
+                <Link style={{color: "inherit", "text-decoration": "none",}} to="/tourism">
                 <div className={`${styles.service} service`}>
-                    <h2>💧</h2>
-                    <p>Water Bill</p>
+                    <h2>🚆</h2>
+                    <p>Plan Your Next Trip</p>
                 </div>
+                </Link>
                 <div className={`${styles.service} service`}>
                     <h2>🚗</h2>
-                    <p>Traffic Fine</p>
+                    <p>Education</p>
                 </div>
                 <div className={`${styles.service} service`}>
                     <h2>🚌</h2>
-                    <p>Bus Pass</p>
+                    <p>Security</p>
                 </div>
                 <div className={`${styles.service} service`}>
                     <h2>🏠</h2>
-                    <p>Property Tax</p>
+                    <p>Health</p>
                 </div>
             </div>
         </div>

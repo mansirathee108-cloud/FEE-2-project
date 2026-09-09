@@ -61,7 +61,7 @@ export default function Tourism(){
     return(
         <div className={styles.tourismPage}>
         <div className={styles.grid}>
-            <div className={styles.card}>
+            <div id="trCost" className={styles.card}>
             
                 <h2>🏖 Famous Tourist Places</h2>
                 

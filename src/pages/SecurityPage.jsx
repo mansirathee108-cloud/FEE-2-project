@@ -1,4 +1,4 @@
-
+import { useState, useEffect } from 'react';
 
 import styles from './Security.module.css';
 
@@ -30,29 +30,27 @@ export default function Security(){
 
     }
 
-    const alerts=[
-        
-        'Cyber Fraud Alert reported in Central Market Area.',
-        
-        'Suspicious vehicle detected near Metro Station.',
-        
-        'Night patrol increased in South Zone sectors.',
-        
-        'Traffic surveillance upgraded near City Mall.',
-        
-        'Online scam warning issued for fake banking links.'
-        
+    const alerts = [
+    "Cyber Fraud Alert reported in Central Market Area.",
+    "Vehicle theft reported near Riverside Parking Lot.",
+    "Noise disturbance complaint in Green Park Colony.",
+    'Suspicious vehicle detected near Metro Station.',  
+    'Night patrol increased in South Zone sectors.',
+    'Traffic surveillance upgraded near City Mall.',
+    'Online scam warning issued for fake banking links.'
     ];
 
-    let a=0;
+    // const [index, setIndex] = useState(0);
 
-    setInterval(()=>{
-        
-        a=(a+1)%alerts.length;
-        
-        document.getElementById('alertBox').textContent=alerts[a];
-        
-    },3000);
+    // useEffect(() => {
+    //     if (alerts.length === 0) return;
+
+    //     const interval = setInterval(() => {
+    //     setIndex(prev => (prev + 1) % alerts.length);
+    //     }, 3000);
+
+    //     return () => clearInterval(interval); // cleanup on unmount
+    // }, []);
 
     function checkBribe(){
         
@@ -150,23 +148,57 @@ export default function Security(){
         </div>
 
         <div className={styles.card}>
-
-        <h2>📢 Live Crime Alerts</h2>
-
-        <div id="alertBox" className={styles.alertBox}>
-        Cyber Fraud Alert reported in Central Market Area.
-        </div>
-
+            <h2>🚨 Live Crime Alerts</h2>
+            <div className={styles.alertBox}>
+                <div className={styles.alertTrack}>
+                    {alerts.map((alert, i) => (
+                        <p key={`a-${i}`} className={styles.alertLine}>{alert}</p>
+                    ))}
+                    {/* duplicate the list so the loop is seamless */}
+                    {alerts.map((alert, i) => (
+                        <p key={`b-${i}`} className={styles.alertLine}>{alert}</p>
+                    ))}
+                </div>
+            </div>
         </div>
 
         <div className={styles.card}>
 
         <h2>💰 Anti-Bribery Monitoring</h2>
 
-        <textarea className={styles.input} id="bribeText" rows="5" placeholder="Enter suspicious bribery report"></textarea>
+        <p className={styles.small}>
+            Report bribery or corruption you've witnessed. All submissions are
+            reviewed by the Anti-Corruption Cell and can be filed anonymously.
+        </p>
+
+        <div className={styles.bribeStats}>
+            <div className={styles.bribeStatItem}>
+            <span className={styles.bribeStatNumber}>212</span>
+            <span className={styles.bribeStatLabel}>Reports This Month</span>
+            </div>
+            <div className={styles.bribeStatItem}>
+            <span className={styles.bribeStatNumber}>89%</span>
+            <span className={styles.bribeStatLabel}>Cases Reviewed</span>
+            </div>
+            <div className={styles.bribeStatItem}>
+            <span className={styles.bribeStatNumber}>24h</span>
+            <span className={styles.bribeStatLabel}>Avg Response Time</span>
+            </div>
+        </div>
+
+        <textarea
+            className={styles.input}
+            id="bribeText"
+            rows="5"
+            placeholder="Describe the incident: who, where, and when it occurred"
+        ></textarea>
+
+        <div className={styles.bribeFootnote}>
+            🔒 Your identity is kept confidential unless you choose to share it.
+        </div>
 
         <button className={styles.button} onClick={checkBribe}>
-        Submit Report
+            Submit Report
         </button>
 
         <div id="bribeResult" className={styles.result}></div>

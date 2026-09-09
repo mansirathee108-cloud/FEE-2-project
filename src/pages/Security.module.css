@@ -1,7 +1,6 @@
 .securityPage {
     min-height: 100vh;
     padding: 24px;
-    font-family: 'Segoe UI', sans-serif;
     color: #1d3557;
 }
 
@@ -20,6 +19,19 @@
     box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
     border-left: 6px solid #1d3557;
     transition: .35s;
+}
+
+.alertTrack {
+  display: flex;
+  flex-direction: column;
+  animation: scrollUp 5s linear infinite;
+}
+
+.alertLine {
+  margin: 0;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.85rem;
 }
 
 .card:hover {
@@ -101,13 +113,61 @@
 }
 
 .alertBox {
-    background: #fff2f2;
-    padding: 14px;
-    border-radius: 16px;
-    margin-top: 10px;
-    border-left: 5px solid #b23a48;
-    font-weight: 700;
-    color: #b23a48;
+  background: #fff2f2;
+  padding: 14px;
+  border-radius: 16px;
+  margin-top: 10px;
+  border-left: 5px solid #b23a48;
+  font-weight: 700;
+  color: #b23a48;
+  overflow: hidden;
+  position: relative;
+  height: 370px;              /* ✅ fixed viewport so overflow actually clips something */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+}
+
+@keyframes scrollUp {
+  from { transform: translateY(0); }      /* ✅ valid unit */
+  to   { transform: translateY(-50%); }   /* ✅ half of doubled track height */
+}
+
+.bribeStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.bribeStatItem {
+  background: #f7f1e7;
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+  border: 1px solid rgba(194, 178, 128, .25);
+}
+
+.bribeStatNumber {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #b23a48;
+}
+
+.bribeStatLabel {
+  display: block;
+  font-size: 0.7rem;
+  color: #5c4b3b;
+  margin-top: 2px;
+}
+
+.bribeFootnote {
+  font-size: 0.78rem;
+  color: #5c4b3b;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .helpline {

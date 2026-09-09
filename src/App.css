@@ -12,13 +12,13 @@ html,
 body,
 #root {
   min-height: 100%; 
+  font-family: 'Poppins', sans-serif;
   overscroll-behavior: none;
   /* overflow-x: hidden; */
   /* /* overflow-y: auto; */
 }
 
 body[data-page="main"] {
-  font-family: 'Poppins', sans-serif;
   background: linear-gradient(180deg, #081120, #111827, #172C4A);
   color: white;
   min-height: 100vh;
@@ -42,13 +42,11 @@ body[data-page="main"]::before {
 }
 
 body[data-page="health"] {
-  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #14090a, #241012, #10131c);
   color: #fff;
 }
 
 body[data-page="food"] {
-  font-family:'Segoe UI',sans-serif;
   background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee,#84fab0,#8fd3f4);
   background-size:400% 400%;
   animation:bgmove 30s ease infinite;
@@ -57,7 +55,6 @@ body[data-page="food"] {
 }
 
 body[data-page="education"] {
-  font-family:'Segoe UI',sans-serif;
   background:linear-gradient(
       135deg,
       #f8f5f0,
@@ -71,7 +68,6 @@ body[data-page="education"] {
 
 body[data-page="tourism"] {
   min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #ffb703, #ff8fab, #ffd6a5, #4cc9f0);
   background-size: 400% 400%;
   animation: bgmove 14s ease infinite;
@@ -79,7 +75,6 @@ body[data-page="tourism"] {
 }
 
 body[data-page="security"]{
-  font-family:'Segoe UI',sans-serif;
   background:
   linear-gradient(
       135deg,

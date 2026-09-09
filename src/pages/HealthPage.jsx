@@ -69,6 +69,7 @@ export default function Health(){
 
     return(
         <>
+        <h1 class={styles.header}><img src="hospital.png" class={styles.logo}/> HEALTH SERVICES</h1>
         <div className={styles.healthPage}>
         <div className={styles.grid}>
             <div className={styles.card}>
@@ -77,8 +78,33 @@ export default function Health(){
                 <p className={styles.small}>Oakridge Central Hospital offers emergency care, surgeries, diagnostics and specialist treatment 24/7.</p>
             </div>
             <div className={styles.card}>
-                <h2 className={styles.redS}>Hospital Branches</h2>
-                <p className={styles.small}>School Clinic North Campus<br/>College Health Wing East Zone<br/>Community Branch West Sector</p>
+            <h2 className={styles.redS}>Hospital Branches</h2>
+            <ul className={styles.branchList}>
+                <li className={styles.branchItem} style={{ animationDelay: '0ms' }}>
+                <span className={styles.statusDot} />
+                School Clinic North Campus
+                </li>
+                <li className={styles.branchItem} style={{ animationDelay: '80ms' }}>
+                <span className={styles.statusDot} />
+                College Health Wing East Zone
+                </li>
+                <li className={styles.branchItem} style={{ animationDelay: '160ms' }}>
+                <span className={styles.statusDotClosed} />
+                Community Branch West Sector
+                </li>
+                <li className={styles.branchItem} style={{ animationDelay: '240ms' }}>
+                <span className={styles.statusDot} />
+                Downtown Diagnostic Center
+                </li>
+                <li className={styles.branchItem} style={{ animationDelay: '320ms' }}>
+                <span className={styles.statusDotClosed} />
+                Riverside Outpatient Unit
+                </li>
+                <li className={styles.branchItem} style={{ animationDelay: '400ms' }}>
+                <span className={styles.statusDot} />
+                Industrial Park Health Post
+                </li>
+            </ul>
             </div>
             <div className={styles.card}>
                 <h2 className={styles.redS}>🚑 Ambulance Emergency</h2>
@@ -94,8 +120,8 @@ export default function Health(){
                 <button className={styles.button} onClick={bmi}>Calculate BMI</button>
                 <div id="bmires" className={styles.result} style={{padding: "12px", borderRadius: "14px", background: "rgba(255,255,255,.06)", minHeight: "60px"}}>{bmiResult}</div>
             </div>
-            <div className={styles.card}>
-                <h2 className={styles.redS}>💉 Vaccination Report</h2>
+            <div className={styles.card} id="vac">
+                <h2 className={styles.redS}>Vaccination Portal</h2>
                 <input className={styles.input} id="apname" placeholder="Appointment Name" value={appointmentName} onChange={(e) => setAppointmentName(e.target.value)} />
                 <input className={styles.input} id="apdate" type="date" value={appointmentDate} onChange={(e) => setAppointmentDate(e.target.value)} />
                 <button className={styles.button} onClick={bookApp}>Book Appointment</button>
