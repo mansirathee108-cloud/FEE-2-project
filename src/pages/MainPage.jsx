@@ -256,18 +256,24 @@ export default function Main(){
                     <p>Plan Your Next Trip</p>
                 </div>
                 </Link>
+                <Link style={{color: "inherit", "text-decoration": "none",}} to="/education">
                 <div className={`${styles.service} service`}>
                     <h2>🎓</h2>
                     <p>Education</p>
                 </div>
+                </Link>
+                <Link style={{color: "inherit", "text-decoration": "none",}} to="/security">
                 <div className={`${styles.service} service`}>
                     <h2>🛡️</h2>
                     <p>Security</p>
                 </div>
+                </Link>
+                <Link style={{color: "inherit", "text-decoration": "none",}} to="/health">
                 <div className={`${styles.service} service`}>
                     <h2>🩺</h2>
                     <p>Health</p>
                 </div>
+                </Link>
             </div>
         </div>
     </section>
