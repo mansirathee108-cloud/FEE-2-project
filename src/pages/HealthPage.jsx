@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Health.module.css";
+import { saveActivity, saveComplaint } from '../modules/complaints.js';
 
 export default function Health(){
     const [weight, setWeight] = useState("");
@@ -52,24 +53,32 @@ export default function Health(){
         let n = citizenName;
         let d = dose;
         localStorage.setItem('vaccination', n + ' - ' + d);
+        saveActivity('Vaccination', n + ' - ' + d, 'vaccination');
         setVacResult('Saved for ' + n);
     };
 
     const complaint = () => {
         let c = complaintText;
         localStorage.setItem('healthComplaint', c);
+
+        if (!saveComplaint('Health', c)) {
+            setComplaintResult('Please enter a complaint before submitting');
+            return;
+        }
+
         setComplaintResult('Complaint submitted successfully');
     };
 
     const bookApp = () => {
         let n = appointmentName;
         let d = appointmentDate;
+        saveActivity('Health Appointment', n + ' - ' + d, 'appointment');
         setAppointmentResult('Appointment booked for ' + n + ' on ' + d);
     };
 
     return(
         <>
-        <h1 class={styles.header}><img src="hospital.png" class={styles.logo}/> HEALTH SERVICES</h1>
+        <h1 className={styles.header}><img src="hospital.png" className={styles.logo}/> Health Services</h1>
         <div className={styles.healthPage}>
         <div className={styles.grid}>
             <div className={styles.card}>
@@ -121,13 +130,13 @@ export default function Health(){
                 <div id="bmires" className={styles.result} style={{padding: "12px", borderRadius: "14px", background: "rgba(255,255,255,.06)", minHeight: "60px"}}>{bmiResult}</div>
             </div>
             <div className={styles.card} id="vac">
-                <h2 className={styles.redS}>Vaccination Portal</h2>
+                <h2 className={styles.redS}>Vaccination Booking</h2>
                 <input className={styles.input} id="apname" placeholder="Appointment Name" value={appointmentName} onChange={(e) => setAppointmentName(e.target.value)} />
                 <input className={styles.input} id="apdate" type="date" value={appointmentDate} onChange={(e) => setAppointmentDate(e.target.value)} />
                 <button className={styles.button} onClick={bookApp}>Book Appointment</button>
                 <div id="appres" className={styles.result}>{appointmentResult}</div>
                 <hr style={{margin: "14px 0", borderColor: "rgba(255,255,255,.08)"}} />
-                <h2 style={{fontSize: "22px"}}>Vaccination Report</h2>
+                <h2 className={styles.redS}>Vaccination Report</h2>
                 <input className={styles.input} id="name" placeholder="Citizen Name" value={citizenName} onChange={(e) => setCitizenName(e.target.value)} />
                 <select className={styles.input} id="dose" value={dose} onChange={(e) => setDose(e.target.value)}>
                     <option>Dose 1</option>

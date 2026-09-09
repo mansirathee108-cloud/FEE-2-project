@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import styles from './Security.module.css';
+import { isPanicAlertActive, saveActivity, setPanicAlert } from '../modules/complaints.js';
 
 export default function Security(){
+    const [panicActive, setPanicActive] = useState(isPanicAlertActive());
 
     function submitFIR(){
 
@@ -24,6 +26,7 @@ export default function Security(){
         'firReport',
         name+' | '+crime+' | '+details
     );
+    saveActivity('FIR Report', name+' | '+crime+' | '+details, 'complaint');
 
     document.getElementById('firResult').textContent=
     'FIR submitted successfully for '+name;
@@ -54,7 +57,9 @@ export default function Security(){
 
     function checkBribe(){
         
-        let text=document.getElementById('bribeText').value.toLowerCase();
+        let originalText=document.getElementById('bribeText').value;
+        let text=originalText.toLowerCase();
+        saveActivity('Anti-Bribery Report', originalText, 'complaint');
         
         if(text.includes('bribe')){
             
@@ -75,16 +80,32 @@ export default function Security(){
     }
 
     function panicMode(){
-        
-        document.body.style.background=
-        'linear-gradient(135deg,#ffe5e5,#ffcccc,#ffeaea)';
-        
-        alert('🚨 Emergency Panic Mode Activated!\nNearest police units have been alerted.');
+        const nextState = !panicActive;
+        setPanicAlert(nextState);
+        setPanicActive(nextState);
+
+        if (nextState) {
+            document.body.style.background=
+            'linear-gradient(135deg,#ffe5e5,#ffcccc,#ffeaea)';
+            alert('🚨 Emergency Panic Mode Activated!\nNearest police units have been alerted.');
+        } else {
+            document.body.style.background='';
+            alert('Emergency Panic Mode Deactivated.');
+        }
         
     }
 
     return(
         <div className={styles.securityPage}>
+        <h1 className={styles.header}><svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 48 48">
+	<path d="M0 0h48v48H0z" fill="none" />
+	<g fill="none" stroke-linejoin="round" stroke-width="4">
+		<path fill="#2F88FF" stroke="#000" d="M6 9.25564L24.0086 4L42 9.25564V20.0337C42 31.3622 34.7502 41.4194 24.0026 45.0005C13.2521 41.4195 6 31.36 6 20.0287V9.25564Z" />
+		<path stroke="#fff" stroke-linecap="round" d="M15 23L22 30L34 18" />
+	</g>
+</svg>
+ Security</h1>
+
         <div className={styles.grid}>
 
         <div className={styles.card}>
@@ -221,7 +242,7 @@ export default function Security(){
         </div>
 
         <button className={styles.panic} onClick={panicMode}>
-        🚨 ACTIVATE EMERGENCY PANIC MODE
+        {panicActive ? '🟢 TURN OFF EMERGENCY PANIC MODE' : '🚨 ACTIVATE EMERGENCY PANIC MODE'}
         </button>
 
         <div id="panicResult" className={styles.result}></div>

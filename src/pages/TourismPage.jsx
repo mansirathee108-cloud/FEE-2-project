@@ -1,4 +1,5 @@
 import styles from "./Tourism.module.css";
+import { saveActivity } from '../modules/complaints.js';
 
 export default function Tourism(){
     function calculateTrip(){
@@ -42,6 +43,7 @@ export default function Tourism(){
             'tourismReview',
             rating+' | '+review
         );
+        saveActivity('Tourism Review', rating+' | '+review, 'review');
         
         document.getElementById('reviewResult').textContent=
         'Thank you for your review!';
@@ -60,6 +62,15 @@ export default function Tourism(){
     }
     return(
         <div className={styles.tourismPage}>
+        <h1 className={styles.header}><svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 48 48">
+	<path d="M0 0h48v48H0z" fill="none" />
+	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+		<path d="m9 24l-4-4s-1.4 4.728-1.076 7.578S7.274 32.574 10 31c2.727-1.574 34-21 34-21l-9-2z" />
+		<path d="m26 13l-15.202-1.615L8 13l7 7m14 24l-4-5h17v-4m-10-7l4 5H19v4" />
+	</g>
+</svg>
+ Travel And Tourism</h1>
+
         <div className={styles.grid}>
             <div id="trCost" className={styles.card}>
             

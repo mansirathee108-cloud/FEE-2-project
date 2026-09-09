@@ -1,3 +1,16 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    word-spacing: 0.5rem;
+    font-weight: bold;
+    color: #fbfeff;
+    font-size: 3rem;
+    text-shadow: 1px 0 #1653fb, -1px 0 #1653fb, 0 1px #1653fb, 0 -1px #1653fb,
+               1px 1px #1653fb, -1px -1px #1653fb, 1px -1px #1653fb, -1px 1px #1653fb;
+}
+
 .grid {
     max-width: 1200px;
     margin: auto;

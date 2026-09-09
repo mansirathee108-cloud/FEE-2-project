@@ -1,8 +1,25 @@
 import styles from './Main.module.css';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getComplaints, isPanicAlertActive } from '../modules/complaints.js';
  
 
 export default function Main(){
+    const [complaints, setComplaints] = useState([]);
+    const [panicAlert, setPanicAlert] = useState(false);
+
+    useEffect(() => {
+        setComplaints(getComplaints());
+        setPanicAlert(isPanicAlertActive());
+
+        const refreshHome = () => {
+            setComplaints(getComplaints());
+            setPanicAlert(isPanicAlertActive());
+        };
+
+        window.addEventListener('storage', refreshHome);
+        return () => window.removeEventListener('storage', refreshHome);
+    }, []);
 
     const explore = document.querySelector(".primary");
         if (explore) {
@@ -83,6 +100,11 @@ export default function Main(){
 
     return(
         <div className={styles.mainPage}>
+    {panicAlert && (
+        <div className={styles.panicAlert} role="alert">
+            🚨 Security panic mode was activated. Emergency services have been alerted.
+        </div>
+    )}
     <section className={styles.hero}>
         <div className="container">
             <div className={styles.heroGrid}>
@@ -100,11 +122,11 @@ export default function Main(){
                         integrated digital platform.
                     </p>
                     <div className={styles.buttons}>
-                        <a href="#" className={`${styles.btn} primary ${styles.primary}`}>Explore City</a>
+                        <a href="#main" className={`${styles.btn} primary ${styles.primary}`}>Explore City</a>
                         {/* <a href="#" className={`${styles.btn} ${styles.secondary}`}>Learn More</a> */}
                     </div>
                 </div>
-                <div className={`${styles.card} card ${styles.mayor}`}>
+                <div className={`${styles.card} card ${styles.mayor}`} >
                     <img src="mayor.jpg" alt="Mayor" />
                     <h2>Himanshi</h2>
                     <h4>Mayor of Oakridge</h4>
@@ -129,7 +151,7 @@ export default function Main(){
             </div>
         </div>
     </section>
-    <section className={`${styles.dashboard} dashboard`}>
+    <section className={`${styles.dashboard} dashboard`} id="main">
         <div className="container">
             <h2 className={styles.sectionTitle}>City Dashboard</h2>
             <div className={styles.statsGrid}>
@@ -195,6 +217,21 @@ export default function Main(){
                     </div>
                 </div>
             </div>
+            <div className={`${styles.card} ${styles.complaints}`}>
+                <h2>Recent Submissions</h2>
+                {complaints.length === 0 ? (
+                    <p className={styles.emptyComplaints}>No complaints submitted yet.</p>
+                ) : (
+                    <ul>
+                        {complaints.slice(0, 3).map((complaint) => (
+                            <li key={complaint.id}>
+                                <strong>{complaint.source}</strong>
+                                <span>{complaint.text}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
     </section>
     <section className={styles.extras}>
@@ -203,13 +240,13 @@ export default function Main(){
             <div className={styles.services}>
                 <Link style={{color: "inherit", "text-decoration": "none",}} to="/food#complaint">
                 <div className={`${styles.service} service`}>
-                    <h2>📄</h2>
+                    <h2>🍕</h2>
                     <p>File a food complaint</p>
                 </div>
                 </Link>
                 <Link style={{color: "inherit", "text-decoration": "none",}} to="/health#vac">
                 <div className={`${styles.service} service`}>
-                    <h2>💡</h2>
+                    <h2>💉</h2>
                     <p>Book Vaccination Appointment</p>
                 </div>
                 </Link>
@@ -220,15 +257,15 @@ export default function Main(){
                 </div>
                 </Link>
                 <div className={`${styles.service} service`}>
-                    <h2>🚗</h2>
+                    <h2>🎓</h2>
                     <p>Education</p>
                 </div>
                 <div className={`${styles.service} service`}>
-                    <h2>🚌</h2>
+                    <h2>🛡️</h2>
                     <p>Security</p>
                 </div>
                 <div className={`${styles.service} service`}>
-                    <h2>🏠</h2>
+                    <h2>🩺</h2>
                     <p>Health</p>
                 </div>
             </div>

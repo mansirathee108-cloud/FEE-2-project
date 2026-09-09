@@ -1,3 +1,16 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    word-spacing: 0.5rem;
+    font-weight: bold;
+    color: #2642b1c9;
+    font-size: 3rem;
+    text-shadow: 1px 0 #b6bfff, -1px 0 #b6bfff, 0 1px #b6bfff, 0 -1px #b6bfff,
+               1px 1px #b6bfff, -1px -1px #b6bfff, 1px -1px #b6bfff, -1px 1px #b6bfff;
+}
+
 .securityPage {
     min-height: 100vh;
     padding: 24px;

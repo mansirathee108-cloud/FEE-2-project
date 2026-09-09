@@ -97,7 +97,7 @@ export default function Header(){
                     <div className="menu">
                         <Link to="/">Home</Link>
                         <a className="sidebarButton">Departments</a>
-                        <Link to="#contact">Contact</Link>
+                        <a href="#contact">Contact</a>
                     </div>
                     <div className="status">
                         <p>Monday, 20 July 2026</p>

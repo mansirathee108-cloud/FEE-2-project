@@ -1,3 +1,14 @@
+.head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-size: 2rem;
+    color: #ffeeee;
+    text-shadow: 1px 0 #876161, -1px 0 #876161, 0 1px #876161, 0 -1px #876161,
+               1px 1px #876161, -1px -1px #876161, 1px -1px #876161, -1px 1px #876161;
+}
+
 .title{
     text-align:center;
     font-size:40px;

@@ -5,6 +5,18 @@
     overflow-x: hidden;
 }
 
+.panicAlert {
+    margin: 18px auto 0;
+    max-width: 1200px;
+    padding: 14px 20px;
+    border: 1px solid rgba(248, 113, 113, .8);
+    border-radius: 12px;
+    background: rgba(127, 29, 29, .82);
+    color: #fee2e2;
+    text-align: center;
+    font-weight: 600;
+}
+
 .mainPage::before {
     content: '';
     position: fixed;
@@ -275,6 +287,42 @@
 
 .newsContainer:hover ul {
     animation-play-state: paused;
+}
+
+.complaints {
+    margin-bottom: 50px;
+}
+
+.complaints ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+    display: grid;
+    gap: 14px;
+}
+
+.complaints li {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 12px 14px;
+    border-left: 3px solid #38bdf8;
+    background: rgba(255, 255, 255, .05);
+    color: #cbd5e1;
+}
+
+.complaints li strong {
+    color: #38bdf8;
+    min-width: 70px;
+}
+
+.complaints li span {
+    overflow-wrap: anywhere;
+}
+
+.emptyComplaints {
+    color: #cbd5e1;
+    margin-bottom: 0;
 }
 
 .weatherBox {

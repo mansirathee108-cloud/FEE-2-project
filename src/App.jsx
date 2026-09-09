@@ -9,6 +9,7 @@ import Tourism from './pages/TourismPage.jsx';
 import Header from '/src/modules/Header.jsx';
 import Sidebar from './modules/Sidebar.jsx';
 import Footer from './modules/Footer.jsx';
+import DevHelper from './pages/DevHelper.jsx';
 import './App.css';
 
 function App() {
@@ -47,12 +48,14 @@ function PageLayout() {
     <>
       <Header />
       <Routes>
+        <Route path="*" element={<Main/>}/>
         <Route path="/" element={<Main />} />
         <Route path="/health" element={<Health />} />
         <Route path="/food" element={<Food />} />
         <Route path="/education" element={<Education/>}/>
         <Route path="/tourism" element={<Tourism/>}/>
         <Route path="/security" element={<Security/>}/>
+        <Route path="/goodbyecruelworld" element={<DevHelper/>}/>
       </Routes>
       <Footer />
       <Sidebar />

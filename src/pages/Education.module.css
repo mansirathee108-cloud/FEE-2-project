@@ -1,3 +1,16 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    word-spacing: 0.5rem;
+    font-weight: bold;
+    color: #07356d;
+    font-size: 3rem;
+    text-shadow: 1px 0 #ed90f0, -1px 0 #ed90f0, 0 1px #ed90f0, 0 -1px #ed90f0,
+               1px 1px #ed90f0, -1px -1px #ed90f0, 1px -1px #ed90f0, -1px 1px #ed90f0;
+}
+
 .title{
     text-align:center;
     font-size:40px;
