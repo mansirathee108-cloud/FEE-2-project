@@ -43,18 +43,6 @@ export default function Security(){
     'Online scam warning issued for fake banking links.'
     ];
 
-    // const [index, setIndex] = useState(0);
-
-    // useEffect(() => {
-    //     if (alerts.length === 0) return;
-
-    //     const interval = setInterval(() => {
-    //     setIndex(prev => (prev + 1) % alerts.length);
-    //     }, 3000);
-
-    //     return () => clearInterval(interval); // cleanup on unmount
-    // }, []);
-
     function checkBribe(){
         
         let originalText=document.getElementById('bribeText').value;
@@ -85,8 +73,6 @@ export default function Security(){
         setPanicActive(nextState);
 
         if (nextState) {
-            document.body.style.background=
-            'linear-gradient(135deg,#ffe5e5,#ffcccc,#ffeaea)';
             alert('🚨 Emergency Panic Mode Activated!\nNearest police units have been alerted.');
         } else {
             document.body.style.background='';
