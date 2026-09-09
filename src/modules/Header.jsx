@@ -91,7 +91,7 @@ export default function Header(){
             <div className="container">
                 <nav>
                     <Link style={{"text-decoration": "none"}} to="/" className="logo">
-                        <img src="/src/assets/Navy_blue_circle_with_tree_202607301434.jpeg" alt="Logo" />
+                        <img src="/Navy_blue_circle_with_tree_202607301434.jpeg" alt="Logo" />
                         <h1 className="moduleWhiteText">Oakridge <span>Smart City</span></h1>
                     </Link>
                     <div className="menu">
