@@ -2,11 +2,21 @@ import styles from './Main.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getSubmissions, isPanicAlertActive } from '../modules/storage.js';
+import { getCurrentUser } from '../modules/auth.js';
  
 
 export default function Main(){
     const [submissions, setSubmissions] = useState([]);
     const [panicAlert, setPanicAlert] = useState(false);
+    const user = getCurrentUser();
+    const visibleSubmissions = submissions.filter((submission) => {
+        if (user?.username === 'mayor') return true;
+        if (user?.username === 'police') {
+            return submission.source.includes('FIR') || submission.source.includes('Bribery') || submission.source === 'Security';
+        }
+        if (user?.username === 'restaurant') return submission.source === 'Food Review';
+        return false;
+    });
 
     useEffect(() => {
         setSubmissions(getSubmissions());
@@ -217,13 +227,13 @@ export default function Main(){
                     </div>
                 </div>
             </div>
-            <div className={`${styles.card} card ${styles.complaints}`}>
+            {user?.username !== 'citizen' && <div className={`${styles.card} card ${styles.complaints}`}>
                 <h2>Recent Submissions</h2>
-                {submissions.length === 0 ? (
+                {visibleSubmissions.length === 0 ? (
                     <p className={styles.emptyComplaints}>No complaints submitted yet.</p>
                 ) : (
                     <ul>
-                        {submissions.map((submission) => (
+                        {visibleSubmissions.map((submission) => (
                             <li key={submission.id}>
                                 <strong>{submission.source}</strong>
                                 <span>{submission.text}</span>
@@ -231,7 +241,7 @@ export default function Main(){
                         ))}
                     </ul>
                 )}
-            </div>
+            </div>}
         </div>
     </section>
     <section className={styles.extras}>

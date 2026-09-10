@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-export default function Header(){
+export default function Header({ user, onLogout }){
     
     const [icnLink, setIcnLink] = useState(null);
     
@@ -79,7 +79,7 @@ export default function Header(){
         };
         const date = now.toLocaleDateString("en-US", dateOptions);
         const time = now.toLocaleTimeString("en-US", timeOptions);
-        const dateBox = document.querySelector(".status p");
+        const dateBox = document.querySelector(".status .date");
         const clockBox = document.querySelector(".status h2");
         if (dateBox) dateBox.innerHTML = date;
         if (clockBox) clockBox.innerHTML = time;
@@ -99,8 +99,12 @@ export default function Header(){
                         <a className="sidebarButton">Departments</a>
                         <a href="#contact">Contact</a>
                     </div>
+                    <div className="account">
+                        <span>{user.username}</span>
+                        <button type="button" onClick={onLogout}>Log out</button>
+                    </div>
                     <div className="status">
-                        <p>Monday, 20 July 2026</p>
+                        <p className="date">Monday, 20 July 2026</p>
                         <h2>09:45 AM</h2>
                         <p className="flex"><img src={icnLink}/><span className="changeTemp">--C</span></p>
                     </div>

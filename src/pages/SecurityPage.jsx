@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react';
 
 import styles from './Security.module.css';
 import { isPanicAlertActive, saveActivity, setPanicAlert } from '../modules/storage.js';
+import { getCurrentUser, canAccess } from '../modules/auth.js';
 
 export default function Security(){
+    const user = getCurrentUser();
+    const canControlPanic = canAccess(user, ['mayor', 'police']);
+    const canViewReports = canAccess(user, ['mayor', 'police']);
+    const canPublishReports = canAccess(user, ['mayor', 'police', 'citizen']);
     const [panicActive, setPanicActive] = useState(isPanicAlertActive());
 
     function submitFIR(){
@@ -64,6 +69,10 @@ export default function Security(){
     }
 
     function panicMode(){
+        if (!canControlPanic) {
+            alert('Only authorized personnel can perform this action.');
+            return;
+        }
         const nextState = !panicActive;
         setPanicAlert(nextState);
         setPanicActive(nextState);
@@ -124,7 +133,7 @@ export default function Security(){
 
         </div>
 
-        <div className={styles.card}>
+        {canPublishReports && <div className={styles.card}>
 
         <h2>📝 FIR Complaint Form</h2>
 
@@ -148,7 +157,7 @@ export default function Security(){
 
         <div id="firResult" className={styles.result}></div>
 
-        </div>
+        </div>}
 
         <div className={styles.card}>
             <h2>🚨 Live Crime Alerts</h2>
@@ -165,7 +174,7 @@ export default function Security(){
             </div>
         </div>
 
-        <div className={styles.card}>
+        {canPublishReports && <div className={styles.card}>
 
         <h2>💰 Anti-Bribery Monitoring</h2>
 
@@ -206,7 +215,7 @@ export default function Security(){
 
         <div id="bribeResult" className={styles.result}></div>
 
-        </div>
+        </div>}
 
         <div className={styles.card}>
 

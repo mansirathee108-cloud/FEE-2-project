@@ -11,19 +11,55 @@ import Sidebar from './modules/Sidebar.jsx';
 import Footer from './modules/Footer.jsx';
 import DevHelper from './pages/DevHelper.jsx';
 import './App.css';
+import { getCurrentUser, login, logout } from './modules/auth.js';
+
+function Login({ onLogin }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  function submit(event) {
+    event.preventDefault();
+    const user = login(username, password);
+    if (!user) {
+      setError('Use the username as both username and password.');
+      return;
+    }
+    onLogin(user);
+  }
+
+  return (
+    <main style={{ maxWidth: '420px', margin: '10vh auto', padding: '32px', textAlign: 'center' }}>
+      <h1>Oakridge Smart City</h1>
+      <p>Sign in to access city services.</p>
+      <form onSubmit={submit} style={{ display: 'grid', gap: '12px' }}>
+        <input aria-label="Username" placeholder="Username" value={username} onChange={(event) => setUsername(event.target.value)} />
+        <input aria-label="Password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+        <button type="submit">Sign in</button>
+      </form>
+      {error && <p role="alert">{error}</p>}
+      <small>Accounts: mayor, police, restaurant, citizen</small>
+    </main>
+  );
+}
 
 function App() {
+  const [user, setUser] = useState(getCurrentUser);
+
+  if (!user) {
+    return <Login onLogin={setUser} />;
+  }
 
   return (
     <>
       <BrowserRouter>
-        <PageLayout />
+        <PageLayout user={user} onLogout={() => { logout(); setUser(null); }} />
       </BrowserRouter>
     </>
   )
 }
 
-function PageLayout() {
+function PageLayout({ user, onLogout }) {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -46,7 +82,7 @@ function PageLayout() {
 
   return (
     <>
-      <Header />
+      <Header user={user} onLogout={onLogout} />
       <Routes>
         <Route path="*" element={<Main/>}/>
         <Route path="/" element={<Main />} />

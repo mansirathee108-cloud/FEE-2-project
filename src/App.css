@@ -199,6 +199,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 15px;
+  margin-right: 9rem;
 }
 
 .logo img {
@@ -236,6 +237,30 @@ nav {
     text-align: right;
 }
 
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: 24px;
+  color: #CBD5E1;
+  white-space: nowrap;
+}
+
+.account button {
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.account button:hover {
+  border-color: #38BDF8;
+  color: #38BDF8;
+}
+
 .status p {
     color: #CBD5E1;
     font-size: 14px;
@@ -244,6 +269,21 @@ nav {
 .status h2 {
     font-size: 22px;
     color: #22D3EE;
+}
+
+@media (max-width: 900px) {
+  nav {
+    height: auto;
+    min-height: 90px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .account {
+    order: 3;
+    margin-left: 0;
+  }
 }
 
 .side {
