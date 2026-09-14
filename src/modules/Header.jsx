@@ -37,8 +37,6 @@ export default function Header({ user, onLogout }){
         
             setIcnLink(`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`);
         
-            console.log(icnLink);
-        
             const fields = document.querySelectorAll('.changeTemp');
         
             if (fields) {
