@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getSubmissions, isPanicAlertActive } from '../modules/storage.js';
 import { getCurrentUser } from '../modules/auth.js';
- 
+import useNearbyRestaurants from '../hooks/restaurants';
 
 export default function Main(){
     const [submissions, setSubmissions] = useState([]);
@@ -17,6 +17,8 @@ export default function Main(){
         if (user?.username === 'restaurant') return submission.source === 'Food Review';
         return false;
     });
+
+    console.log(useNearbyRestaurants());
 
     useEffect(() => {
         setSubmissions(getSubmissions());

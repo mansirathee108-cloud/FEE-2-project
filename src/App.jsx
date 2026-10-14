@@ -10,6 +10,7 @@ import Header from '/src/modules/Header.jsx';
 import Sidebar from './modules/Sidebar.jsx';
 import Footer from './modules/Footer.jsx';
 import DevHelper from './pages/DevHelper.jsx';
+import Jobs from './pages/Jobs';
 import './App.css';
 import { getCurrentUser, login, logout } from './modules/auth.js';
 
@@ -91,6 +92,7 @@ function PageLayout({ user, onLogout }) {
         <Route path="/education" element={<Education/>}/>
         <Route path="/tourism" element={<Tourism/>}/>
         <Route path="/security" element={<Security/>}/>
+        <Route path="/jobs" element={<Jobs/>}/>
         <Route path="/goodbyecruelworld" element={<DevHelper/>}/>
       </Routes>
       <Footer />
