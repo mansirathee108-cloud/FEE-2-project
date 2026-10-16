@@ -1,0 +1,33 @@
+.page {
+  width: min(100% - 32px, 1000px);
+  margin: 32px auto;
+  color: inherit;
+}
+
+.list {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.item h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.item a {
+  color: inherit;
+}
+
+.item p {
+  margin: 4px 0;
+}

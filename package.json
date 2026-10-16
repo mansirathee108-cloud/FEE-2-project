@@ -7,11 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\" index.html package.json vite.config.js vercel.json",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,css}\" index.html package.json vite.config.js vercel.json"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.13.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-redux": "^9.3.0",
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
@@ -22,6 +26,7 @@
     "@vitejs/plugin-react": "^6.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
     "oxlint": "^1.75.0",
+    "prettier": "^3.9.10",
     "vite": "^8.2.0"
   }
 }
