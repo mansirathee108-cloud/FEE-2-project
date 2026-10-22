@@ -1,16 +1,12 @@
 import styles from './Food.module.css';
 import { saveActivity, saveComplaint } from '../modules/storage.js';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import useNearbyRestaurants from '../hooks/restaurants.js';
+import { useState } from 'react';
+import useRajpuraRestaurants from '../hooks/restaurants.js';
+import useRestaurantMenu from '../hooks/restaurantMenu.js';
 import FormField from '../components/FormField.jsx';
 
 export default function Food() {
-  const location = useSelector((state) => state.location.coordinates);
-  const locationLabel = useSelector((state) => state.location.label);
-  const locationError = useSelector((state) => state.location.error);
-  const locationLoading = useSelector((state) => state.location.status === 'loading');
-  const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
+  const [selectedMenuRestaurant, setSelectedMenuRestaurant] = useState('');
   const [reviewRestaurant, setReviewRestaurant] = useState('');
   const [rating, setRating] = useState('⭐');
   const [review, setReview] = useState('');
@@ -18,21 +14,10 @@ export default function Food() {
   const [issueRestaurant, setIssueRestaurant] = useState('');
   const [complaint, setComplaint] = useState('');
   const [complaintResult, setComplaintResult] = useState('');
-  const { restaurants, error, loading } = useNearbyRestaurants(location);
-
-  useEffect(() => {
-    if (!restaurants) {
-      setFeaturedRestaurants([]);
-      return;
-    }
-
-    const candidates = restaurants.filter((restaurant) => restaurant.name !== 'Unnamed restaurant');
-    for (let index = candidates.length - 1; index > 0; index -= 1) {
-      const swapIndex = Math.floor(Math.random() * (index + 1));
-      [candidates[index], candidates[swapIndex]] = [candidates[swapIndex], candidates[index]];
-    }
-    setFeaturedRestaurants(candidates.slice(0, 4));
-  }, [restaurants]);
+  const { restaurants, error, loading } = useRajpuraRestaurants();
+  const menu = useRestaurantMenu(selectedMenuRestaurant);
+  const namedRestaurants =
+    restaurants?.filter((restaurant) => restaurant.name !== 'Unnamed restaurant') ?? [];
 
   function submitReview(event) {
     event.preventDefault();
@@ -115,62 +100,45 @@ export default function Food() {
             </div>
             <h2>🍴 Local Restaurant Highlights</h2>
             <p className={styles.small}>
-              Explore top-rated restaurants in your area, complete with hygiene ratings, digital
-              menus, and verified food quality checks.
+              Browse restaurant listings mapped around Rajpura, along with suggested names that
+              have not been verified as local businesses.
             </p>
           </div>
 
           <div className={styles.card}>
-            <h2>
-              {locationLabel
-                ? `${locationLabel}'s hottest restaurants today`
-                : 'Hottest restaurants today'}
-            </h2>
-            {locationLoading && (
-              <p className={styles.hotStatus} role="status">
-                Finding your location...
-              </p>
-            )}
-            {locationError && (
-              <p className={styles.hotError} role="alert">
-                {locationError}
-              </p>
-            )}
-            {loading && (
-              <p className={styles.hotStatus} role="status">
-                Finding nearby restaurants...
-              </p>
-            )}
+            <h2>Restaurants near you</h2>
+            <p className={styles.hotStatus}>
+              Showing mapped Rajpura restaurants and custom suggestions.
+            </p>
             {error && (
               <p className={styles.hotError} role="alert">
                 Restaurant search failed: {error}
               </p>
             )}
             {!loading && restaurants?.length === 0 && (
-              <p className={styles.hotStatus}>No restaurants found nearby.</p>
+              <p className={styles.hotStatus}>No restaurant listings found in Rajpura.</p>
             )}
-            {!loading && restaurants?.length > 0 && featuredRestaurants.length === 0 && (
-              <p className={styles.hotStatus}>No named restaurants were found nearby.</p>
+            {!loading && restaurants?.length > 0 && namedRestaurants.length === 0 && (
+              <p className={styles.hotStatus}>No named restaurants were found in Rajpura.</p>
             )}
-            {featuredRestaurants.length > 0 && (
+            {namedRestaurants.length > 0 && (
               <ol className={styles.hotRestaurantList}>
-                {featuredRestaurants.map((restaurant) => (
+                {namedRestaurants.map((restaurant) => (
                   <li className={styles.hotRestaurantItem} key={restaurant.id}>
-                    <div>
-                      <h3>{restaurant.name}</h3>
-                      <p>
-                        {[restaurant.cuisine?.replaceAll(';', ', '), restaurant.street]
-                          .filter(Boolean)
-                          .join(' · ') || 'Restaurant nearby'}
-                      </p>
-                    </div>
-                    <a
-                      href={`https://www.openstreetmap.org/?mlat=${restaurant.lat}&mlon=${restaurant.lon}#map=18/${restaurant.lat}/${restaurant.lon}`}
-                      target="_blank"
-                      rel="noreferrer"
+                    <h3
+                      className={styles.restaurantName}
+                      tabIndex={0}
+                      aria-describedby={`${restaurant.id}-maps-tooltip`}
                     >
-                      Map
-                    </a>
+                      {restaurant.name}
+                      <span
+                        className={styles.restaurantTooltip}
+                        id={`${restaurant.id}-maps-tooltip`}
+                        role="tooltip"
+                      >
+                        Maps functionality coming soon
+                      </span>
+                    </h3>
                   </li>
                 ))}
               </ol>
@@ -263,11 +231,40 @@ export default function Food() {
               {complaintResult}
             </div>
           </div>
+          <div className={`${styles.card} ${styles.menuCard}`}>
+            <h2 className={styles.menuHeading}>
+              Fetch Menu For
+              <select
+                className={styles.menuSelect}
+                aria-label="Restaurant menu"
+                value={selectedMenuRestaurant}
+                onChange={(event) => setSelectedMenuRestaurant(event.target.value)}
+              >
+                <option value="">Restaurant</option>
+                {restaurants?.map((restaurant) => (
+                  <option key={restaurant.id} value={restaurant.name}>
+                    {restaurant.name}
+                  </option>
+                ))}
+              </select>
+            </h2>
+            {menu.length > 0 && (
+              <ul className={styles.menuList}>
+                {menu.map((item, index) => (
+                  <li key={`${selectedMenuRestaurant}-${index}`}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
           <datalist id="nearby-restaurants">
             {restaurants
               ?.filter((restaurant) => restaurant.name !== 'Unnamed restaurant')
               .map((restaurant) => (
-                <option key={restaurant.id} value={restaurant.name} />
+                <option
+                  key={restaurant.id}
+                  value={restaurant.name}
+                  label={restaurant.source === 'suggestion' ? 'Suggested name, unverified' : ''}
+                />
               ))}
           </datalist>
         </div>

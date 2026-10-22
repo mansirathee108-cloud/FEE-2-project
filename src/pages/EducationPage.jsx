@@ -3,17 +3,84 @@ import { saveActivity } from '../modules/storage.js';
 import { useState } from 'react';
 import FormField from '../components/FormField.jsx';
 
+const FEE_OPTIONS = {
+  school: [
+    { name: 'Oakridge Public Academy', annualFee: 24000 },
+    { name: 'Vtuber Academy', annualFee: 42000 },
+    { name: 'Oakridge Science School', annualFee: 38000 },
+    { name: 'Riverside Community School', annualFee: 22000 },
+    { name: 'Oakridge Arts Academy', annualFee: 34000 },
+  ],
+  college: [
+    {
+      name: 'Northstar University',
+      courses: [
+        { name: 'Artificial intelligence and machine learning', annualFee: 82000 },
+        { name: 'Computer science', annualFee: 76000 },
+      ],
+    },
+    {
+      name: 'Riverside Institute of Technology',
+      courses: [
+        { name: 'Environmental engineering', annualFee: 78000 },
+        { name: 'Civil engineering', annualFee: 74000 },
+      ],
+    },
+    {
+      name: 'Oakridge Medical University',
+      courses: [
+        { name: 'Community healthcare', annualFee: 96000 },
+        { name: 'Nursing', annualFee: 68000 },
+      ],
+    },
+    {
+      name: 'Westbridge Business College',
+      courses: [
+        { name: 'Entrepreneurship and finance', annualFee: 64000 },
+        { name: 'Business administration', annualFee: 61000 },
+      ],
+    },
+  ],
+};
+
+const SCHOOL_YEARS = [
+  'KG',
+  '1st',
+  '2nd',
+  '3rd',
+  '4th',
+  '5th',
+  '6th',
+  '7th',
+  '8th',
+  '9th',
+  '10th',
+  '11th',
+  '12th',
+];
+
 export default function Education() {
   const [marks, setMarks] = useState('');
   const [income, setIncome] = useState('low');
+  const [scholarshipInstitution, setScholarshipInstitution] = useState('');
   const [scholarshipResult, setScholarshipResult] = useState('');
-  const [course, setCourse] = useState('50000');
-  const [years, setYears] = useState('');
-  const [feeResult, setFeeResult] = useState('');
+  const [institutionType, setInstitutionType] = useState('');
+  const [institutionName, setInstitutionName] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState('');
   const [studentName, setStudentName] = useState('');
   const [studentEmail, setStudentEmail] = useState('');
   const [department, setDepartment] = useState('Engineering');
   const [admissionResult, setAdmissionResult] = useState('');
+  const selectedInstitution = FEE_OPTIONS[institutionType]?.find(
+    (institution) => institution.name === institutionName,
+  );
+  const selectedCourseFee =
+    institutionType === 'school'
+      ? SCHOOL_YEARS.includes(selectedCourse)
+        ? selectedInstitution?.annualFee
+        : undefined
+      : selectedInstitution?.courses.find((courseOption) => courseOption.name === selectedCourse)
+          ?.annualFee;
 
   function checkScholarship(event) {
     event.preventDefault();
@@ -27,11 +94,6 @@ export default function Education() {
       result = 'Scholarship Not Available';
     }
     setScholarshipResult(result);
-  }
-
-  function calculateFees(event) {
-    event.preventDefault();
-    setFeeResult(`Estimated Total Fees: ₹${Number(course) * Number(years)}`);
   }
 
   function submitAdmission(event) {
@@ -68,43 +130,57 @@ export default function Education() {
       <div className={`${styles.educationPage} ${styles.grid}`}>
         <div className={styles.card}>
           <h2>🏫 Smart Schools</h2>
-
-          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" />
-
-          <p className={styles.small}>
-            Oakridge Smart Schools provide AI-supported classrooms, digital attendance systems and
-            interactive learning environments.
-          </p>
-
           <div className={styles['school-box']}>
             <h3>Oakridge Public Academy</h3>
-            <p>
-              Academic Rating: <span className="highlight">9.4/10</span>
-            </p>
-            <p>
-              Sports Rating: <span className="highlight">8.9/10</span>
-            </p>
+            <p>Speciality: Smart classrooms and environmental projects</p>
           </div>
+          <div className={styles['school-box']}>
+            <h3>Vtuber Academy</h3>
+            <p>Speciality: Extracurricular activities and digital arts</p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Oakridge Science School</h3>
+            <p>Speciality: Hands-on science labs and robotics clubs</p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Riverside Community School</h3>
+            <p>Speciality: Community service and outdoor learning</p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Oakridge Arts Academy</h3>
+            <p>Speciality: Visual arts, theatre and music programs</p>
+          </div>
+          {/* <div className={styles['school-box']}>
+            <h3>Northstar Learning School</h3>
+            <p>Speciality: Inclusive learning and student support</p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Greenfield Preparatory</h3>
+            <p>Speciality: Gardening, sustainability and nature studies</p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Oakridge Sports School</h3>
+            <p>Speciality: Athletics training and team sports</p>
+          </div> */}
         </div>
 
         <div className={styles.card}>
           <h2>🎓 Colleges & Universities</h2>
-
-          <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80" />
-
-          <p className={styles.small}>
-            Top institutions in Oakridge offer engineering, medical, business and technology
-            programs with modern campuses.
-          </p>
-
           <div className={styles['school-box']}>
-            <h3>Oakridge Tech University</h3>
-            <p>
-              Placement Rate: <span className="highlight">96%</span>
-            </p>
-            <p>
-              Research Score: <span className="highlight">9.1/10</span>
-            </p>
+            <h3>Northstar University - AI and machine learning</h3>
+            <p>Placement Rate: <span className="highlight">96%</span></p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Riverside Institute of Technology - Environmental engineering</h3>
+            <p>Placement Rate: <span className="highlight">93%</span></p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Oakridge Medical University - Community healthcare</h3>
+            <p>Placement Rate: <span className="highlight">91%</span></p>
+          </div>
+          <div className={styles['school-box']}>
+            <h3>Westbridge Business College - Entrepreneurship and finance</h3>
+            <p>Placement Rate: <span className="highlight">89%</span></p>
           </div>
         </div>
 
@@ -130,9 +206,33 @@ export default function Education() {
               value={income}
               onChange={(event) => setIncome(event.target.value)}
             >
-              <option value="low">Low Income</option>
-              <option value="medium">Middle Income</option>
-              <option value="high">High Income</option>
+              <option value="low">Low (under $10,000 PA)</option>
+              <option value="medium">Medium ($10,000-$50,000 PA)</option>
+              <option value="high">High (over $50,000 PA)</option>
+            </FormField>
+            <FormField
+              id="scholarshipInstitution"
+              label="School or university/college"
+              as="select"
+              value={scholarshipInstitution}
+              onChange={(event) => setScholarshipInstitution(event.target.value)}
+              required
+            >
+              <option value="">Select an institution</option>
+              <optgroup label="Schools">
+                {FEE_OPTIONS.school.map((school) => (
+                  <option key={school.name} value={school.name}>
+                    {school.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Universities and colleges">
+                {FEE_OPTIONS.college.map((institution) => (
+                  <option key={institution.name} value={institution.name}>
+                    {institution.name}
+                  </option>
+                ))}
+              </optgroup>
             </FormField>
             <button type="submit">Check Eligibility</button>
           </form>
@@ -143,35 +243,79 @@ export default function Education() {
 
         <div className={styles.card}>
           <h2>🧮 Fee Calculator</h2>
-          <form onSubmit={calculateFees}>
+          <div>
             <FormField
-              id="course"
-              label="Course"
+              id="institutionType"
+              label="School or university/college"
               as="select"
-              value={course}
-              onChange={(event) => setCourse(event.target.value)}
+              value={institutionType}
+              onChange={(event) => {
+                setInstitutionType(event.target.value);
+                setInstitutionName('');
+                setSelectedCourse('');
+              }}
             >
-              <option value="50000">Engineering - ₹50,000</option>
-              <option value="45000">Medical - ₹45,000</option>
-              <option value="35000">Business - ₹35,000</option>
-              <option value="30000">Arts - ₹30,000</option>
+              <option value="">Select institution type</option>
+              <option value="school">School</option>
+              <option value="college">University/College</option>
             </FormField>
             <FormField
-              id="years"
-              label="Duration in years"
-              type="number"
-              min="1"
-              max="10"
-              step="1"
-              value={years}
-              onChange={(event) => setYears(event.target.value)}
-              placeholder="Course Duration (Years)"
-              required
-            />
-            <button type="submit">Calculate Fees</button>
-          </form>
+              id="institutionName"
+              label={institutionType === 'school' ? 'School' : 'University/College'}
+              as="select"
+              value={institutionName}
+              onChange={(event) => {
+                setInstitutionName(event.target.value);
+                setSelectedCourse('');
+              }}
+              disabled={!institutionType}
+            >
+              <option value="">Select an institution</option>
+              {FEE_OPTIONS[institutionType]?.map((institution) => (
+                <option key={institution.name} value={institution.name}>
+                  {institution.name}
+                </option>
+              ))}
+            </FormField>
+            {institutionType === 'school' ? (
+              <>
+                <FormField
+                  id="schoolYear"
+                  label="Year"
+                  type="text"
+                  list="school-years"
+                  placeholder="Type or select a year"
+                  value={selectedCourse}
+                  onChange={(event) => setSelectedCourse(event.target.value)}
+                  disabled={!institutionName}
+                />
+                <datalist id="school-years">
+                  {SCHOOL_YEARS.map((year) => (
+                    <option key={year} value={year} />
+                  ))}
+                </datalist>
+              </>
+            ) : (
+              <FormField
+                id="feeCourse"
+                label="Course"
+                as="select"
+                value={selectedCourse}
+                onChange={(event) => setSelectedCourse(event.target.value)}
+                disabled={!institutionName}
+              >
+                <option value="">Select a course</option>
+                {selectedInstitution?.courses.map((courseOption) => (
+                  <option key={courseOption.name} value={courseOption.name}>
+                    {courseOption.name}
+                  </option>
+                ))}
+              </FormField>
+            )}
+          </div>
           <div id="feeResult" className={styles.result} role="status">
-            {feeResult}
+            {selectedCourseFee &&
+              `Annual fee: ₹${selectedCourseFee.toLocaleString('en-IN')}`}
           </div>
         </div>
 
@@ -225,6 +369,14 @@ export default function Education() {
             Students can access e-libraries, virtual classrooms, career counseling and mentorship
             programs through the city's education portal.
           </p>
+          <a
+            className={styles.resourceButton}
+            href="https://library.chitkara.edu.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Access the library
+          </a>
         </div>
       </div>
     </>

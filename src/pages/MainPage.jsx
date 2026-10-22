@@ -1,10 +1,12 @@
 import styles from './Main.module.css';
 import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getCurrentUser } from '../modules/auth.js';
 import useWeather from '../context/useWeather.js';
 
 export default function Main() {
+  const pageRef = useRef(null);
   const submissions = useSelector((state) => state.city.submissions);
   const panicAlert = useSelector((state) => state.city.panicActive);
   const { weather, status: weatherStatus, error: weatherError } = useWeather();
@@ -22,85 +24,67 @@ export default function Main() {
     return false;
   });
 
-  const explore = document.querySelector('.primary');
-  if (explore) {
-    explore.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelector('.dashboard').scrollIntoView({
-        behavior: 'smooth',
-      });
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
+
+    const observer =
+      typeof IntersectionObserver === 'undefined'
+        ? null
+        : new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0px)';
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15 },
+          );
+
+    const cards = page.querySelectorAll(
+      '.card,.dept,.stat-card,.service,.event-card,.emergency',
+    );
+    cards.forEach((card) => {
+      if (!observer) return;
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(50px)';
+      card.style.transition = '.8s';
+      observer.observe(card);
     });
-  }
 
-  const cards = document.querySelectorAll('.card,.dept,.stat-card,.service,.event-card,.emergency');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0px)';
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-    },
-  );
+    const animationFrames = [];
+    page.querySelectorAll('.stat-card h1').forEach((stat) => {
+      const target = stat.textContent || '';
+      const numeric = Number.parseFloat(target);
+      if (!Number.isFinite(numeric)) return;
 
-  cards.forEach((card) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(50px)';
-    card.style.transition = '.8s';
-    observer.observe(card);
-  });
+      const hasMillions = target.includes('M');
+      const suffix = target.includes('%') ? '%' : hasMillions ? 'M' : '';
+      const precision = hasMillions ? 1 : 0;
+      const total = Math.round(numeric * 10 ** precision);
+      let count = 0;
+      const step = Math.max(1, Math.ceil(total / 80));
 
-  const stats = document.querySelectorAll('.stat-card h1');
-  stats.forEach((stat) => {
-    const target = stat.innerHTML;
-    let numeric = parseInt(target);
-    if (isNaN(numeric)) return;
-    let count = 0;
-    const speed = Math.ceil(numeric / 80);
-
-    function update() {
-      count += speed;
-      if (count >= numeric) {
-        count = numeric;
+      function update() {
+        count = Math.min(count + step, total);
+        stat.textContent = `${(count / 10 ** precision).toFixed(precision)}${suffix}`;
+        if (count < total) animationFrames.push(requestAnimationFrame(update));
       }
-      if (target.includes('%')) {
-        stat.innerHTML = count + '%';
-      } else if (target.includes('M')) {
-        stat.innerHTML = (count / 10).toFixed(1) + 'M';
-      } else {
-        stat.innerHTML = count;
-      }
-      if (count < numeric) {
-        requestAnimationFrame(update);
-      }
-    }
 
-    update();
-  });
-
-  cards.forEach((card) => {
-    card.addEventListener('mouseenter', () => {
-      card.style.boxShadow = '0px 20px 45px rgba(56,189,248,.25)';
+      update();
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.boxShadow = '0px 20px 40px rgba(0,0,0,.25)';
-    });
-  });
 
-  window.onload = function () {
-    document.body.style.opacity = '0';
-    document.body.style.transition = '1s';
-    setTimeout(() => {
-      document.body.style.opacity = '1';
-    }, 100);
-  };
+    return () => {
+      observer?.disconnect();
+      animationFrames.forEach(cancelAnimationFrame);
+    };
+  }, []);
 
   return (
-    <div className={styles.mainPage}>
+    <div className={styles.mainPage} ref={pageRef}>
       {panicAlert && (
         <div className={styles.panicAlert} role="alert">
           🚨 Security panic mode was activated. Emergency services have been alerted.

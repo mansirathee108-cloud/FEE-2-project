@@ -1,6 +1,47 @@
 import { useEffect, useState } from 'react';
 
 const ENDPOINTS = ['/api/osm/query', '/api/osm/fallback'];
+const CACHE_KEY = 'rajpuraRestaurantListings';
+const SUGGESTED_RESTAURANTS = ['Greggs', 'McNeuros', 'McCrelly', "Vedal's rum factory"];
+
+function makeSuggestions() {
+  return SUGGESTED_RESTAURANTS.map((name) => ({
+    id: `suggestion/${name.toLowerCase().replaceAll(' ', '-')}`,
+    name,
+    cuisine: null,
+    street: null,
+    lat: null,
+    lon: null,
+    source: 'suggestion',
+  }));
+}
+
+function readCachedRestaurants() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    if (Array.isArray(cached)) {
+      return cached.filter(
+        (restaurant) =>
+          restaurant &&
+          typeof restaurant.id === 'string' &&
+          typeof restaurant.name === 'string' &&
+          restaurant.source === 'openstreetmap',
+      );
+    }
+  } catch {
+    // Continue with the predefined suggestions when storage is unavailable.
+  }
+  return [];
+}
+
+function shuffleRestaurants(restaurants) {
+  const shuffled = [...restaurants];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
+}
 
 async function queryOverpass(query, signal) {
   let lastError;
@@ -17,46 +58,47 @@ async function queryOverpass(query, signal) {
   throw lastError;
 }
 
-export default function useNearbyRestaurants(location, radiusMeters = 3000) {
-  const lat = location?.lat;
-  const lon = location?.lon;
-  const [restaurants, setRestaurants] = useState(null);
+export default function useRajpuraRestaurants() {
+  const [restaurants, setRestaurants] = useState(makeSuggestions);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-      setRestaurants(null);
-      setError(null);
-      setLoading(false);
-      return;
-    }
-
     const controller = new AbortController();
+    const cachedRestaurants = readCachedRestaurants();
+    if (cachedRestaurants.length > 0) {
+      setRestaurants(shuffleRestaurants([...cachedRestaurants, ...makeSuggestions()]));
+    }
 
     async function load() {
       try {
         setLoading(true);
         setError(null);
-        setRestaurants(null);
         const query = `
           [out:json][timeout:20];
-          nwr["amenity"="restaurant"](around:${radiusMeters},${lat},${lon});
-          out center tags 100;
+          area["name"="Rajpura"]["boundary"="administrative"]->.rajpura;
+          nwr["amenity"="restaurant"](area.rajpura);
+          out center tags;
         `;
         const data = await queryOverpass(query, controller.signal);
 
-        setRestaurants(
-          data.elements.map((el) => ({
-            id: `${el.type}/${el.id}`,
-            name: el.tags?.name ?? 'Unnamed restaurant',
-            cuisine: el.tags?.cuisine ?? null,
-            street: el.tags?.['addr:street'] ?? null,
-            phone: el.tags?.phone ?? null,
-            lat: el.lat ?? el.center?.lat,
-            lon: el.lon ?? el.center?.lon,
-          })),
-        );
+        const mappedRestaurants = (data.elements || []).map((el) => ({
+          id: `${el.type}/${el.id}`,
+          name: el.tags?.name ?? 'Unnamed restaurant',
+          cuisine: el.tags?.cuisine ?? null,
+          street: el.tags?.['addr:street'] ?? null,
+          phone: el.tags?.phone ?? null,
+          lat: el.lat ?? el.center?.lat,
+          lon: el.lon ?? el.center?.lon,
+          source: 'openstreetmap',
+        }));
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(mappedRestaurants));
+        } catch {
+          // The current results remain usable when storage is unavailable.
+        }
+
+        setRestaurants(shuffleRestaurants([...mappedRestaurants, ...makeSuggestions()]));
       } catch (err) {
         if (err.name !== 'AbortError') setError(err.message);
       } finally {
@@ -66,7 +108,7 @@ export default function useNearbyRestaurants(location, radiusMeters = 3000) {
 
     load();
     return () => controller.abort();
-  }, [lat, lon, radiusMeters]);
+  }, []);
 
   return { restaurants, error, loading };
 }

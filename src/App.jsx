@@ -1,21 +1,22 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Main from './pages/MainPage.jsx';
-import Health from './pages/HealthPage.jsx';
-import Food from './pages/FoodPage.jsx';
-import Education from './pages/EducationPage.jsx';
-import Security from './pages/SecurityPage.jsx';
-import Tourism from './pages/TourismPage.jsx';
 import Header from '/src/modules/Header.jsx';
 import Sidebar from './modules/Sidebar.jsx';
 import Footer from './modules/Footer.jsx';
-import Jobs from './pages/Jobs';
 import './App.css';
 import { getCurrentUser, login, logout } from './modules/auth.js';
 import { resolveLocation } from './store/locationSlice.js';
 import { WeatherProvider } from './context/WeatherContext.jsx';
 import FormField from './components/FormField.jsx';
+
+const Main = lazy(() => import('./pages/MainPage.jsx'));
+const Health = lazy(() => import('./pages/HealthPage.jsx'));
+const Food = lazy(() => import('./pages/FoodPage.jsx'));
+const Education = lazy(() => import('./pages/EducationPage.jsx'));
+const Security = lazy(() => import('./pages/SecurityPage.jsx'));
+const Tourism = lazy(() => import('./pages/TourismPage.jsx'));
+const Jobs = lazy(() => import('./pages/Jobs.jsx'));
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -119,16 +120,17 @@ function PageLayout({ user, onLogout }) {
     <WeatherProvider>
       <>
         <Header user={user} onLogout={onLogout} />
-        <Routes>
-          <Route path="*" element={<Main />} />
-          <Route path="/" element={<Main />} />
-          <Route path="/health" element={<Health />} />
-          <Route path="/food" element={<Food />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/tourism" element={<Tourism />} />
-          <Route path="/security" element={<Security />} />
-          <Route path="/jobs" element={<Jobs />} />
-        </Routes>
+        <Suspense fallback={<main aria-busy="true" className="route-loading" />}>
+          <Routes>
+            <Route path="*" element={<Main />} />
+            <Route path="/health" element={<Health />} />
+            <Route path="/food" element={<Food />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/tourism" element={<Tourism />} />
+            <Route path="/security" element={<Security />} />
+            <Route path="/jobs" element={<Jobs />} />
+          </Routes>
+        </Suspense>
         <Footer />
         <Sidebar />
       </>

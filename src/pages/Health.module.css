@@ -41,12 +41,85 @@
   line-height: 1.5;
 }
 
+.ambulanceStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 12px 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ambulanceStat {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  line-height: 1.4;
+}
+
+.ambulanceStat + .ambulanceStat {
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.ambulanceStat span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.85rem;
+}
+
+.ambulanceStat strong {
+  font-size: 1.1rem;
+}
+
+.nearbyUnitsLabel {
+  margin: 0 0 8px;
+  color: #ffb1a8;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.ambulanceList {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
 .healthPage .input {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
   border: none;
   border-radius: 12px;
+}
+
+.inputLabel {
+  display: block;
+  margin-top: 8px;
+}
+
+.heightControl {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.heightControl .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.heightUnit {
+  align-self: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font: inherit;
+  width: 3vw;
+}
+
+.heightUnit option {
+  color: #222;
 }
 
 .healthPage .button {
@@ -68,6 +141,28 @@
   margin-top: 10px;
   color: #ffd166;
   font-weight: 700;
+}
+
+.acceptedTitle {
+  margin: 18px 0 8px;
+  color: #ffd166;
+  font-size: 1rem;
+}
+
+.acceptedSuggestions {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.acceptedSuggestions li {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  line-height: 1.5;
 }
 
 .logo {

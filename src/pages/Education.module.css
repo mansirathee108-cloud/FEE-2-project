@@ -118,6 +118,24 @@ button:hover {
   background: linear-gradient(90deg, #1d3557, #0d1b2a, #b23a48);
 }
 
+.resourceButton {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #0d1b2a, #1d3557, #d4a373);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: 0.3s;
+}
+
+.resourceButton:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #1d3557, #0d1b2a, #b23a48);
+}
+
 .result {
   margin-top: 12px;
   padding: 14px;

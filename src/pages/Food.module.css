@@ -39,6 +39,56 @@
   gap: 22px;
 }
 
+.menuCard {
+  grid-column: 1 / -1;
+}
+
+.menuHeading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 0.1rem;
+  text-align: center;
+}
+
+.menuSelect {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font: inherit;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.menuList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.8;
+}
+
+.menuList li {
+  display: flex;
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  background: rgba(18, 28, 36, 0.48);
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .hotRestaurantList {
   display: grid;
   gap: 0;
@@ -58,6 +108,38 @@
 .hotRestaurantItem h3 {
   margin: 0 0 4px;
   font-size: 18px;
+}
+
+.restaurantName {
+  position: relative;
+  width: fit-content;
+  cursor: help;
+}
+
+.restaurantTooltip {
+  position: absolute;
+  z-index: 5;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: max-content;
+  max-width: min(260px, 75vw);
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: #18212b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.restaurantName:hover .restaurantTooltip,
+.restaurantName:focus-visible .restaurantTooltip {
+  opacity: 1;
+  visibility: visible;
 }
 
 .hotRestaurantItem p,

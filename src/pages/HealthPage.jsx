@@ -1,12 +1,38 @@
 import { useState } from 'react';
 import styles from './Health.module.css';
-import { saveActivity, saveComplaint } from '../modules/storage.js';
+import { saveActivity } from '../modules/storage.js';
 import FormField from '../components/FormField.jsx';
 
+const DEMO_AMBULANCES = [
+  'Oakridge North Response Unit',
+  'Oakridge Central Response Unit',
+  'Oakridge East Response Unit',
+  'Oakridge West Response Unit',
+];
+
+const ACCEPTED_HEALTH_SUGGESTIONS = [
+  'Extend evening hours at neighborhood clinics.',
+  'Offer more weekend vaccination appointments.',
+  'Add clearer accessibility and wayfinding signs at health centers.',
+];
+
+function selectDemoAmbulances() {
+  const available = [...DEMO_AMBULANCES];
+  for (let index = available.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [available[index], available[swapIndex]] = [available[swapIndex], available[index]];
+  }
+  return available.slice(0, 2).map((name) => ({
+    name,
+    distance: Math.floor(Math.random() * 951) + 50,
+  }));
+}
+
 export default function Health() {
+  const [ambulances] = useState(selectDemoAmbulances);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
-  const [heightInches, setHeightInches] = useState('');
+  const [heightUnit, setHeightUnit] = useState('m');
   const [bmiResult, setBmiResult] = useState('');
   const [bmiError, setBmiError] = useState('');
   const [appointmentName, setAppointmentName] = useState('');
@@ -15,28 +41,21 @@ export default function Health() {
   const [citizenName, setCitizenName] = useState('');
   const [dose, setDose] = useState('Dose 1');
   const [vacResult, setVacResult] = useState('');
-  const [complaintText, setComplaintText] = useState('');
-  const [complaintResult, setComplaintResult] = useState('');
-
-  // Exact JS functionality preserved
-  const convertInches = () => {
-    let inch = parseFloat(heightInches);
-    if (inch > 0) {
-      setHeight((inch * 0.0254).toFixed(2));
-    }
-  };
+  const [suggestionText, setSuggestionText] = useState('');
+  const [suggestionResult, setSuggestionResult] = useState('');
 
   const bmi = (event) => {
     event.preventDefault();
-    let w = parseFloat(weight);
-    let h = parseFloat(height);
+    const w = Number.parseFloat(weight);
+    const enteredHeight = Number.parseFloat(height);
+    const h = heightUnit === 'in' ? enteredHeight * 0.0254 : enteredHeight;
 
     if (!Number.isFinite(w) || w <= 0) {
       setBmiError('Enter a weight greater than zero.');
       return;
     }
     if (!Number.isFinite(h) || h <= 0) {
-      setBmiError('Enter a height in meters or convert the height in inches first.');
+      setBmiError('Enter a height greater than zero.');
       return;
     }
 
@@ -66,15 +85,15 @@ export default function Health() {
     setVacResult('Saved for ' + n);
   };
 
-  const complaint = (event) => {
+  const submitSuggestion = (event) => {
     event.preventDefault();
-    let c = complaintText;
-    if (!saveComplaint('Health', c)) {
-      setComplaintResult('Please enter a complaint before submitting');
+    if (!saveActivity('Health Suggestion', suggestionText, 'suggestion')) {
+      setSuggestionResult('Please enter a suggestion before submitting.');
       return;
     }
 
-    setComplaintResult('Complaint submitted successfully');
+    setSuggestionResult('Thank you. Your healthcare suggestion has been submitted.');
+    setSuggestionText('');
   };
 
   const bookApp = (event) => {
@@ -152,11 +171,24 @@ export default function Health() {
                 marginBottom: '10px',
               }}
             />
-            <p className={styles.small}>
-              Emergency Helpline: 108
-              <br />
-              Smart Response Vans Active: 26
-            </p>
+            <div className={styles.ambulanceStats}>
+              <div className={styles.ambulanceStat}>
+                <span>Emergency Helpline</span>
+                <strong>108</strong>
+              </div>
+              <div className={styles.ambulanceStat}>
+                <span>Smart Response Vans Active</span>
+                <strong>26</strong>
+              </div>
+            </div>
+            <p className={styles.nearbyUnitsLabel}>Nearby response units</p>
+            <ul className={styles.ambulanceList}>
+              {ambulances.map((ambulance) => (
+                <li key={ambulance.name}>
+                  {ambulance.name} - {ambulance.distance} m
+                </li>
+              ))}
+            </ul>
           </div>
           <div className={styles.card}>
             <h2 className={styles.redS}>⚕️ BMI Calculator</h2>
@@ -172,30 +204,31 @@ export default function Health() {
                 className={styles.input}
                 required
               />
-              <FormField
-                id="h"
-                label="Height (meters)"
-                type="number"
-                min="0.1"
-                step="any"
-                value={height}
-                onChange={(event) => setHeight(event.target.value)}
-                className={styles.input}
-              />
-              <FormField
-                id="inch"
-                label="Or height (inches)"
-                type="number"
-                min="1"
-                step="any"
-                value={heightInches}
-                onChange={(event) => setHeightInches(event.target.value)}
-                className={styles.input}
-              />
+              <label className={styles.inputLabel} htmlFor="height">
+                Height
+              </label>
+              <div className={styles.heightControl}>
+                <input
+                  id="height"
+                  className={styles.input}
+                  type="number"
+                  min="0.1"
+                  step="any"
+                  value={height}
+                  onChange={(event) => setHeight(event.target.value)}
+                  required
+                />
+                <select
+                  className={styles.heightUnit}
+                  aria-label="Height unit"
+                  value={heightUnit}
+                  onChange={(event) => setHeightUnit(event.target.value)}
+                >
+                  <option value="m">m</option>
+                  <option value="in">in</option>
+                </select>
+              </div>
               {bmiError && <p role="alert">{bmiError}</p>}
-              <button className={styles.button} type="button" onClick={convertInches}>
-                Convert Inches to Meters
-              </button>
               <button className={styles.button} type="submit">
                 Calculate BMI
               </button>
@@ -277,28 +310,34 @@ export default function Health() {
             </div>
           </div>
           <div className={styles.card}>
-            <h2 className={styles.redS}>Complaint Box</h2>
-            <form onSubmit={complaint}>
+            <h2 className={styles.redS}>Healthcare Suggestions</h2>
+            <form onSubmit={submitSuggestion}>
               <FormField
-                id="comp"
-                label="Complaint details"
+                id="health-suggestion"
+                label="What could the city improve in its healthcare system?"
                 as="textarea"
                 rows="5"
                 minLength={5}
                 maxLength={500}
-                placeholder="Enter complaint"
-                value={complaintText}
-                onChange={(event) => setComplaintText(event.target.value)}
+                placeholder="Share an idea for improving local healthcare"
+                value={suggestionText}
+                onChange={(event) => setSuggestionText(event.target.value)}
                 className={styles.input}
                 required
               />
               <button className={styles.button} type="submit">
-                Send Complaint
+                Submit Suggestion
               </button>
             </form>
-            <div id="compres" className={styles.result} role="status">
-              {complaintResult}
+            <div id="suggestion-result" className={styles.result} role="status">
+              {suggestionResult}
             </div>
+            <h3 className={styles.acceptedTitle}>Recently accepted suggestions</h3>
+            <ul className={styles.acceptedSuggestions}>
+              {ACCEPTED_HEALTH_SUGGESTIONS.map((suggestion) => (
+                <li key={suggestion}>{suggestion}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
