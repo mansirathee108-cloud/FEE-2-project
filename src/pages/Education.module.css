@@ -5,17 +5,17 @@
   padding: 2%;
   word-spacing: 0.5rem;
   font-weight: bold;
-  color: #07356d;
+  color: #e0f2fe;
   font-size: 3rem;
   text-shadow:
-    1px 0 #ed90f0,
-    -1px 0 #ed90f0,
-    0 1px #ed90f0,
-    0 -1px #ed90f0,
-    1px 1px #ed90f0,
-    -1px -1px #ed90f0,
-    1px -1px #ed90f0,
-    -1px 1px #ed90f0;
+    1px 0 #38bdf8,
+    -1px 0 #38bdf8,
+    0 1px #38bdf8,
+    0 -1px #38bdf8,
+    1px 1px #38bdf8,
+    -1px -1px #38bdf8,
+    1px -1px #38bdf8,
+    -1px 1px #38bdf8;
 }
 
 .title {
@@ -26,11 +26,11 @@
   border-radius: 22px;
   max-width: 720px;
   margin: 0 auto 24px;
-  background: rgba(13, 27, 42, 0.92);
+  background: rgba(255, 255, 255, 0.07);
   color: #ffffff;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
   letter-spacing: 0.5px;
-  border: 2px solid #d4a373;
+  border: 1px solid rgba(56, 189, 248, 0.36);
 }
 
 .grid {
@@ -42,17 +42,18 @@
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(15px);
   padding: 20px;
   border-radius: 24px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   transition: 0.35s;
-  border: 1px solid rgba(13, 27, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 36px rgba(212, 163, 115, 0.22);
+  box-shadow: 0 18px 36px rgba(56, 189, 248, 0.16);
 }
 
 .card img {
@@ -64,18 +65,18 @@
 }
 
 .educationPage h2 {
-  color: #0d1b2a;
+  color: #f8fafc;
   margin-bottom: 12px;
   font-size: 28px;
 }
 
 .small {
   line-height: 1.7;
-  color: #344e68;
+  color: #cbd5e1;
 }
 
 .highlight {
-  color: #b23a48;
+  color: #7dd3fc;
   font-weight: 700;
 }
 
@@ -86,25 +87,25 @@ textarea {
   padding: 12px;
   margin: 8px 0;
   border-radius: 12px;
-  border: 1px solid rgba(13, 27, 42, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   outline: none;
-  background: #ffffff;
+  background: rgba(8, 17, 32, 0.72);
   font-size: 15px;
-  color: #1d3557;
+  color: #f8fafc;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #d4a373;
-  box-shadow: 0 0 8px rgba(212, 163, 115, 0.25);
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
 }
 
 button {
   padding: 12px 24px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #0d1b2a, #1d3557, #d4a373);
+  background: linear-gradient(135deg, #38bdf8, #2563eb, #8b5cf6);
   font-weight: 800;
   cursor: pointer;
   margin-top: 10px;
@@ -115,7 +116,7 @@ button {
 
 button:hover {
   transform: scale(1.05);
-  background: linear-gradient(90deg, #1d3557, #0d1b2a, #b23a48);
+  background: linear-gradient(135deg, #22d3ee, #38bdf8, #6366f1);
 }
 
 .resourceButton {
@@ -123,7 +124,7 @@ button:hover {
   margin-top: 10px;
   padding: 12px 24px;
   border-radius: 12px;
-  background: linear-gradient(90deg, #0d1b2a, #1d3557, #d4a373);
+  background: linear-gradient(135deg, #38bdf8, #2563eb, #8b5cf6);
   color: #fff;
   font-weight: 800;
   text-decoration: none;
@@ -133,31 +134,31 @@ button:hover {
 
 .resourceButton:hover {
   transform: scale(1.05);
-  background: linear-gradient(90deg, #1d3557, #0d1b2a, #b23a48);
+  background: linear-gradient(135deg, #22d3ee, #38bdf8, #6366f1);
 }
 
 .result {
   margin-top: 12px;
   padding: 14px;
   border-radius: 14px;
-  background: #f6f1e7;
-  color: #1d3557;
+  background: rgba(56, 189, 248, 0.12);
+  color: #e0f2fe;
   font-weight: 700;
   min-height: 55px;
   white-space: pre-line;
-  border-left: 5px solid #d4a373;
+  border-left: 5px solid #38bdf8;
 }
 
 .school-box {
-  background: #f8f4ed;
+  background: rgba(8, 17, 32, 0.42);
   padding: 14px;
   border-radius: 16px;
   margin-top: 12px;
-  border-left: 5px solid #b23a48;
+  border-left: 5px solid #22d3ee;
 }
 
 .school-box h3 {
-  color: #0d1b2a;
+  color: #f8fafc;
   margin-bottom: 6px;
 }
 
@@ -171,12 +172,12 @@ button:hover {
   right: -240px;
   top: 18%;
   width: 220px;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(8, 17, 32, 0.94);
   padding: 16px;
   border-radius: 24px 0 0 24px;
   transition: 0.4s;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(13, 27, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .side.show {
@@ -189,33 +190,33 @@ button:hover {
   padding: 13px;
   margin: 10px 0;
   border-radius: 14px;
-  background: #f3ede4;
+  background: rgba(255, 255, 255, 0.07);
   font-weight: 700;
   transition: 0.3s;
 }
 
 .side a:hover {
   transform: translateX(-4px);
-  background: #e8dcc8;
+  background: rgba(56, 189, 248, 0.16);
 }
 
 .side a:nth-child(1) {
-  color: #1d3557;
+  color: #7dd3fc;
 }
 .side a:nth-child(2) {
-  color: #b23a48;
+  color: #a5f3fc;
 }
 .side a:nth-child(3) {
-  color: #c08400;
+  color: #38bdf8;
 }
 .side a:nth-child(4) {
-  color: #0d1b2a;
+  color: #e0f2fe;
 }
 .side a:nth-child(5) {
-  color: #3a5a40;
+  color: #22d3ee;
 }
 .side a:nth-child(6) {
-  color: #9d4edd;
+  color: #a78bfa;
 }
 
 @media (max-width: 900px) {

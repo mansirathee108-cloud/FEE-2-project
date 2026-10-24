@@ -5,23 +5,23 @@
   padding: 2%;
   word-spacing: 0.5rem;
   font-weight: bold;
-  color: #2642b1c9;
+  color: #e0f2fe;
   font-size: 3rem;
   text-shadow:
-    1px 0 #b6bfff,
-    -1px 0 #b6bfff,
-    0 1px #b6bfff,
-    0 -1px #b6bfff,
-    1px 1px #b6bfff,
-    -1px -1px #b6bfff,
-    1px -1px #b6bfff,
-    -1px 1px #b6bfff;
+    1px 0 #38bdf8,
+    -1px 0 #38bdf8,
+    0 1px #38bdf8,
+    0 -1px #38bdf8,
+    1px 1px #38bdf8,
+    -1px -1px #38bdf8,
+    1px -1px #38bdf8,
+    -1px 1px #38bdf8;
 }
 
 .securityPage {
   min-height: 100vh;
   padding: 24px;
-  color: #1d3557;
+  color: #f8fafc;
 }
 
 .grid {
@@ -33,11 +33,13 @@
 }
 
 .card {
-  background: rgba(255, 248, 240, 0.92);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(15px);
   padding: 20px;
   border-radius: 24px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  border-left: 6px solid #1d3557;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 6px solid #38bdf8;
   transition: 0.35s;
 }
 
@@ -57,7 +59,7 @@
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
-  border-left-color: #b23a48;
+  border-left-color: #22d3ee;
 }
 
 .card img {
@@ -69,18 +71,18 @@
 }
 
 .card h2 {
-  color: #1d3557;
+  color: #f8fafc;
   margin-bottom: 12px;
   font-size: 28px;
 }
 
 .small {
   line-height: 1.7;
-  color: #5c4b3b;
+  color: #cbd5e1;
 }
 
 .highlight {
-  color: #b23a48;
+  color: #7dd3fc;
   font-weight: 700;
 }
 
@@ -89,24 +91,24 @@
   padding: 12px;
   margin: 8px 0;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   outline: none;
   box-sizing: border-box;
-  background: #fffdf8;
+  background: rgba(8, 17, 32, 0.72);
   font-size: 15px;
-  color: #1d3557;
+  color: #f8fafc;
 }
 
 .input:focus {
-  border-color: #c2b280;
-  box-shadow: 0 0 8px rgba(194, 178, 128, 0.35);
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
 }
 
 .button {
   padding: 12px 24px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #1d3557, #2b4c7e, #c2b280);
+  background: linear-gradient(135deg, #38bdf8, #2563eb, #8b5cf6);
   font-weight: 800;
   cursor: pointer;
   margin-top: 10px;
@@ -117,29 +119,29 @@
 
 .button:hover {
   transform: scale(1.05);
-  background: linear-gradient(90deg, #1d3557, #b23a48, #c2b280);
+  background: linear-gradient(135deg, #22d3ee, #38bdf8, #6366f1);
 }
 
 .result {
   margin-top: 12px;
   padding: 14px;
   border-radius: 14px;
-  background: #f5ede0;
-  color: #1d3557;
+  background: rgba(56, 189, 248, 0.12);
+  color: #e0f2fe;
   font-weight: 700;
   min-height: 55px;
   white-space: pre-line;
-  border-left: 5px solid #b23a48;
+  border-left: 5px solid #38bdf8;
 }
 
 .alertBox {
-  background: #fff2f2;
+  background: rgba(127, 29, 29, 0.25);
   padding: 14px;
   border-radius: 16px;
   margin-top: 10px;
-  border-left: 5px solid #b23a48;
+  border-left: 5px solid #f87171;
   font-weight: 700;
-  color: #b23a48;
+  color: #fecaca;
   overflow: hidden;
   position: relative;
   height: 370px; /* ✅ fixed viewport so overflow actually clips something */
@@ -164,24 +166,24 @@
 }
 
 .bribeStatItem {
-  background: #f7f1e7;
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 12px;
   padding: 10px 6px;
   text-align: center;
-  border: 1px solid rgba(194, 178, 128, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .bribeStatNumber {
   display: block;
   font-size: 1.3rem;
   font-weight: 800;
-  color: #b23a48;
+  color: #7dd3fc;
 }
 
 .bribeStatLabel {
   display: block;
   font-size: 0.7rem;
-  color: #5c4b3b;
+  color: #cbd5e1;
   margin-top: 2px;
 }
 
@@ -195,12 +197,12 @@
 }
 
 .helpline {
-  background: #f7f1e7;
+  background: rgba(255, 255, 255, 0.07);
   padding: 14px;
   border-radius: 16px;
   margin-top: 10px;
   line-height: 1.8;
-  border: 1px solid rgba(194, 178, 128, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .panic {

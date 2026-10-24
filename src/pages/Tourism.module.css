@@ -5,17 +5,17 @@
   padding: 2%;
   word-spacing: 0.5rem;
   font-weight: bold;
-  color: #fbfeff;
+  color: #e0f2fe;
   font-size: 3rem;
   text-shadow:
-    1px 0 #1653fb,
-    -1px 0 #1653fb,
-    0 1px #1653fb,
-    0 -1px #1653fb,
-    1px 1px #1653fb,
-    -1px -1px #1653fb,
-    1px -1px #1653fb,
-    -1px 1px #1653fb;
+    1px 0 #22d3ee,
+    -1px 0 #22d3ee,
+    0 1px #22d3ee,
+    0 -1px #22d3ee,
+    1px 1px #22d3ee,
+    -1px -1px #22d3ee,
+    1px -1px #22d3ee,
+    -1px 1px #22d3ee;
 }
 
 .grid {
@@ -33,25 +33,26 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
   transition: 0.35s;
   color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card:nth-child(1) {
-  background: rgba(255, 183, 3, 0.22);
+  background: rgba(34, 211, 238, 0.12);
 }
 .card:nth-child(2) {
-  background: rgba(255, 143, 171, 0.22);
+  background: rgba(56, 189, 248, 0.12);
 }
 .card:nth-child(3) {
-  background: rgba(76, 201, 240, 0.22);
+  background: rgba(59, 130, 246, 0.12);
 }
 .card:nth-child(4) {
-  background: rgba(42, 157, 143, 0.22);
+  background: rgba(139, 92, 246, 0.1);
 }
 .card:nth-child(5) {
-  background: rgba(255, 214, 165, 0.25);
+  background: rgba(34, 211, 238, 0.1);
 }
 .card:nth-child(6) {
-  background: rgba(255, 107, 107, 0.22);
+  background: rgba(56, 189, 248, 0.09);
 }
 
 .card:hover {
@@ -85,15 +86,16 @@
   border-radius: 12px;
   outline: none;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(8, 17, 32, 0.72);
   font-size: 15px;
+  color: #f8fafc;
 }
 
 .button {
   padding: 12px 24px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #ff9f1c, #ff6b6b, #4cc9f0);
+  background: linear-gradient(135deg, #22d3ee, #38bdf8, #6366f1);
   font-weight: 800;
   cursor: pointer;
   margin-top: 10px;
@@ -110,7 +112,7 @@
   margin-top: 12px;
   padding: 14px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(56, 189, 248, 0.12);
   color: white;
   font-weight: 700;
   min-height: 55px;
@@ -118,7 +120,7 @@
 }
 
 .hotel {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
   padding: 14px;
   border-radius: 16px;
   margin-top: 12px;

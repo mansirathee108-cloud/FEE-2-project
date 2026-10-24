@@ -42,35 +42,38 @@ body[data-page='main']::before {
 }
 
 body[data-page='health'] {
-  background: linear-gradient(135deg, #14090a, #241012, #10131c);
+  background: linear-gradient(135deg, #10131c, #21151d, #17263b);
   color: #fff;
+  min-height: 100vh;
 }
 
 body[data-page='food'] {
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #84fab0, #8fd3f4);
-  background-size: 400% 400%;
-  animation: bgmove 30s ease infinite;
-  color: white;
+  background: linear-gradient(135deg, #091923, #102b3a, #17243a);
+  color: #fff;
   min-height: 100vh;
 }
 
 body[data-page='education'] {
-  background: linear-gradient(135deg, #f8f5f0, #f2ede3, #ede7dc, #f7f3eb);
-  color: #1d3557;
+  background: linear-gradient(135deg, #0b1423, #10243a, #17263b);
+  color: #fff;
   min-height: 100vh;
 }
 
 body[data-page='tourism'] {
   min-height: 100vh;
-  background: linear-gradient(135deg, #ffb703, #ff8fab, #ffd6a5, #4cc9f0);
-  background-size: 400% 400%;
-  animation: bgmove 14s ease infinite;
-  color: white;
+  background: linear-gradient(135deg, #10201f, #102b3a, #172c4a);
+  color: #fff;
 }
 
 body[data-page='security'] {
-  background: linear-gradient(135deg, #f4efe6, #ebe3d5, #e6dcc8, #f8f4ed);
-  color: #1d3557;
+  background: linear-gradient(135deg, #0b1423, #111827, #1b293b);
+  color: #fff;
+  min-height: 100vh;
+}
+
+body[data-page='jobs'] {
+  background: linear-gradient(135deg, #081120, #111827, #172c4a);
+  color: #fff;
   min-height: 100vh;
 }
 
