@@ -1,10 +1,10 @@
 const SESSION_KEY = 'oakridgeUser';
 
 const USERS = {
-  mayor: { password: 'mayor', role: 'Mayor' },
-  police: { password: 'police', role: 'Police' },
-  restaurant: { password: 'restaurant', role: 'Restaurant Staff' },
-  citizen: { password: 'citizen', role: 'Citizen' },
+  mayor: { password: 'WorldwidePersonality1', role: 'Mayor' },
+  police: { password: 'WorldwidePersonality1', role: 'Police' },
+  restaurant: { password: 'WorldwidePersonality1', role: 'Restaurant Staff' },
+  citizen: { password: 'WorldwidePersonality1', role: 'Citizen' },
 };
 
 export function login(username, password) {

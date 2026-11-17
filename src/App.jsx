@@ -9,6 +9,7 @@ import { getCurrentUser, login, logout } from './modules/auth.js';
 import { resolveLocation } from './store/locationSlice.js';
 import { WeatherProvider } from './context/WeatherContext.jsx';
 import FormField from './components/FormField.jsx';
+import { validateForm } from './api/validator.js';
 
 const Main = lazy(() => import('./pages/MainPage.jsx'));
 const Health = lazy(() => import('./pages/HealthPage.jsx'));
@@ -19,18 +20,45 @@ const Tourism = lazy(() => import('./pages/TourismPage.jsx'));
 const Jobs = lazy(() => import('./pages/Jobs.jsx'));
 
 function Login({ onLogin }) {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  function submit(event) {
+  async function submit(event) {
     event.preventDefault();
-    const user = login(username, password);
-    if (!user) {
-      setError('Use the username as both username and password.');
-      return;
+    setError('');
+    setFieldErrors({});
+    setLoading(true);
+
+    try {
+      const result = await validateForm({ email, username, password });
+
+      if (!result.success) {
+        // Collect field-specific errors
+        const errors = {};
+        result.results.forEach(r => {
+          if (!r.valid) errors[r.field] = r.message;
+        });
+        setFieldErrors(errors);
+        setError('Please fix the validation errors below.');
+        return;
+      }
+
+      // If validation passes, proceed with existing login logic
+      const user = login(username, password);
+      if (!user) {
+        setError('Use the username as both username and password.');
+        return;
+      }
+      onLogin(user);
+    } catch (err) {
+      setError('Validation service unavailable. Please try again.');
+    } finally {
+      setLoading(false);
     }
-    onLogin(user);
   }
 
   return (
@@ -39,6 +67,17 @@ function Login({ onLogin }) {
       <p>Sign in to access city services.</p>
       <form onSubmit={submit} style={{ display: 'grid', gap: '12px' }}>
         <FormField
+          id="login-email"
+          label="Email"
+          type="email"
+          autoComplete="email"
+          placeholder="Email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+          error={fieldErrors.email}
+        />
+        <FormField
           id="login-username"
           label="Username"
           autoComplete="username"
@@ -46,6 +85,7 @@ function Login({ onLogin }) {
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           required
+          error={fieldErrors.username}
         />
         <FormField
           id="login-password"
@@ -56,11 +96,14 @@ function Login({ onLogin }) {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           required
+          error={fieldErrors.password}
         />
-        <button type="submit">Sign in</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Validating...' : 'Sign in'}
+        </button>
       </form>
-      {error && <p role="alert">{error}</p>}
-      <small>Accounts: mayor, police, restaurant, citizen</small>
+      {error && <p role="alert" style={{ color: 'red' }}>{error}</p>}
+      <small>Accounts: mayor, police, restaurant, citizen (password: WorldwidePersonality1)</small>
     </main>
   );
 }
