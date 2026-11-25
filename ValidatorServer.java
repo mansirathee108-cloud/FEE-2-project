@@ -3,8 +3,12 @@ import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.*;
 
 public class ValidatorServer {
+
+    // Simple fixed thread pool for validation - 3 threads
+    private static final ExecutorService validationExecutor = Executors.newFixedThreadPool(3);
 
     // Validation result class
     static class ValidationResult {
@@ -37,21 +41,38 @@ public class ValidatorServer {
         }
     }
 
-    // Core validation logic (extracted from FormValidator)
+    // Core validation logic - runs 3 validations concurrently
     static List<ValidationResult> validate(String email, String username, String password) {
+        Future<ValidationResult> emailFuture = validationExecutor.submit(() -> validateEmail(email));
+        Future<ValidationResult> usernameFuture = validationExecutor.submit(() -> validateUsername(username));
+        Future<ValidationResult> passwordFuture = validationExecutor.submit(() -> validatePassword(password));
+
         List<ValidationResult> results = new ArrayList<>();
+        try {
+            results.add(emailFuture.get());
+            results.add(usernameFuture.get());
+            results.add(passwordFuture.get());
+        } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
+            return validateSequential(email, username, password);
+        }
+        return results;
+    }
 
-        // Email format validation
-        boolean emailValid = email != null && email.contains("@") && email.contains(".");
-        results.add(new ValidationResult("email", emailValid,
-            emailValid ? "Email: OK" : "Email: Invalid format"));
+    // Individual validation methods
+    private static ValidationResult validateEmail(String email) {
+        boolean valid = email != null && email.contains("@") && email.contains(".");
+        return new ValidationResult("email", valid,
+            valid ? "Email: OK" : "Email: Invalid format");
+    }
 
-        // Username length validation
-        boolean usernameValid = username != null && username.length() >= 3;
-        results.add(new ValidationResult("username", usernameValid,
-            usernameValid ? "Username: OK" : "Username: Too short (min 3 chars)"));
+    private static ValidationResult validateUsername(String username) {
+        boolean valid = username != null && username.length() >= 3;
+        return new ValidationResult("username", valid,
+            valid ? "Username: OK" : "Username: Too short (min 3 chars)");
+    }
 
-        // Password strength validation
+    private static ValidationResult validatePassword(String password) {
         boolean hasUpper = false, hasLower = false, hasDigit = false;
         if (password != null) {
             for (char c : password.toCharArray()) {
@@ -60,10 +81,17 @@ public class ValidatorServer {
                 if (Character.isDigit(c)) hasDigit = true;
             }
         }
-        boolean passwordValid = hasUpper && hasLower && hasDigit && password != null && password.length() >= 8;
-        results.add(new ValidationResult("password", passwordValid,
-            passwordValid ? "Password: OK" : "Password: Needs upper, lower, digit, 8+ chars"));
+        boolean valid = hasUpper && hasLower && hasDigit && password != null && password.length() >= 8;
+        return new ValidationResult("password", valid,
+            valid ? "Password: OK" : "Password: Needs upper, lower, digit, 8+ chars");
+    }
 
+    // Fallback sequential validation
+    private static List<ValidationResult> validateSequential(String email, String username, String password) {
+        List<ValidationResult> results = new ArrayList<>();
+        results.add(validateEmail(email));
+        results.add(validateUsername(username));
+        results.add(validatePassword(password));
         return results;
     }
 
@@ -99,10 +127,9 @@ public class ValidatorServer {
                 .replace("\t", "\\t");
     }
 
-    // Parse simple JSON request (for demo purposes)
+    // Parse simple JSON request 
     static Map<String, String> parseJson(String json) {
         Map<String, String> map = new HashMap<>();
-        // Very simple parser for {"email":"x","username":"y","password":"z"}
         String content = json.trim();
         if (content.startsWith("{") && content.endsWith("}")) {
             content = content.substring(1, content.length() - 1);
@@ -123,17 +150,21 @@ public class ValidatorServer {
         int port = 8081;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
 
+        // Use fixed thread pool for HTTP request handling (10 threads)
+        server.setExecutor(Executors.newFixedThreadPool(10));
+
         // CORS headers for local development
         server.createContext("/api/validate", exchange -> {
             // Handle CORS preflight
-            if ("OPTIONS".equals(exchange.getRequestMethod())) {
-                addCorsHeaders(exchange);
+            addCorsHeaders(exchange);
+            String method = exchange.getRequestMethod();
+            
+            if ("OPTIONS".equals(method)) {
                 exchange.sendResponseHeaders(204, -1);
                 return;
             }
 
-            if (!"POST".equals(exchange.getRequestMethod())) {
-                addCorsHeaders(exchange);
+            if (!"POST".equals(method)) {
                 String response = toJson(new ValidationResponse("Method not allowed"));
                 sendResponse(exchange, 405, response);
                 return;
@@ -155,7 +186,6 @@ public class ValidatorServer {
                 ValidationResponse response = new ValidationResponse(allValid, results);
 
                 // Send response
-                addCorsHeaders(exchange);
                 sendResponse(exchange, 200, toJson(response));
 
             } catch (Exception e) {
@@ -171,8 +201,22 @@ public class ValidatorServer {
             sendResponse(exchange, 200, response);
         });
 
-        server.setExecutor(null); // Use default executor
         server.start();
+
+        // Shutdown hook to clean up validation executor
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Shutting down validation executor...");
+            validationExecutor.shutdown();
+            try {
+                if (!validationExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
+                    validationExecutor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                validationExecutor.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        }));
+
         System.out.println("Validator Server running on http://localhost:" + port);
         System.out.println("Endpoints:");
         System.out.println("  POST http://localhost:" + port + "/api/validate");
